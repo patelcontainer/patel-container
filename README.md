@@ -58,7 +58,7 @@ This replaces the seeded documents (fixed IDs) with the starter content. It neve
 | Enquiries and quote requests | Leads & enquiries (change status as you follow up) |
 | Old URL → new URL | Redirects (applies on next deploy) |
 
-Every page and product has an **SEO** tab. After publishing, the live site updates within seconds once the webhook below is set up (otherwise within an hour).
+Every page and product has an **SEO** tab. After publishing, the live site updates within a few seconds (the site reads Sanity on every visit, so the webhook is optional).
 
 ## Go-live checklist
 

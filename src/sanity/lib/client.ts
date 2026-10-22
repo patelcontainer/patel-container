@@ -1,24 +1,25 @@
 import { createClient } from "next-sanity";
 import { apiVersion, dataset, projectId } from "../env";
 
-const isDev = process.env.NODE_ENV === "development";
-
+// Sanity's API CDN is purged within seconds of a publish; "noStale" stops it serving old copies meanwhile.
 export const client = createClient({
   projectId,
   dataset,
   apiVersion,
-  useCdn: !isDev,
+  useCdn: true,
   perspective: "published",
 });
 
 type FetchArgs = { query: string; params?: Record<string, unknown>; tags?: string[] };
 
 /**
- * Cached fetch for published content. Pages revalidate hourly and immediately
- * when the Sanity webhook hits /api/revalidate (tag "sanity"). In dev, always fresh.
+ * Published content, fetched on every request (no Next cache), so edits in the Studio
+ * show on the site within seconds of publishing — no webhook needed.
  */
 export async function sanityFetch<T>({ query, params = {}, tags = [] }: FetchArgs): Promise<T> {
   return client.fetch<T>(query, params, {
-    next: { revalidate: isDev ? 0 : 3600, tags: ["sanity", ...tags] },
+    cacheMode: "noStale",
+    cache: "no-store",
+    next: { tags: ["sanity", ...tags] },
   });
 }
