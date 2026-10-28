@@ -82,7 +82,7 @@ export function organizationSchema(s: Settings) {
     name: s.legalName || s.siteName,
     alternateName: s.siteName,
     url: SITE_URL,
-    logo: hasImage(s.logo) ? urlFor(s.logo).width(600).url() : undefined,
+    logo: `${SITE_URL}/brand/vahana-logo.png`,
     slogan: s.tagline,
     foundingDate: s.foundingYear,
     email: s.email,

@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import Script from "next/script";
-import { Archivo, Inter } from "next/font/google";
+import { Inter, Inter_Tight } from "next/font/google";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
@@ -11,11 +11,11 @@ import { SITE_URL, getSettings, organizationSchema } from "@/lib/seo";
 import { whatsappHref } from "@/lib/links";
 import { resolveTemplates } from "@/lib/templates";
 
-const archivo = Archivo({ subsets: ["latin"], variable: "--font-archivo", display: "swap", weight: ["500", "600", "700", "800"] });
+const interTight = Inter_Tight({ subsets: ["latin"], variable: "--font-inter-tight", display: "swap", weight: ["500", "600", "700", "800"] });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
 
 export const viewport: Viewport = {
-  themeColor: "#0b1b30",
+  themeColor: "#002c62",
   width: "device-width",
   initialScale: 1,
 };
@@ -48,7 +48,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   };
 
   return (
-    <html lang="en-IN" className={`${archivo.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en-IN" className={`${interTight.variable} ${inter.variable}`} data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="min-h-screen bg-white" suppressHydrationWarning>
         {s.gtmId && (
           <Script id="gtm" strategy="afterInteractive">

@@ -28,7 +28,7 @@ export function Footer({ settings }: { settings: Settings }) {
 
         <div className="wrap grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-16">
           <div className="lg:col-span-3">
-            <Logo logo={settings.logoLight || settings.logo} mark={settings.logoLight ? undefined : settings.logoMark} text={settings.logoText} subtext={settings.logoSubtext} name={settings.siteName} light={!settings.logoLight} className="h-12" />
+            <Logo name={settings.siteName} light className="h-16" />
             {settings.footerText && <p className="mt-6 max-w-sm leading-relaxed">{settings.footerText}</p>}
             {!!settings.socialLinks?.length && (
               <div className="mt-6 flex gap-2.5">

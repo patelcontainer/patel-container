@@ -1,4 +1,3 @@
-import type { SanityImage } from "@/sanity/lib/image";
 import type { InternalRef, LinkLike } from "./links";
 import type { CmsButton } from "@/components/ui/Button";
 
@@ -18,11 +17,6 @@ export type Settings = {
   siteName: string;
   legalName?: string;
   tagline?: string;
-  logo?: SanityImage;
-  logoLight?: SanityImage;
-  logoMark?: SanityImage;
-  logoText?: string;
-  logoSubtext?: string;
   brochureUrl?: string;
   foundingYear?: string;
   phones?: string[];

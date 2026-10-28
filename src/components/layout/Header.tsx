@@ -82,11 +82,11 @@ export function Header({ settings }: { settings: Settings }) {
 
       <header
         className={`sticky top-0 z-50 border-b bg-white/95 backdrop-blur-md transition-shadow duration-300 ${
-          scrolled ? "border-line shadow-[0_6px_24px_-12px_rgb(10_22_38/0.18)]" : "border-transparent"
+          scrolled ? "border-line shadow-[0_6px_24px_-12px_rgb(6_26_56/0.18)]" : "border-transparent"
         }`}
       >
         <div className="wrap flex h-[72px] items-center justify-between gap-4 lg:h-[84px] 2xl:gap-5">
-          <Logo logo={settings.logo} mark={settings.logoMark} text={settings.logoText} subtext={settings.logoSubtext} name={settings.siteName} className="h-10 lg:h-11 2xl:h-12" />
+          <Logo name={settings.siteName} className="h-12 lg:h-14" />
 
           <nav aria-label="Main" className="hidden xl:block">
             <ul className="flex items-center gap-0.5">
@@ -168,7 +168,7 @@ export function Header({ settings }: { settings: Settings }) {
           aria-label="Menu"
         >
           <div className="flex h-[76px] items-center justify-between border-b border-line px-4">
-            <Logo logo={settings.logo} mark={settings.logoMark} text={settings.logoText} subtext={settings.logoSubtext} name={settings.siteName} className="h-9" />
+            <Logo name={settings.siteName} className="h-11" />
             <button type="button" onClick={() => setOpen(false)} className="grid size-11 place-items-center rounded-md border border-line" aria-label="Close menu">
               <X className="size-5" />
             </button>

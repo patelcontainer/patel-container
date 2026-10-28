@@ -233,7 +233,7 @@ export function LeadForm({ type, submitLabel, productOptions, jobOptions, defaul
         <button
           type="submit"
           disabled={pending}
-          className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent px-7 text-[0.9rem] font-semibold text-white shadow-[0_8px_20px_-8px_rgb(236_106_30/0.6)] transition hover:bg-accent-600 disabled:opacity-60"
+          className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-accent px-7 text-[0.9rem] font-semibold text-white shadow-[0_8px_20px_-8px_rgb(28_88_215/0.6)] transition hover:bg-accent-600 disabled:opacity-60"
         >
           {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-4" />}
           {pending ? "Sending…" : submitLabel || (type === "quote" ? "Request Quote" : type === "career" ? "Submit Application" : type === "callback" ? "Request Callback" : "Send Enquiry")}

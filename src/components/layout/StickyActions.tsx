@@ -7,7 +7,7 @@ import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { LeadForm } from "@/components/forms/LeadForm";
 
 const fab =
-  "group relative grid size-12 place-items-center rounded-full shadow-[0_6px_20px_-6px_rgb(10_22_38/0.45)] transition-transform duration-200 hover:-translate-y-0.5 sm:size-14";
+  "group relative grid size-12 place-items-center rounded-full shadow-[0_6px_20px_-6px_rgb(6_26_56/0.45)] transition-transform duration-200 hover:-translate-y-0.5 sm:size-14";
 const tip =
   "pointer-events-none absolute right-full mr-3 hidden whitespace-nowrap rounded-md bg-ink px-3 py-1.5 text-xs font-semibold text-white opacity-0 shadow-lg transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100 sm:block";
 

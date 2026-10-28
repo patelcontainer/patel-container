@@ -42,7 +42,7 @@ export function Hero({ block }: { block: Block }) {
               {block.eyebrow}
             </p>
           )}
-          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.03] tracking-[-0.03em] text-white sm:text-6xl lg:text-[4rem] 2xl:text-[4.75rem] min-[1700px]:text-[5.25rem] [@media(max-height:820px)_and_(min-width:1024px)]:text-[3.6rem]">
+          <h1 className="mt-5 text-[2.5rem] font-extrabold leading-[1.05] tracking-[-0.02em] text-white sm:text-6xl lg:text-[4rem] 2xl:text-[4.75rem] min-[1700px]:text-[5.25rem] [@media(max-height:820px)_and_(min-width:1024px)]:text-[3.6rem]">
             {block.heading}
           </h1>
           {block.subheading && <p className="mt-6 max-w-xl text-lg leading-relaxed text-steel-300 2xl:text-xl">{block.subheading}</p>}

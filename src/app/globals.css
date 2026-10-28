@@ -1,31 +1,33 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0a1626;
-  --color-navy-950: #071120;
-  --color-navy-900: #0b1b30;
-  --color-navy-800: #0f2643;
-  --color-navy-700: #163457;
-  --color-navy-600: #1f4573;
-  --color-steel-600: #4b5b70;
-  --color-steel-500: #66768a;
-  --color-steel-400: #8a98aa;
-  --color-steel-300: #b7c1ce;
-  --color-line: #e3e8ef;
-  --color-surface: #f4f6f9;
-  --color-surface-2: #eaeef3;
-  --color-accent: #ec6a1e;
-  --color-accent-600: #d2560f;
-  --color-accent-700: #ad450a;
-  --color-accent-50: #fdf1e9;
+  --color-ink: #061a38;
+  --color-navy-950: #001a3d;
+  --color-navy-900: #002c62;
+  --color-navy-800: #0a3a78;
+  --color-navy-700: #14498f;
+  --color-navy-600: #1d58a8;
+  --color-steel-600: #4a5b73;
+  --color-steel-500: #64758c;
+  --color-steel-400: #8898ae;
+  --color-steel-300: #b9c5d6;
+  --color-line: #e1e7f0;
+  --color-surface: #f3f6fb;
+  --color-surface-2: #e8eef7;
+  --color-accent: #1c58d7;
+  --color-accent-600: #1749b6;
+  --color-accent-700: #123b94;
+  --color-accent-50: #ebf1fd;
+  /* Royal blue is too dark for text on navy; this lighter tint is used there instead */
+  --color-accent-300: #7fa7f5;
   --color-lime: #c8da6e;
   --color-whatsapp: #25d366;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-archivo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  --shadow-card: 0 1px 2px rgb(10 22 38 / 0.04), 0 8px 24px -12px rgb(10 22 38 / 0.12);
-  --shadow-lift: 0 2px 4px rgb(10 22 38 / 0.05), 0 24px 48px -20px rgb(10 22 38 / 0.28);
+  --shadow-card: 0 1px 2px rgb(6 26 56 / 0.04), 0 8px 24px -12px rgb(6 26 56 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(6 26 56 / 0.05), 0 24px 48px -20px rgb(6 26 56 / 0.28);
 
   --animate-marquee: marquee 40s linear infinite;
   @keyframes marquee {
@@ -56,7 +58,7 @@
   }
   h1, h2, h3, h4, h5 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
@@ -112,8 +114,8 @@
   .corrugated-dark {
     background-image: repeating-linear-gradient(
       90deg,
-      rgb(10 22 38 / 0.035) 0 14px,
-      rgb(10 22 38 / 0) 14px 28px
+      rgb(6 26 56 / 0.035) 0 14px,
+      rgb(6 26 56 / 0) 14px 28px
     );
   }
   .grid-lines {
@@ -169,7 +171,7 @@
     transition: border-color 0.15s, box-shadow 0.15s;
   }
   .field::placeholder { color: var(--color-steel-400); }
-  .field:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgb(236 106 30 / 0.15); }
+  .field:focus { outline: none; border-color: var(--color-accent); box-shadow: 0 0 0 3px rgb(28 88 215 / 0.15); }
   select.field {
     appearance: none;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2366768a' stroke-width='2.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
@@ -188,6 +190,14 @@
 
   .no-scrollbar { scrollbar-width: none; }
   .no-scrollbar::-webkit-scrollbar { display: none; }
+}
+
+/* Accent text on dark surfaces (navy sections, hero, footer) uses the lighter tint for contrast */
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.eyebrow, .text-accent, .hover\:text-accent:hover) {
+  color: --theme(--color-accent-300 inline);
+}
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.bg-white, .bg-surface) :is(.eyebrow, .text-accent, .hover\:text-accent:hover) {
+  color: var(--color-accent);
 }
 
 /* Avoid two newsletter forms on one page */

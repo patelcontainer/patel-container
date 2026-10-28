@@ -98,7 +98,6 @@ async function run() {
   if (!client.config().token) throw new Error("SANITY_API_WRITE_TOKEN missing");
   console.log("Uploading images…");
   const A = {
-    logo: await upload("logo.png"),
     portCranes: await upload("port-cranes.jpg"),
     ship: await upload("container-ship.jpg"),
     portAerial: await upload("port-aerial.jpg"),
@@ -113,7 +112,6 @@ async function run() {
     deflag: { top: 0.13, bottom: 0.13, left: 0.158, right: 0.158 },
     enclosure: { top: 0.103, bottom: 0.103, left: 0.208, right: 0.208 },
     laser: { top: 0.152, bottom: 0.178, left: 0.143, right: 0.143 },
-    logo: { top: 0.05, bottom: 0.07, left: 0.015, right: 0.015 },
   };
   const I = {
     portCranes: img(A.portCranes, "Container terminal with gantry cranes and stacked shipping containers"),
@@ -804,10 +802,6 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
     _id: "siteSettings", _type: "siteSettings",
     siteName: "Patel Container India", legalName: "Patel Container India Private Limited",
     tagline: "Heart of Perfect Joint",
-    logo: { _type: "image", asset: ref(A.logo), crop: { _type: "sanity.imageCrop", ...CROP.logo } },
-    logoMark: { _type: "image", asset: ref(A.logo), crop: { _type: "sanity.imageCrop", top: 0.06, bottom: 0.345, left: 0.325, right: 0.295 } },
-    logoText: "Patel Container India",
-    logoSubtext: "Heart of Perfect Joint",
     phones: ["+91 70464 68484", "+91 94281 81618"],
     email: "info@patelcontainer.com",
     whatsappNumber: "917046468484",
