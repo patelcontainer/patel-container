@@ -26,8 +26,8 @@ export function Footer({ settings }: { settings: Settings }) {
           </div>
         </div>
 
-        <div className="wrap grid gap-12 py-14 md:grid-cols-2 lg:grid-cols-12 lg:gap-8 lg:py-16">
-          <div className="lg:col-span-3">
+        <div className="wrap grid grid-cols-2 gap-x-6 gap-y-10 py-14 md:gap-12 lg:grid-cols-12 lg:gap-8 lg:py-16">
+          <div className="col-span-2 md:col-span-1 lg:col-span-3">
             <Logo name={settings.siteName} light className="h-16" />
             {settings.footerText && <p className="mt-6 max-w-sm leading-relaxed">{settings.footerText}</p>}
             {!!settings.socialLinks?.length && (
@@ -64,7 +64,7 @@ export function Footer({ settings }: { settings: Settings }) {
           ))}
 
           {!!settings.topProducts?.length && (
-            <div className="lg:col-span-2">
+            <div className="col-span-2 md:col-span-1 lg:col-span-2">
               <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">Products</h3>
               <ul className="mt-5 space-y-3 text-[0.925rem]">
                 {settings.topProducts.map((p) => (
@@ -78,7 +78,7 @@ export function Footer({ settings }: { settings: Settings }) {
             </div>
           )}
 
-          <div className="md:col-span-2 lg:col-span-3">
+          <div className="col-span-2 lg:col-span-3">
             <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">Contact</h3>
             <ul className="mt-5 space-y-4 text-[0.925rem]">
               {primaryAddress?.address && (

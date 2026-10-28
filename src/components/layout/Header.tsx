@@ -17,6 +17,8 @@ export function Header({ settings }: { settings: Settings }) {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
+  // Dropdown just clicked: keep it shut until the pointer leaves, since hover/focus would hold it open after navigation
+  const [dismissed, setDismissed] = useState<string | null>(null);
   const nav = settings.mainNav || [];
   const phone = settings.phones?.[0];
   const cta = settings.headerCta;
@@ -93,17 +95,23 @@ export function Header({ settings }: { settings: Settings }) {
               {nav.map((item) => {
                 const active = isActive(item);
                 const hasChildren = !!item.children?.length;
+                const shut = dismissed === item._key;
+                const dismiss = () => {
+                  setDismissed(item._key);
+                  (document.activeElement as HTMLElement | null)?.blur();
+                };
                 return (
-                  <li key={item._key} className="group relative">
+                  <li key={item._key} className="group relative" onMouseLeave={() => shut && setDismissed(null)}>
                     <Link
                       href={itemHref(item)}
+                      onClick={dismiss}
                       className={`relative flex items-center gap-0.5 whitespace-nowrap px-[0.4rem] py-7 text-[0.875rem] 2xl:gap-1 2xl:px-[0.5rem] 2xl:text-[0.9375rem] font-medium transition-colors ${
                         active ? "text-accent" : "text-ink hover:text-accent"
                       }`}
                       aria-haspopup={hasChildren || undefined}
                     >
                       {item.label}
-                      {hasChildren && <ChevronDown className="size-3.5 opacity-60 transition-transform group-hover:rotate-180" />}
+                      {hasChildren && <ChevronDown className={`size-3.5 opacity-60 transition-transform ${shut ? "" : "group-hover:rotate-180"}`} />}
                       <span
                         className={`absolute inset-x-[0.4rem] bottom-5 2xl:inset-x-[0.5rem] h-0.5 origin-left bg-accent transition-transform duration-300 ${
                           active ? "scale-x-100" : "scale-x-0 group-hover:scale-x-100"
@@ -111,14 +119,18 @@ export function Header({ settings }: { settings: Settings }) {
                       />
                     </Link>
                     {hasChildren && (
-                      <div className="invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100">
+                      <div
+                        className={`invisible absolute left-1/2 top-full z-50 -translate-x-1/2 translate-y-2 opacity-0 transition-all duration-200 ${
+                          shut ? "" : "group-focus-within:visible group-focus-within:translate-y-0 group-focus-within:opacity-100 group-hover:visible group-hover:translate-y-0 group-hover:opacity-100"
+                        }`}
+                      >
                         <div
                           className={`overflow-hidden rounded-lg border border-line bg-white p-2 shadow-lift ${
                             item.children!.length > 4 ? "grid w-[560px] grid-cols-2" : "w-[300px]"
                           }`}
                         >
                           {item.children!.map((c) => (
-                            <Link key={c._key} href={itemHref(c)} className="group/item flex items-start gap-3 rounded-md p-3 transition hover:bg-surface">
+                            <Link key={c._key} href={itemHref(c)} onClick={dismiss} className="group/item flex items-start gap-3 rounded-md p-3 transition hover:bg-surface">
                               <span className="mt-1.5 size-1.5 shrink-0 bg-accent opacity-40 transition group-hover/item:opacity-100" />
                               <span>
                                 <span className="block text-sm font-semibold text-ink group-hover/item:text-accent">{c.label}</span>
