@@ -168,7 +168,7 @@ export async function FormBlock({ block }: { block: Block }) {
                 </a>
               )}
               {wa && (
-                <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex h-12 items-center gap-2 rounded-md bg-whatsapp px-5 text-sm font-semibold text-white transition hover:brightness-95">
+                <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex h-12 items-center gap-2 rounded-md bg-whatsapp-700 px-5 text-sm font-semibold text-white transition hover:bg-[#116b36]">
                   <WhatsAppIcon className="size-5" /> Chat on WhatsApp
                 </a>
               )}

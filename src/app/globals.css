@@ -8,7 +8,7 @@
   --color-navy-700: #14498f;
   --color-navy-600: #1d58a8;
   --color-steel-600: #4a5b73;
-  --color-steel-500: #64758c;
+  --color-steel-500: #5a6b82;
   --color-steel-400: #8898ae;
   --color-steel-300: #b9c5d6;
   --color-line: #e1e7f0;
@@ -22,6 +22,8 @@
   --color-accent-300: #7fa7f5;
   --color-lime: #c8da6e;
   --color-whatsapp: #25d366;
+  /* Darker green for WhatsApp buttons with text, so white labels stay readable */
+  --color-whatsapp-700: #157f40;
 
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -155,7 +157,7 @@
     font-style: italic;
   }
   .rich > :first-child { margin-top: 0; }
-  .rich-dark { color: var(--color-steel-300); }
+  .rich-dark { color: rgb(255 255 255 / 0.88); }
   .rich-dark h2, .rich-dark h3, .rich-dark h4, .rich-dark strong, .rich-dark blockquote { color: #fff; }
 
   /* Form controls */
@@ -199,6 +201,15 @@
 :is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.bg-white, .bg-surface) :is(.eyebrow, .text-accent, .hover\:text-accent:hover) {
   color: var(--color-accent);
 }
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.group:hover .group-hover\:text-white, .hover\:text-white:hover) {
+  color: #fff;
+}
+
+/* Grey body text reads too dim on navy; use white tints there instead */
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) .text-steel-300 { color: rgb(255 255 255 / 0.88); }
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) .text-steel-400 { color: rgb(255 255 255 / 0.75); }
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.bg-white, .bg-surface) .text-steel-300 { color: var(--color-steel-300); }
+:is(.bg-navy-950, .bg-navy-900, .bg-navy-800, .bg-ink) :is(.bg-white, .bg-surface) .text-steel-400 { color: var(--color-steel-400); }
 
 /* Avoid two newsletter forms on one page */
 body:has(.newsletter-block) .footer-newsletter { display: none; }

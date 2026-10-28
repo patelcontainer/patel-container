@@ -31,7 +31,7 @@ export function Newsletter({ light }: { light?: boolean }) {
           type="email"
           required
           placeholder="Your email address"
-          className={`min-w-0 flex-1 bg-transparent px-3 text-[0.95rem] outline-none ${light ? "text-ink placeholder:text-steel-400" : "text-white placeholder:text-steel-400"}`}
+          className={`min-w-0 flex-1 bg-transparent px-3 text-[0.95rem] outline-none ${light ? "text-ink placeholder:text-steel-400" : "text-white placeholder:text-white/60"}`}
         />
         <button
           type="submit"

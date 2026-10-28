@@ -6,7 +6,7 @@ const styles: Record<ButtonStyle, string> = {
   secondary: "bg-navy-900 text-white shadow-sm hover:bg-navy-700",
   outline: "border border-ink/20 bg-white text-ink hover:border-ink hover:bg-ink hover:text-white",
   outlineLight: "border border-white/40 bg-white/5 text-white backdrop-blur-sm hover:border-white hover:bg-white hover:text-ink",
-  whatsapp: "bg-whatsapp text-white shadow-sm hover:bg-[#1ebe5b]",
+  whatsapp: "bg-whatsapp-700 text-white shadow-sm hover:bg-[#116b36]",
   white: "bg-white text-ink shadow-sm hover:bg-accent hover:text-white",
 };
 

@@ -12,7 +12,7 @@ export function Footer({ settings }: { settings: Settings }) {
   const primaryAddress = settings.addresses?.[0];
 
   return (
-    <footer className="relative overflow-hidden bg-navy-950 text-steel-300">
+    <footer className="relative overflow-hidden bg-navy-950 text-white">
       <div className="hazard h-1.5 w-full opacity-90" />
       <div className="corrugated">
         {/* Newsletter band (hidden when the page has its own newsletter section) */}
@@ -20,7 +20,7 @@ export function Footer({ settings }: { settings: Settings }) {
           <div className="wrap grid items-center gap-6 py-10 lg:grid-cols-[1fr_auto] lg:py-12 [&>*]:min-w-0">
             <div>
               <h2 className="text-2xl font-bold text-white">{settings.newsletterHeading || "Get industry updates"}</h2>
-              {settings.newsletterText && <p className="mt-2 text-steel-300">{settings.newsletterText}</p>}
+              {settings.newsletterText && <p className="mt-2">{settings.newsletterText}</p>}
             </div>
             <Newsletter />
           </div>

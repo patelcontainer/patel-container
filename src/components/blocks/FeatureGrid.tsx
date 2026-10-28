@@ -72,7 +72,7 @@ export function FeatureGrid({ block }: { block: Block }) {
           >
             <span className="absolute inset-x-0 top-0 h-0.5 origin-left scale-x-0 bg-accent transition-transform duration-500 group-hover:scale-x-100" />
             {variant === "numbered" ? (
-              <span className="font-display text-5xl font-extrabold text-accent/90">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-display text-5xl font-extrabold text-accent">{String(i + 1).padStart(2, "0")}</span>
             ) : (
               <span
                 className={`grid size-14 place-items-center rounded-md transition-colors duration-300 group-hover:bg-accent group-hover:text-white ${
