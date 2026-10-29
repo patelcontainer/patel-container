@@ -120,7 +120,7 @@ async function run() {
     shipCranes: img(A.shipCranes, "Container ship being loaded under ship-to-shore cranes"),
     stack: img(A.stack, "Stacked steel shipping containers against a blue sky"),
     deflag: img(A.deflag, "Enclosure container after the deflagration test developed with GE Renewables India", CROP.deflag),
-    enclosure: img(A.enclosure, "Technician testing a specialised enclosure container at the Patel Container plant", CROP.enclosure),
+    enclosure: img(A.enclosure, "Technician testing a specialised enclosure container at the VAHANA plant", CROP.enclosure),
     laser: img(A.laser, "CNC fibre laser cutting machine used for container panel processing", CROP.laser),
   };
 
@@ -138,7 +138,7 @@ async function run() {
     ["cat-specialized", "Specialized Containers", "specialized-containers", "shield", "Engineered enclosures, refrigerated and custom-built containers.", I.enclosure,
       "When a standard box isn't enough, our engineers design to your specification: equipment and energy-storage enclosures, refrigerated containers and project-specific builds, including enclosures validated through deflagration testing."],
     ["cat-railway", "Railway & Rolling Stock", "railway-and-rolling-stock", "train", "Railway wagons, passenger coach components and alloy steel castings.", null,
-      "The Patel group manufactures railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track, built with the same in-house engineering and fabrication depth as our containers."],
+      "Our group manufactures railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track, built with the same in-house engineering and fabrication depth as our containers."],
     ["cat-ev", "Commercial EV", "commercial-ev", "zap", "Our eLCV range of electric light commercial vehicles.", null,
       "The group has entered the commercial electric vehicle space with the launch of two electric light commercial vehicles (eLCVs), bringing our load-body and fabrication expertise to clean last-mile mobility."],
   ];
@@ -147,13 +147,13 @@ async function run() {
       _id: id, _type: "productCategory", title, slug: slug(s), icon, shortDescription: short, order: i + 1,
       ...(image ? { image } : {}),
       body: pt(body),
-      seo: seo(`${title} Manufacturer in India`, `${short} Built by Patel Container India in Bhavnagar, Gujarat. Request a quote.`),
+      seo: seo(`${title} Manufacturer in India`, `${short} Built by VAHANA in Bhavnagar, Gujarat. Request a quote.`),
     }),
   );
 
   /* FAQs */
   const faqs = [
-    ["faq-types", "Products", "What types of containers does Patel make?", "We make 20 ft and 40 ft ISO containers, 20 ft and 40 ft High Cube containers and truck containers. We also build specialized and refrigerated containers, railway wagons and components, and load bodies for commercial vehicles."],
+    ["faq-types", "Products", "What types of containers does VAHANA make?", "We make 20 ft and 40 ft ISO containers, 20 ft and 40 ft High Cube containers and truck containers. We also build specialized and refrigerated containers, railway wagons and components, and load bodies for commercial vehicles."],
     ["faq-hc-diff", "Products", "What is the difference between a standard and a High Cube container?", "A High Cube is one foot taller. A 40 ft standard container is 8.6 ft high and a 40 ft High Cube is 9.6 ft high, so you can load taller cargo or stack more volume on the same footprint."],
     ["faq-weights", "Products", "What are the weight limits?", "A 20 ft ISO container has a maximum gross weight of 30,480 kg and a 40 ft ISO container 32,500 kg. Maximum payload is 28,800 kg for both. A 40 ft High Cube has a maximum gross weight of 32,730 kg."],
     ["faq-order", "Ordering", "How do I place an order?", "Use the Get a Quote page, call +91 70464 68484, or message us on WhatsApp. We will confirm specifications and price."],
@@ -162,7 +162,7 @@ async function run() {
     ["faq-export", "Shipping and export", "Do you export?", "Yes, we welcome export enquiries. Share your destination port and quantity and we will quote delivered or ex-works prices."],
     ["faq-leadtime", "Shipping and export", "What is the delivery time?", "Lead time depends on quantity, specification and destination. We confirm a firm delivery schedule in your quotation."],
     ["faq-testing", "Quality", "How are containers tested?", "Every container goes through in-house leak testing for water-tightness, with quality checks at each stage of fabrication, painting and final inspection before dispatch."],
-    ["faq-deflag", "Quality", "What is your deflagration test?", "Patel is the first in Asia to perform the deflagration test, developed jointly with GE Renewables India. It verifies that an enclosure behaves safely when gases inside it ignite, which is critical for energy-storage and power equipment enclosures."],
+    ["faq-deflag", "Quality", "What is your deflagration test?", "VAHANA is the first in Asia to perform the deflagration test, developed jointly with GE Renewables India. It verifies that an enclosure behaves safely when gases inside it ignite, which is critical for energy-storage and power equipment enclosures."],
   ];
   faqs.forEach(([id, topic, question, answer], i) => add({ _id: id, _type: "faq", topic, question, answer: pt(answer), order: i + 1 }));
 
@@ -175,7 +175,7 @@ async function run() {
       ["p-20-iso", "p-40-iso", "p-20-hc", "p-40-hc"]],
     ["ind-energy", "Renewable Energy", "renewable-energy", "wind", I.deflag, "Safe, tested enclosures for energy storage and power equipment.",
       "Energy storage and power equipment need enclosures that stay safe under fault conditions and protect sensitive equipment from the environment.",
-      "Patel co-developed deflagration testing with GE Renewables India, the first of its kind in Asia, and builds enclosures to project specifications.",
+      "VAHANA co-developed deflagration testing with GE Renewables India, the first of its kind in Asia, and builds enclosures to project specifications.",
       ["Asia's first deflagration-tested enclosure", "Built to project specifications", "In-house design, simulation and DFMEA"],
       ["cat-specialized"]],
     ["ind-railways", "Railways", "railways", "train", null, "Wagons, coach components and castings for rolling stock and track.",
@@ -201,7 +201,7 @@ async function run() {
       challenge: pt(challenge), solution: pt(solution), solutionPoints: points,
       recommendedProducts: refs(recs),
       ...(id === "ind-energy" ? { caseStudy: ref("proj-deflagration") } : {}),
-      seo: seo(`Containers for ${title} | Patel Container India`, `${short} Engineered and built by Patel Container India, Bhavnagar.`),
+      seo: seo(`Containers for ${title} | VAHANA`, `${short} Engineered and built by VAHANA, Bhavnagar.`),
     }),
   );
 
@@ -227,7 +227,7 @@ async function run() {
       specs: [...dims(20, "6.058", 8.6, "2.591"), { _type: "specGroup", title: "Weights", rows: [kv("Max gross weight", "30,480 kg"), kv("Max payload", "28,800 kg")] }],
       apps: ["General cargo", "Export packing", "On-site storage", "Heavy, dense goods"],
       related: ["p-40-iso", "p-20-hc"], inds: ["ind-shipping", "ind-storage"], faqs: ["faq-weights", "faq-custom", "faq-testing"],
-      seo: seo("20 ft ISO Container Manufacturer in India", "20 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from Patel Container India."),
+      seo: seo("20 ft ISO Container Manufacturer in India", "20 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from VAHANA."),
     },
     {
       _id: "p-40-iso", title: "40 ft ISO Container", s: "40-ft-iso-container", cat: "cat-standard", image: I.shipCranes, order: 2,
@@ -237,7 +237,7 @@ async function run() {
       specs: [...dims(40, "12.192", 8.6, "2.591"), { _type: "specGroup", title: "Weights", rows: [kv("Max gross weight", "32,500 kg"), kv("Max payload", "28,800 kg")] }],
       apps: ["Bulk shipments", "Furniture", "Machinery", "Consumer goods"],
       related: ["p-20-iso", "p-40-hc"], inds: ["ind-shipping"], faqs: ["faq-weights", "faq-hc-diff", "faq-export"],
-      seo: seo("40 ft ISO Container Manufacturer in India", "40 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from Patel Container India."),
+      seo: seo("40 ft ISO Container Manufacturer in India", "40 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from VAHANA."),
     },
     {
       _id: "p-20-hc", title: "20 ft High Cube Container", s: "20-ft-high-cube-container", cat: "cat-highcube", image: I.stack, order: 3,
@@ -291,10 +291,10 @@ async function run() {
     summary: "Developed jointly with GE Renewables India, this was the first deflagration test performed in Asia, proving an enclosure design safe under internal gas ignition.",
     requirement: pt("Energy-storage and power equipment enclosures must stay safe if gases inside them ignite. GE Renewables India needed an enclosure design whose behaviour under deflagration was proven by physical testing, not only by calculation."),
     solution: pt("Our engineering team co-developed the enclosure and the test set-up, using in-house 3D modelling, simulation and DFMEA. The enclosure was fabricated and finished in our Bhavnagar plant and prepared for the deflagration test."),
-    result: pt("Patel became the first company in Asia to perform the deflagration test. The project established a validated design approach that we now apply to specialised and energy enclosures."),
+    result: pt("VAHANA became the first company in Asia to perform the deflagration test. The project established a validated design approach that we now apply to specialised and energy enclosures."),
     resultStats: [kv("In Asia to perform the deflagration test", "1st"), kv("Design & development projects", "30+")],
     gallery: [I.deflag, I.enclosure],
-    seo: seo("Deflagration Test Case Study | Patel Container India", "How Patel Container India and GE Renewables India performed Asia's first deflagration test on an enclosure container."),
+    seo: seo("Deflagration Test Case Study | VAHANA", "How VAHANA and GE Renewables India performed Asia's first deflagration test on an enclosure container."),
   });
   add({
     _id: "proj-enclosure", _type: "project", title: "Specialised equipment enclosure", slug: slug("specialised-equipment-enclosure"),
@@ -312,7 +312,7 @@ async function run() {
   const certs = [
     ["cert-iso1496", "ISO 1496 dimensions", "International Organization for Standardization", "Containers built to ISO 1496 series dimensions for freight containers."],
     ["cert-deflag", "Deflagration tested", "Joint development with GE Renewables India", "First deflagration test performed in Asia on an enclosure container."],
-    ["cert-leak", "In-house leak testing", "Patel Container India QA", "Water-tightness test on containers before dispatch."],
+    ["cert-leak", "In-house leak testing", "VAHANA QA", "Water-tightness test on containers before dispatch."],
     ["cert-dfmea", "DFMEA & PFMEA", "In-house engineering", "Design and process failure-mode analysis built into our engineering workflow."],
   ];
   certs.forEach(([id, title, issuer, description], i) => add({ _id: id, _type: "certificate", title, issuer, description, order: i + 1 }));
@@ -328,14 +328,14 @@ async function run() {
   );
   const posts = [
     {
-      _id: "post-elcv", postType: "news", title: "Patel group enters commercial EV space with two eLCVs", s: "patel-group-launches-two-elcvs", date: "2026-09-15", cat: catIds.products, image: I.portCranes,
+      _id: "post-elcv", postType: "news", title: "VAHANA enters commercial EV space with two eLCVs", s: "vahana-launches-two-elcvs", date: "2026-09-15", cat: catIds.products, image: I.portCranes,
       excerpt: "Building on decades of load-body and fabrication experience, the group has launched two electric light commercial vehicles.",
-      body: "The Patel group has entered the commercial electric vehicle space with the launch of two electric light commercial vehicles (eLCVs).\n\nThe move builds on the group's experience in application-based load bodies for commercial vehicles, and brings the same in-house engineering and fabrication depth to clean last-mile mobility.\n\n## Why commercial EVs\n\nUrban delivery fleets are moving to electric drivetrains to cut running costs and emissions. Load-body design matters as much as the drivetrain: weight, volume and access decide how useful the vehicle is on the road.\n\nFor details on the eLCV range, contact our team.",
+      body: "VAHANA has entered the commercial electric vehicle space with the launch of two electric light commercial vehicles (eLCVs).\n\nThe move builds on the group's experience in application-based load bodies for commercial vehicles, and brings the same in-house engineering and fabrication depth to clean last-mile mobility.\n\n## Why commercial EVs\n\nUrban delivery fleets are moving to electric drivetrains to cut running costs and emissions. Load-body design matters as much as the drivetrain: weight, volume and access decide how useful the vehicle is on the road.\n\nFor details on the eLCV range, contact our team.",
     },
     {
       _id: "post-deflag-news", postType: "news", title: "Asia's first deflagration test, developed with GE Renewables India", s: "asias-first-deflagration-test", date: "2026-08-20", cat: catIds.company, image: I.deflag,
-      excerpt: "Patel Container India is the first in Asia to perform the deflagration test on an enclosure, in joint development with GE Renewables India.",
-      body: "Patel Container India is the first company in Asia to perform the deflagration test, in joint development with GE Renewables, India.\n\nThe test validates how an enclosure behaves when gases inside it ignite, which is critical for energy-storage and power equipment.\n\nRead the full case study on our Projects page.",
+      excerpt: "VAHANA is the first in Asia to perform the deflagration test on an enclosure, in joint development with GE Renewables India.",
+      body: "VAHANA is the first company in Asia to perform the deflagration test, in joint development with GE Renewables, India.\n\nThe test validates how an enclosure behaves when gases inside it ignite, which is critical for energy-storage and power equipment.\n\nRead the full case study on our Projects page.",
     },
     {
       _id: "post-20-vs-40", postType: "blog", title: "How to choose between 20 ft and 40 ft containers", s: "20-ft-vs-40-ft-container", date: "2026-07-10", cat: catIds.guides, image: I.portAerial, featured: true,
@@ -350,7 +350,7 @@ async function run() {
     {
       _id: "post-what-deflag", postType: "blog", title: "What is a deflagration test and why it matters", s: "what-is-a-deflagration-test", date: "2026-05-22", cat: catIds.engineering, image: I.deflag,
       excerpt: "Why enclosures for energy storage and power equipment need to be proven safe under internal gas ignition.",
-      body: "A deflagration is a fast-burning combustion of flammable gas that travels slower than the speed of sound. Inside a closed enclosure it can build up pressure quickly.\n\n## Why it matters for enclosures\n\nBattery energy storage systems and some power equipment can release flammable gases under fault conditions. If those gases ignite, the enclosure must manage the pressure safely to protect people and nearby equipment.\n\n## How the test works\n\nA deflagration test ignites a controlled gas mixture inside the enclosure and measures how the structure and its safety features respond.\n\n## Our experience\n\nPatel Container India is the first in Asia to perform the deflagration test, in joint development with GE Renewables India.",
+      body: "A deflagration is a fast-burning combustion of flammable gas that travels slower than the speed of sound. Inside a closed enclosure it can build up pressure quickly.\n\n## Why it matters for enclosures\n\nBattery energy storage systems and some power equipment can release flammable gases under fault conditions. If those gases ignite, the enclosure must manage the pressure safely to protect people and nearby equipment.\n\n## How the test works\n\nA deflagration test ignites a controlled gas mixture inside the enclosure and measures how the structure and its safety features respond.\n\n## Our experience\n\nVAHANA is the first in Asia to perform the deflagration test, in joint development with GE Renewables India.",
     },
     {
       _id: "post-how-built", postType: "blog", title: "How an ISO container is built", s: "how-an-iso-container-is-built", date: "2026-04-30", cat: catIds.engineering, image: I.laser,
@@ -361,7 +361,7 @@ async function run() {
   posts.forEach((p) =>
     add({
       _id: p._id, _type: "post", postType: p.postType, title: p.title, slug: slug(p.s), publishedAt: new Date(p.date + "T09:00:00Z").toISOString(),
-      categories: refs([p.cat]), excerpt: p.excerpt, mainImage: p.image, body: pt(p.body), featured: Boolean(p.featured), author: "Patel Container India",
+      categories: refs([p.cat]), excerpt: p.excerpt, mainImage: p.image, body: pt(p.body), featured: Boolean(p.featured), author: "VAHANA",
     }),
   );
 
@@ -384,7 +384,7 @@ async function run() {
       _type: "heroBlock",
       eyebrow: "ISO container manufacturer · Bhavnagar, Gujarat",
       heading: "Complete Mobility Solutions, Built in India",
-      subheading: "ISO shipping containers, specialized containers and engineered mobility products from Bhavnagar, Gujarat.",
+      subheading: "ISO shipping containers, specialized containers and engineered mobility products from Bhavnagar.",
       buttons: [btn("Get a Quote", "/get-a-quote"), btn("Download Brochure", "#brochure", "outlineLight")],
       images: [I.portCranes, I.ship, I.portAerial],
       highlights: [
@@ -396,15 +396,15 @@ async function run() {
     },
     {
       _type: "splitContentBlock", eyebrow: "Who we are", heading: "A premier manufacturer of ISO marine shipping containers",
-      body: pt("Patel Container India Private Limited is a premier manufacturer of ISO marine shipping containers and specialized containers. Our group also builds refrigerated containers, railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track.\n\nWe make load bodies for commercial vehicles and have entered the commercial EV space with two eLCVs."),
+      body: pt("VAHANA, from Patel Containers India Pvt. Ltd., is a premier manufacturer of ISO marine shipping containers and specialized containers. Our group also builds refrigerated containers, railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track.\n\nWe make load bodies for commercial vehicles and have entered the commercial EV space with two eLCVs."),
       bullets: ["ISO & High Cube containers", "Specialized enclosures", "Railway & rolling stock", "Commercial EV (eLCV)"],
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Design & engineering projects", "30+"),
       buttons: [btn("Know More About Us", "/about-us")], imagePosition: "right", background: "white",
     },
     { _type: "productCategoriesBlock", eyebrow: "Our products", heading: "Containers and mobility products for every load", intro: "From standard ISO boxes to specialized enclosures, rail and electric vehicles, all engineered and built in-house.", background: "light", buttons: [btn("View All Products", "/products", "secondary")] },
     {
-      _type: "featureGridBlock", eyebrow: "Why choose Patel", heading: "Engineers, not just manufacturers", intro: "Every container is designed, fabricated, painted and tested under one roof by a team that solves real engineering problems.",
-      columns: 3, variant: "cards", background: "white",
+      _type: "featureGridBlock", eyebrow: "Why choose VAHANA", heading: "Engineers, not just manufacturers", intro: "Every container is designed, fabricated, painted and tested under one roof by a team that solves real engineering problems.",
+      columns: 3, variant: "cards", background: "white", buttons: [btn("Contact Us", null, "primary", "page-contact")],
       items: [
         item("compass", "Complete in-house engineering", "3D modelling, 2D drafting, CNC nesting, simulation, DFMEA and PFMEA, all done by our own team."),
         item("flame", "Asia's first deflagration test", "Developed jointly with GE Renewables India to prove enclosure safety under internal gas ignition."),
@@ -439,13 +439,13 @@ async function run() {
       formType: "enquiry", submitLabel: "Send Enquiry", background: "dark", sectionId: "enquiry",
       points: [item("clock", "Reply within one working day"), item("compass", "Engineering support for custom builds"), item("globe", "Domestic and export orders")],
     },
-  ], { seo: seo("ISO Container Manufacturer in Bhavnagar | Patel Container India", "Patel Container India makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.") });
+  ], { seo: seo("ISO Container Manufacturer in Bhavnagar | VAHANA", "VAHANA makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.") });
 
   /* About */
   page("page-about", "About Us", "about-us", [
     {
       _type: "splitContentBlock", eyebrow: "Company profile", heading: "Complete mobility solutions from Bhavnagar",
-      body: pt("Patel Container India Private Limited (PCIPL) is a premier manufacturer of ISO marine shipping containers, specialized containers and refrigerated containers. We also build railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track."),
+      body: pt("VAHANA, the brand of Patel Containers India Pvt. Ltd. (PCIPL), is a premier manufacturer of ISO marine shipping containers, specialized containers and refrigerated containers. We also build railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track."),
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Engineering projects", "30+"), imagePosition: "right",
     },
     {
@@ -462,7 +462,7 @@ async function run() {
       image: I.ship, imagePosition: "left",
     },
     {
-      _type: "featureGridBlock", eyebrow: "What sets us apart", heading: "Why customers choose Patel", columns: 4, variant: "numbered", background: "dark",
+      _type: "featureGridBlock", eyebrow: "What sets us apart", heading: "Why customers choose VAHANA", columns: 4, variant: "numbered", background: "dark",
       items: [
         item("users", "Real engineers", "A team of real engineers solving real engineering problems."),
         item("flame", "Asia's first", "Asia's first deflagration test, developed with GE Renewables India."),
@@ -472,14 +472,14 @@ async function run() {
     },
     cta("Talk to our team", "Tell us about your project and we'll put you in touch with the right engineer.", [btn("Talk to Our Team", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
   ], {
-    header: { eyebrow: "About us", heading: "About Patel Container India", intro: "A premier manufacturer of ISO marine shipping containers and specialized containers, with in-house engineering that goes beyond the standard.", image: I.portCranes },
-    seo: seo("About Patel Container India | Container Manufacturer", "Learn about Patel Container India, our engineering team, our journey and our vision for complete mobility solutions."),
+    header: { eyebrow: "About us", heading: "About VAHANA", intro: "A premier manufacturer of ISO marine shipping containers and specialized containers, with in-house engineering that goes beyond the standard.", image: I.portCranes },
+    seo: seo("About VAHANA | Container Manufacturer", "Learn about VAHANA, our engineering team, our journey and our vision for complete mobility solutions."),
   });
   page("page-journey", "Our Journey", "about-us/our-journey", [
     {
       _type: "timelineBlock", eyebrow: "Milestones", heading: "How we grew into a multi-product manufacturer",
       items: [
-        { _type: "milestone", year: "Founded", title: "Patel Container India is established", text: "The company is founded in Bhavnagar, Gujarat to manufacture containers." },
+        { _type: "milestone", year: "Founded", title: "Patel Containers India is established", text: "The company is founded in Bhavnagar, Gujarat to manufacture containers." },
         { _type: "milestone", year: "Growth", title: "First ISO containers delivered", text: "ISO marine shipping containers roll off our 20 ft and 40 ft boxing lines." },
         { _type: "milestone", year: "Milestone", title: "Deflagration test with GE Renewables", text: "We become the first in Asia to perform the deflagration test, in joint development with GE Renewables India.", image: I.deflag },
         { _type: "milestone", year: "Today", title: "Entering commercial EV", text: "The group launches two electric light commercial vehicles (eLCVs)." },
@@ -487,16 +487,16 @@ async function run() {
     },
     { _type: "statsBlock", background: "dark", stats: [{ _type: "stat", value: 1, suffix: "st", label: "Deflagration test in Asia" }, { _type: "stat", value: 30, suffix: "+", label: "Engineering projects" }, { _type: "stat", value: 6, label: "Product categories" }] },
     cta("See what we build today", "Explore our containers, rail products and EVs.", [btn("See Our Products", "/products"), btn("Contact Us", "/contact", "outlineLight")]),
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Our Journey", intro: "From container manufacturing to a multi-product mobility group.", image: I.shipCranes }, seo: seo("Our Journey | Patel Container India", "Milestones in the growth of Patel Container India, from ISO containers to Asia's first deflagration test and commercial EVs.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Our Journey", intro: "From container manufacturing to a multi-product mobility group.", image: I.shipCranes }, seo: seo("Our Journey | VAHANA", "Milestones in the growth of VAHANA, from ISO containers to Asia's first deflagration test and commercial EVs.") });
   page("page-leadership", "Leadership Team", "about-us/leadership-team", [
     {
       _type: "messageBlock", eyebrow: "Founder's message", heading: "Quality, engineering and our customers",
-      message: pt("When we started Patel Container India, we set out to build more than steel boxes. We wanted to build an engineering company: one that understands why a product works, tests it before it ships, and stands behind it in the field.\n\nThat approach led us to perform Asia's first deflagration test with GE Renewables India, and it guides every container, wagon component and vehicle we make today.\n\nOur promise to customers is simple: honest specifications, careful workmanship, and a team of engineers who will solve your problem with you."),
-      name: "Founder & Managing Director", role: "Patel Container India Pvt. Ltd.",
+      message: pt("When we started Patel Containers India, we set out to build more than steel boxes. We wanted to build an engineering company: one that understands why a product works, tests it before it ships, and stands behind it in the field.\n\nThat approach led us to perform Asia's first deflagration test with GE Renewables India, and it guides every container, wagon component and vehicle we make today.\n\nOur promise to customers is simple: honest specifications, careful workmanship, and a team of engineers who will solve your problem with you."),
+      name: "Founder & Managing Director", role: "Patel Containers India Pvt. Ltd.",
     },
-    { _type: "teamBlock", eyebrow: "Leadership", heading: "The team behind Patel", background: "light" },
+    { _type: "teamBlock", eyebrow: "Leadership", heading: "The team behind VAHANA", background: "light" },
     cta("Want to talk to our leadership?", "We're always happy to discuss long-term partnerships and large projects.", [btn("Contact Us", "/contact"), btn("Careers", "/about-us/careers", "outlineLight")]),
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Leadership Team", intro: "The people who lead our engineering, manufacturing and customer relationships.", image: I.portAerial }, seo: seo("Leadership Team | Patel Container India", "Meet the leadership team of Patel Container India.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Leadership Team", intro: "The people who lead our engineering, manufacturing and customer relationships.", image: I.portAerial }, seo: seo("Leadership Team | VAHANA", "Meet the leadership team of VAHANA.") });
   page("page-careers", "Careers", "about-us/careers", [
     {
       _type: "featureGridBlock", eyebrow: "Why work here", heading: "Build things that move the world", columns: 3, variant: "cards",
@@ -508,11 +508,11 @@ async function run() {
     },
     { _type: "jobsBlock", eyebrow: "Open positions", heading: "Current openings", background: "light" },
     { _type: "formBlock", eyebrow: "How to apply", heading: "Apply now", intro: "Send your CV using the form, or email it to info@patelcontainer.com with the role in the subject line.", formType: "career", sectionId: "apply", showContactDetails: false, background: "white" },
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Careers", intro: "Join a team of engineers and craftspeople building containers, rail products and EVs.", image: I.laser }, seo: seo("Careers | Patel Container India", "Engineering and manufacturing careers at Patel Container India in Bhavnagar, Gujarat.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Careers", intro: "Join a team of engineers and craftspeople building containers, rail products and EVs.", image: I.laser }, seo: seo("Careers | VAHANA", "Engineering and manufacturing careers at VAHANA in Bhavnagar, Gujarat.") });
 
   /* Products overview */
   page("page-products", "Products", "products", [
-    { _type: "productCategoriesBlock", eyebrow: "Categories", heading: "Choose a product category", intro: "From standard ISO boxes to specialized and rail products, Patel builds to international standards with in-house engineering. Choose a category to see specifications and request a quote." },
+    { _type: "productCategoriesBlock", eyebrow: "Categories", heading: "Choose a product category", intro: "From standard ISO boxes to specialized and rail products, VAHANA builds to international standards with in-house engineering. Choose a category to see specifications and request a quote." },
     {
       _type: "comparisonTableBlock", eyebrow: "Compare sizes", heading: "20 ft vs 40 ft vs High Cube", background: "light",
       columns: ["Product", "Length", "Width", "Height", "Max gross weight", "Max payload"],
@@ -526,12 +526,12 @@ async function run() {
     },
     { _type: "productsBlock", eyebrow: "All products", heading: "Product range" },
     cta("Not sure which size fits?", "Talk to our team and we'll recommend the right container for your cargo.", quoteBtns),
-  ], { header: { eyebrow: "Products", heading: "Containers & Mobility Products", intro: "ISO, High Cube, truck and specialized containers, plus railway products and commercial EVs.", image: I.portAerial, buttons: [btn("Get a Quote", "/get-a-quote")] }, seo: seo("ISO and High Cube Containers | Patel Container India", "Browse 20 ft and 40 ft ISO containers, High Cube containers and truck containers made in Bhavnagar, Gujarat.") });
+  ], { header: { eyebrow: "Products", heading: "Containers & Mobility Products", intro: "ISO, High Cube, truck and specialized containers, plus railway products and commercial EVs.", image: I.portAerial, buttons: [btn("Get a Quote", "/get-a-quote")] }, seo: seo("ISO and High Cube Containers | VAHANA", "Browse 20 ft and 40 ft ISO containers, High Cube containers and truck containers made in Bhavnagar, Gujarat.") });
 
   /* Capabilities */
   page("page-capabilities", "Capabilities", "capabilities", [
     {
-      _type: "linkCardsBlock", eyebrow: "How we build", heading: "Engineering and manufacturing under one roof", intro: "Explore how Patel designs, builds and tests its products.",
+      _type: "linkCardsBlock", eyebrow: "How we build", heading: "Engineering and manufacturing under one roof", intro: "Explore how VAHANA designs, builds and tests its products.",
       cards: [
         { _type: "linkCard", title: "Manufacturing Facility", text: "Boxing, part processing, painting and leak testing.", image: I.laser, link: link("Explore", "page-cap-facility") },
         { _type: "linkCard", title: "Design & Engineering", text: "In-house CAD/CAE, simulation, DFMEA and PFMEA.", image: I.enclosure, link: link("Explore", "page-cap-design") },
@@ -572,11 +572,11 @@ async function run() {
     },
     { _type: "galleryBlock", eyebrow: "Gallery", heading: "Inside our plant", source: "inline", images: [I.laser, I.enclosure, I.deflag], background: "light" },
     cta("Visit our plant", "Book a factory tour and see our production lines for yourself.", [btn("Book a Factory Tour", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Manufacturing Facility", intro: "Container boxing, part processing, painting and leak testing under one roof in Bhavnagar.", image: I.laser }, seo: seo("Container Manufacturing Facility | Patel Container India", "Our Bhavnagar plant: 20 ft and 40 ft boxing lines, laser and CNC cutting, shot blasting, painting and leak testing.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Manufacturing Facility", intro: "Container boxing, part processing, painting and leak testing under one roof in Bhavnagar.", image: I.laser }, seo: seo("Container Manufacturing Facility | VAHANA", "Our Bhavnagar plant: 20 ft and 40 ft boxing lines, laser and CNC cutting, shot blasting, painting and leak testing.") });
   page("page-cap-design", "Design & Engineering", "capabilities/design-and-engineering", [
     {
       _type: "splitContentBlock", eyebrow: "Engineering firm", heading: "More than a manufacturer",
-      body: pt("More than a manufacturer, Patel is an engineering firm of real engineers who tackle real engineering problems. Our team has co-developed products with Fortune 500 companies and delivered more than 30 projects across the full design and development process.\n\nWe have a legacy of transforming client inspirations and aspirations into powerful business results."),
+      body: pt("More than a manufacturer, VAHANA is an engineering firm of real engineers who tackle real engineering problems. Our team has co-developed products with Fortune 500 companies and delivered more than 30 projects across the full design and development process.\n\nWe have a legacy of transforming client inspirations and aspirations into powerful business results."),
       image: I.enclosure, badge: kv("Projects delivered", "30+"),
     },
     {
@@ -592,7 +592,7 @@ async function run() {
     },
     { _type: "projectsBlock", eyebrow: "Sample projects", heading: "Engineering we have delivered", projects: refs(["proj-deflagration", "proj-enclosure", "proj-elcv"]), showFilters: false, background: "light" },
     cta("Discuss your design requirement", "Share your drawings or idea and our engineers will propose a solution.", quoteBtns),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Design & Engineering", intro: "A team of real engineers with in-house CAD/CAE, simulation and failure-mode analysis.", image: I.enclosure }, seo: seo("Container Design & Engineering | Patel Container India", "In-house 3D modelling, 2D drafting, CNC nesting, simulation, DFMEA and PFMEA. 30+ engineering projects delivered.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Design & Engineering", intro: "A team of real engineers with in-house CAD/CAE, simulation and failure-mode analysis.", image: I.enclosure }, seo: seo("Container Design & Engineering | VAHANA", "In-house 3D modelling, 2D drafting, CNC nesting, simulation, DFMEA and PFMEA. 30+ engineering projects delivered.") });
   page("page-cap-testing", "Testing & Innovation", "capabilities/testing-and-innovation", [
     {
       _type: "featureGridBlock", eyebrow: "Testing facilities", heading: "We test what we build, and we test beyond the standard", columns: 3, variant: "cards",
@@ -612,7 +612,7 @@ async function run() {
       items: [item("zap", "Commercial EV launch", "Two electric light commercial vehicles from the group."), item("lightbulb", "New container designs", "Specialized enclosures and custom builds for energy and industry.")],
     },
     cta("Request test reports", "Ask our team for test documentation for your project.", [btn("Request Test Reports", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Testing & Innovation", intro: "We test what we build, and we test beyond the standard.", image: I.deflag }, seo: seo("Container Testing & Deflagration Test | Patel Container India", "Asia's first deflagration test with GE Renewables India, plus in-house leak testing and stage-wise inspection.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Testing & Innovation", intro: "We test what we build, and we test beyond the standard.", image: I.deflag }, seo: seo("Container Testing & Deflagration Test | VAHANA", "Asia's first deflagration test with GE Renewables India, plus in-house leak testing and stage-wise inspection.") });
   page("page-cap-process", "Production Process", "capabilities/production-process", [
     {
       _type: "processBlock", eyebrow: "Step by step", heading: "From drawings to dispatch", note: "A quality check is done at each stage.",
@@ -628,7 +628,7 @@ async function run() {
       ],
     },
     cta("See how we build to your specification", "Send your requirement and we'll walk you through the build.", quoteBtns),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Production Process", intro: "Eight disciplined stages, with a quality check at every step.", image: I.shipCranes }, seo: seo("Container Production Process | Patel Container India", "How an ISO container is built at Patel: eight production stages from design to final inspection and dispatch.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Production Process", intro: "Eight disciplined stages, with a quality check at every step.", image: I.shipCranes }, seo: seo("Container Production Process | VAHANA", "How an ISO container is built at VAHANA: eight production stages from design to final inspection and dispatch.") });
 
   /* Quality */
   page("page-quality", "Quality & Certifications", "quality", [
@@ -653,7 +653,7 @@ async function run() {
     },
     { _type: "featureGridBlock", eyebrow: "Third-party approvals", heading: "Inspection agencies and customer approvals", intro: "Details of third-party inspection agencies and customer approvals are available on request.", columns: 2, variant: "cards", items: [item("badge", "Inspection agencies", "Third-party inspection can be arranged on request."), item("handshake", "Customer approvals", "Joint development and approvals with partners such as GE Renewables India.")] },
     cta("Request our quality documents", "Ask for certificates, test reports and inspection records.", [btn("Request Documents", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { header: { eyebrow: "Quality", heading: "Quality & Certifications", intro: "Our quality process, standards and certificates for container manufacturing.", image: I.deflag }, seo: seo("Quality and Certifications | Patel Container India", "Our quality process, standards and certificates for container manufacturing.") });
+  ], { header: { eyebrow: "Quality", heading: "Quality & Certifications", intro: "Our quality process, standards and certificates for container manufacturing.", image: I.deflag }, seo: seo("Quality and Certifications | VAHANA", "Our quality process, standards and certificates for container manufacturing.") });
 
   /* Industries */
   page("page-industries", "Industries", "industries", [
@@ -665,10 +665,10 @@ async function run() {
   page("page-projects", "Projects", "projects", [
     { _type: "projectsBlock", eyebrow: "Our work", heading: "A selection of containers and engineered products delivered to customers", showFilters: true },
     cta("Have a project in mind?", "Let's engineer it together.", quoteBtns),
-  ], { header: { eyebrow: "Projects", heading: "Our Work", intro: "A selection of containers and engineered products delivered to customers.", image: I.shipCranes, buttons: [btn("View Gallery", "/gallery", "outlineLight")] }, seo: seo("Projects and Case Studies | Patel Container India", "See containers and engineered products delivered by Patel Container India.") });
+  ], { header: { eyebrow: "Projects", heading: "Our Work", intro: "A selection of containers and engineered products delivered to customers.", image: I.shipCranes, buttons: [btn("View Gallery", "/gallery", "outlineLight")] }, seo: seo("Projects and Case Studies | VAHANA", "See containers and engineered products delivered by VAHANA.") });
   page("page-gallery", "Gallery", "gallery", [
     { _type: "galleryBlock", source: "albums" },
-  ], { header: { eyebrow: "Media", heading: "Gallery", intro: "Photos and videos of our products, plant, machinery, testing and events.", image: I.portAerial }, seo: seo("Gallery | Patel Container India", "Photos and videos of Patel Container India's containers, plant, machinery and testing.") });
+  ], { header: { eyebrow: "Media", heading: "Gallery", intro: "Photos and videos of our products, plant, machinery, testing and events.", image: I.portAerial }, seo: seo("Gallery | VAHANA", "Photos and videos of VAHANA's containers, plant, machinery and testing.") });
 
   /* Media */
   page("page-media", "Media", "media", [
@@ -681,19 +681,19 @@ async function run() {
         { _type: "linkCard", title: "Gallery", text: "Photos and videos.", image: I.ship, link: link("View gallery", "page-gallery") },
       ],
     },
-    { _type: "postsBlock", eyebrow: "Latest", heading: "Latest from Patel", postType: "all", mode: "latest", background: "light" },
-  ], { header: { eyebrow: "Media", heading: "News, Blog & Downloads", intro: "News, articles and brochures from Patel Container India.", image: I.ship }, seo: seo("News, Blog and Downloads", "News, articles and brochures from Patel Container India.") });
+    { _type: "postsBlock", eyebrow: "Latest", heading: "Latest from VAHANA", postType: "all", mode: "latest", background: "light" },
+  ], { header: { eyebrow: "Media", heading: "News, Blog & Downloads", intro: "News, articles and brochures from VAHANA.", image: I.ship }, seo: seo("News, Blog and Downloads", "News, articles and brochures from VAHANA.") });
   page("page-news", "News", "news", [
     { _type: "postsBlock", postType: "news", mode: "full" },
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "News and Updates", intro: "Company, product, event and award news from Patel Container India.", image: I.portCranes }, seo: seo("News and Updates | Patel Container India", "The latest company, product and event news from Patel Container India.") });
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "News and Updates", intro: "Company, product, event and award news from VAHANA.", image: I.portCranes }, seo: seo("News and Updates | VAHANA", "The latest company, product and event news from VAHANA.") });
   page("page-blog", "Blog", "blog", [
     { _type: "postsBlock", postType: "blog", mode: "full" },
     { _type: "newsletterBlock", eyebrow: "Newsletter", heading: "Get new articles by email", intro: "Container guides, product news and engineering updates. No spam.", background: "light" },
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Container Knowledge Hub", intro: "Practical guides on choosing, specifying and using containers.", image: I.portAerial }, seo: seo("Container Knowledge Hub | Patel Container India", "Guides on container sizes, High Cube vs standard, deflagration testing and how ISO containers are built.") });
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Container Knowledge Hub", intro: "Practical guides on choosing, specifying and using containers.", image: I.portAerial }, seo: seo("Container Knowledge Hub | VAHANA", "Guides on container sizes, High Cube vs standard, deflagration testing and how ISO containers are built.") });
   page("page-downloads", "Downloads", "media/downloads", [
     { _type: "downloadsBlock" },
     cta("Need a specific document?", "Ask us for datasheets, drawings, certificates or test reports.", [btn("Request a Document", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Downloads", intro: "Company brochure, product datasheets and certificates.", image: I.laser }, seo: seo("Brochures & Downloads | Patel Container India", "Download the Patel Container India brochure, product datasheets and certificates.") });
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Downloads", intro: "Company brochure, product datasheets and certificates.", image: I.laser }, seo: seo("Brochures & Downloads | VAHANA", "Download the VAHANA brochure, product datasheets and certificates.") });
 
   /* Contact & quote */
   page("page-contact", "Contact", "contact", [
@@ -703,15 +703,15 @@ async function run() {
       points: [item("clock", "Reply within one working day"), item("users", "Talk directly to our engineers")],
     },
     { _type: "contactInfoBlock", eyebrow: "Reach us", heading: "Contact details", background: "light", exportNote: "Planning an export order? Share your destination port and quantity and we will quote delivered or ex-works prices." },
-  ], { header: { eyebrow: "Contact", heading: "Contact Patel Container India", intro: "Call, WhatsApp or send an enquiry. Our team in Bhavnagar is ready to help.", image: I.portCranes }, seo: seo("Contact Patel Container India | Bhavnagar", "Call (+91) 7046468484 or send an enquiry. Bhadbhid, Bhavnagar, Gujarat 364002.") });
+  ], { header: { eyebrow: "Contact", heading: "Contact VAHANA", intro: "Call, WhatsApp or send an enquiry. Our team in Bhavnagar is ready to help.", image: I.portCranes }, seo: seo("Contact VAHANA | Bhavnagar", "Call (+91) 7046468484 or send an enquiry. Kumbharwada, Bhavnagar, Gujarat 364006.") });
   page("page-quote", "Get a Quote", "get-a-quote", [
     {
       _type: "formBlock", eyebrow: "Request a quote", heading: "Share your requirement", intro: "Share your requirement and get a detailed quote within one working day.",
       formType: "quote", submitLabel: "Request Quote", sectionId: "form",
       points: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design and engineering"), item("droplets", "In-house leak testing"), item("ruler", "Built to ISO standard dimensions")],
     },
-    { _type: "badgesBlock", eyebrow: "Why Patel", heading: "Trusted engineering", background: "light", items: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design & engineering"), item("droplets", "In-house leak testing"), item("badge", "ISO 1496 dimensions")] },
-  ], { header: { eyebrow: "Get a quote", heading: "Request a Quote", intro: "Tell us your size, quantity and destination and get a detailed quote within one working day." }, seo: seo("Get a Container Quote | Patel Container India", "Tell us your size, quantity and destination and get a quote within one working day.") });
+    { _type: "badgesBlock", eyebrow: "Why VAHANA", heading: "Trusted engineering", background: "light", items: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design & engineering"), item("droplets", "In-house leak testing"), item("badge", "ISO 1496 dimensions")] },
+  ], { header: { eyebrow: "Get a quote", heading: "Request a Quote", intro: "Tell us your size, quantity and destination and get a detailed quote within one working day." }, seo: seo("Get a Container Quote | VAHANA", "Tell us your size, quantity and destination and get a quote within one working day.") });
   page("page-thanks", "Thank You", "get-a-quote/thank-you", [
     {
       _type: "linkCardsBlock", eyebrow: "Next steps", heading: "Thank you, we have your request.", intro: "Our team will contact you within one working day. In the meantime:",
@@ -722,18 +722,18 @@ async function run() {
         { _type: "linkCard", title: "Read case studies", text: "Projects we've delivered.", image: I.deflag, link: link("Projects", "page-projects") },
       ],
     },
-  ], { parent: ref("page-quote"), header: { eyebrow: "Request received", heading: "Thank You" }, seo: seo("Thank You | Patel Container India", "We have your quote request.", { noIndex: true }) });
+  ], { parent: ref("page-quote"), header: { eyebrow: "Request received", heading: "Thank You" }, seo: seo("Thank You | VAHANA", "We have your quote request.", { noIndex: true }) });
 
   page("page-faq", "FAQ", "faq", [
     { _type: "faqBlock" },
     cta("Didn't find your answer?", "Our team is happy to help.", [btn("Contact Us", "/contact"), btn("Chat on WhatsApp", "#whatsapp", "whatsapp")]),
-  ], { header: { eyebrow: "FAQ", heading: "Frequently Asked Questions", intro: "Answers on container sizes, weights, ordering, export and quality." }, seo: seo("Container FAQ | Patel Container India", "Answers on container sizes, weights, ordering, export and quality.") });
+  ], { header: { eyebrow: "FAQ", heading: "Frequently Asked Questions", intro: "Answers on container sizes, weights, ordering, export and quality." }, seo: seo("Container FAQ | VAHANA", "Answers on container sizes, weights, ordering, export and quality.") });
 
   /* Legal */
   page("page-privacy", "Privacy Policy", "privacy-policy", [
     {
       _type: "richTextBlock", showToc: true,
-      content: pt(`This policy explains how Patel Container India Private Limited ("we", "us") collects and uses personal information through this website.
+      content: pt(`This policy explains how VAHANA, a brand of Patel Containers India Pvt. Ltd. ("we", "us"), collects and uses personal information through this website.
 
 ## What data we collect
 
@@ -763,11 +763,11 @@ You can ask to access, correct or delete your personal data. Questions about pri
 
 We may update this policy from time to time. The latest version will always be on this page.`),
     },
-  ], { header: { eyebrow: "Legal", heading: "Privacy Policy" }, seo: seo("Privacy Policy | Patel Container India", "How Patel Container India collects, uses and protects your personal data.") });
+  ], { header: { eyebrow: "Legal", heading: "Privacy Policy" }, seo: seo("Privacy Policy | VAHANA", "How VAHANA collects, uses and protects your personal data.") });
   page("page-terms", "Terms and Conditions", "terms-and-conditions", [
     {
       _type: "richTextBlock", showToc: true,
-      content: pt(`These terms govern your use of the Patel Container India website.
+      content: pt(`These terms govern your use of the VAHANA website.
 
 ## Use of the website
 
@@ -779,11 +779,11 @@ Product descriptions and specifications are for general information and may chan
 
 ## Quotes and orders
 
-Quotations are valid for the period stated on them. Orders are subject to written confirmation by Patel Container India Private Limited.
+Quotations are valid for the period stated on them. Orders are subject to written confirmation by Patel Containers India Pvt. Ltd.
 
 ## Intellectual property
 
-All content on this website, including text, images, logos and drawings, belongs to Patel Container India Private Limited unless stated otherwise.
+All content on this website, including text, images, logos and drawings, belongs to Patel Containers India Pvt. Ltd. unless stated otherwise.
 
 ## Limitation of liability
 
@@ -793,22 +793,25 @@ We are not liable for any loss arising from the use of information on this websi
 
 These terms are governed by the laws of India, and the courts of Bhavnagar, Gujarat have jurisdiction.`),
     },
-  ], { header: { eyebrow: "Legal", heading: "Terms and Conditions" }, seo: seo("Terms and Conditions | Patel Container India", "Terms and conditions for using the Patel Container India website.") });
+  ], { header: { eyebrow: "Legal", heading: "Terms and Conditions" }, seo: seo("Terms and Conditions | VAHANA", "Terms and conditions for using the VAHANA website.") });
 
   /* Site settings */
   const mapQ = (q) => `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=13&output=embed`;
   const dirQ = (q) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`;
   add({
     _id: "siteSettings", _type: "siteSettings",
-    siteName: "Patel Container India", legalName: "Patel Container India Private Limited",
-    tagline: "Heart of Perfect Joint",
+    siteName: "VAHANA", legalName: "Patel Containers India Pvt. Ltd.",
+    tagline: "Complete Mobility Solutions, Built in India",
     phones: ["+91 70464 68484", "+91 94281 81618"],
     email: "info@patelcontainer.com",
     whatsappNumber: "917046468484",
     whatsappMessage: "Hi, I am interested in your containers. Please share details and pricing.",
     addresses: [
-      { _type: "address", label: "Bhadbhid unit", address: "Patel Container India Pvt. Ltd.\nBhadbhid, Bhavnagar,\nGujarat 364002, India", mapEmbedUrl: mapQ("Bhadbhid, Bhavnagar, Gujarat 364002"), directionsUrl: dirQ("Bhadbhid, Bhavnagar, Gujarat 364002") },
-      { _type: "address", label: "Sanes unit", address: "Sanes, Bhavnagar,\nGujarat 364002, India", directionsUrl: dirQ("Sanes, Bhavnagar, Gujarat") },
+      {
+        _type: "address", label: "Plant & office",
+        address: "Patel Containers India Pvt. Ltd.\nPlot No.374, Nr. Red Colour,\nNr. Banuben ni wadi, Kumbharwada,\nBhavnagar, Gujarat, India, 364006",
+        mapEmbedUrl: mapQ("Kumbharwada, Bhavnagar, Gujarat 364006"), directionsUrl: dirQ("Plot No.374, Kumbharwada, Bhavnagar, Gujarat 364006"),
+      },
     ],
     businessHours: "Monday – Saturday",
     responseTime: "one working day",
@@ -818,7 +821,7 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
       { _type: "navItem", label: "About Us", internal: ref("page-about"), children: [
         { _type: "navChild", label: "Company Profile", description: "Vision, mission and group", internal: ref("page-about") },
         { _type: "navChild", label: "Our Journey", description: "Milestones and achievements", internal: ref("page-journey") },
-        { _type: "navChild", label: "Leadership Team", description: "The people behind Patel", internal: ref("page-leadership") },
+        { _type: "navChild", label: "Leadership Team", description: "The people behind VAHANA", internal: ref("page-leadership") },
         { _type: "navChild", label: "Careers", description: "Join our engineering team", internal: ref("page-careers") },
       ] },
       { _type: "navItem", label: "Products", internal: ref("page-products"), children: cats.map(([id, title, , , short]) => ({ _type: "navChild", label: title, description: short, internal: ref(id) })) },
@@ -850,10 +853,10 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
     legalLinks: [link("Privacy Policy", "page-privacy"), link("Terms and Conditions", "page-terms"), link("Sitemap", null, "/site-map")],
     newsletterHeading: "Get new articles by email",
     newsletterText: "Container guides, product news and engineering updates. No spam.",
-    copyright: "© {year} Patel Container India Private Limited. All rights reserved.",
-    titleTemplate: "%s | Patel Container India",
+    copyright: "© {year} VAHANA, a brand of Patel Containers India Pvt. Ltd. All rights reserved.",
+    titleTemplate: "%s | VAHANA",
     templates: { _type: "object", ...templateDefaults() },
-    defaultSeo: seo("ISO Container Manufacturer in Bhavnagar | Patel Container India", "Patel Container India makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.", { keywords: ["ISO container manufacturer", "shipping container manufacturer India", "High Cube container", "container manufacturer Gujarat", "Bhavnagar container"] }),
+    defaultSeo: seo("ISO Container Manufacturer in Bhavnagar | VAHANA", "VAHANA makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.", { keywords: ["ISO container manufacturer", "shipping container manufacturer India", "High Cube container", "container manufacturer Gujarat", "Bhavnagar container"] }),
   });
 
   /* Redirects from the old site */
@@ -863,6 +866,7 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
     ["/20 Feet High Cube Container.html", "/products/20-ft-high-cube-container"],
     ["/40 Feet High Cube Container.html", "/products/40-ft-high-cube-container"],
     ["/Truck Container.html", "/products/truck-container"],
+    ["/news/patel-group-launches-two-elcvs", "/news/vahana-launches-two-elcvs"],
   ].forEach(([source, destination], i) => add({ _id: `redirect-${i + 1}`, _type: "redirect", source, destination, permanent: true }));
 
   /* Write */

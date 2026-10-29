@@ -8,7 +8,7 @@ import { ProjectsIcon } from "@sanity/icons/Projects";
 
 export const structure: StructureResolver = (S) =>
   S.list()
-    .title("Patel Container")
+    .title("VAHANA")
     .items([
       S.listItem()
         .title("Site settings")

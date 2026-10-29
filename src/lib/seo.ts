@@ -13,7 +13,7 @@ export const absoluteUrl = (path = "/") => (path.startsWith("http") ? path : `${
 /** Site settings, deduped per request. */
 export const getSettings = cache(async (): Promise<Settings> => {
   const s = await sanityFetch<Settings | null>({ query: settingsQuery, tags: ["siteSettings"] });
-  return s ?? { siteName: "Patel Container India" };
+  return s ?? { siteName: "VAHANA" };
 });
 
 type MetaInput = {
@@ -79,8 +79,8 @@ export function organizationSchema(s: Settings) {
     "@context": "https://schema.org",
     "@type": ["Organization", "Manufacturer"],
     "@id": `${SITE_URL}/#organization`,
-    name: s.legalName || s.siteName,
-    alternateName: s.siteName,
+    name: s.siteName,
+    legalName: s.legalName,
     url: SITE_URL,
     logo: `${SITE_URL}/brand/vahana-logo.png`,
     slogan: s.tagline,
@@ -91,7 +91,13 @@ export function organizationSchema(s: Settings) {
     address: addr?.address
       ? {
           "@type": "PostalAddress",
-          streetAddress: addr.address.split("\n")[0],
+          // Address lines minus the company name and the city/state/PIN line
+          streetAddress: addr.address
+            .split("\n")
+            .map((l) => l.trim().replace(/,$/, ""))
+            .filter((l) => l && l !== s.legalName && l !== s.siteName)
+            .slice(0, -1)
+            .join(", "),
           addressLocality: "Bhavnagar",
           addressRegion: "Gujarat",
           postalCode: addr.address.match(/\b\d{6}\b/)?.[0],

@@ -9,7 +9,7 @@ import { structure } from "./src/sanity/structure";
 
 export default defineConfig({
   name: "patel-container",
-  title: "Patel Container India",
+  title: "VAHANA",
   basePath: "/studio",
   projectId,
   dataset,

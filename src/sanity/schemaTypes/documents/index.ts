@@ -154,7 +154,7 @@ export const siteSettings = defineType({
       name: "titleTemplate",
       type: "string",
       group: "seo",
-      description: 'Appended to page titles, e.g. "%s | Patel Container India"',
+      description: 'Appended to page titles, e.g. "%s | VAHANA"',
     }),
     defineField({ name: "defaultSeo", title: "Default SEO", type: "seo", group: "seo" }),
     defineField({

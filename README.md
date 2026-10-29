@@ -1,4 +1,4 @@
-# Patel Container India — Website
+# VAHANA (Patel Containers India Pvt. Ltd.) — Website
 
 Next.js 16 (App Router) + Sanity 6 (embedded Studio) + Tailwind CSS 4.
 
@@ -63,7 +63,7 @@ Every page and product has an **SEO** tab. After publishing, the live site updat
 ## Go-live checklist
 
 1. Rotate the Sanity token: sanity.io/manage → API → Tokens → create an **Editor** token, put it in `SANITY_API_WRITE_TOKEN`, delete the old one.
-2. Set `NEXT_PUBLIC_SITE_URL` to the real domain (e.g. `https://www.patelcontainerindia.com`). Canonical URLs, sitemap and social previews depend on it.
+2. Set `NEXT_PUBLIC_SITE_URL` to the real domain (e.g. `https://www.vahanacontainers.com`). Canonical URLs, sitemap and social previews depend on it.
 3. Set a long random `SANITY_REVALIDATE_SECRET` and create the webhook (below).
 4. Add the production domain to Sanity **CORS origins** (allow credentials) so /studio works on the live domain.
 5. Point DNS to Vercel; submit `https://<domain>/sitemap.xml` in Google Search Console.

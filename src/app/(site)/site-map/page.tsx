@@ -4,7 +4,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { sitemapQuery } from "@/sanity/lib/queries";
 import { buildMetadata } from "@/lib/seo";
 
-export const generateMetadata = () => buildMetadata({ title: "Sitemap", description: "A list of every page on the Patel Container India website.", path: "/site-map" });
+export const generateMetadata = () => buildMetadata({ title: "Sitemap", description: "A list of every page on the VAHANA website.", path: "/site-map" });
 
 type Item = { title: string; slug: string; postType?: string; parent?: string };
 type Data = Record<"pages" | "products" | "categories" | "industries" | "projects" | "posts", Item[]>;
