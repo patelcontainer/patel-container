@@ -19,7 +19,7 @@ export function Footer({ settings }: { settings: Settings }) {
         <div className="footer-newsletter border-b border-white/10">
           <div className="wrap grid items-center gap-6 py-10 lg:grid-cols-[1fr_auto] lg:py-12 [&>*]:min-w-0">
             <div>
-              <h2 className="text-2xl font-bold text-white">{settings.newsletterHeading || "Get industry updates"}</h2>
+              <p className="heading-text text-2xl font-bold text-white">{settings.newsletterHeading || "Get industry updates"}</p>
               {settings.newsletterText && <p className="mt-2">{settings.newsletterText}</p>}
             </div>
             <Newsletter />
@@ -50,7 +50,7 @@ export function Footer({ settings }: { settings: Settings }) {
 
           {(settings.footerColumns || []).map((col) => (
             <div key={col._key} className="lg:col-span-2">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">{col.title}</h3>
+              <p className="heading-text text-sm font-semibold uppercase tracking-[0.14em] text-white">{col.title}</p>
               <ul className="mt-5 space-y-3 text-[0.925rem]">
                 {(col.links || []).map((l) => (
                   <li key={l._key}>
@@ -65,7 +65,7 @@ export function Footer({ settings }: { settings: Settings }) {
 
           {!!settings.topProducts?.length && (
             <div className="col-span-2 md:col-span-1 lg:col-span-2">
-              <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">Products</h3>
+              <p className="heading-text text-sm font-semibold uppercase tracking-[0.14em] text-white">Products</p>
               <ul className="mt-5 space-y-3 text-[0.925rem]">
                 {settings.topProducts.map((p) => (
                   <li key={p.slug}>
@@ -79,7 +79,7 @@ export function Footer({ settings }: { settings: Settings }) {
           )}
 
           <div className="col-span-2 lg:col-span-3">
-            <h3 className="text-sm font-semibold uppercase tracking-[0.14em] text-white">Contact</h3>
+            <p className="heading-text text-sm font-semibold uppercase tracking-[0.14em] text-white">Contact</p>
             <ul className="mt-5 space-y-4 text-[0.925rem]">
               {primaryAddress?.address && (
                 <li className="flex gap-3">

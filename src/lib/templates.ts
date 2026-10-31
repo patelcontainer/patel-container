@@ -1,3 +1,5 @@
+import { headingTag } from "./headings";
+
 /**
  * Text used by the fixed page templates (product, category, industry, case study, article, 404, forms).
  * Editable in Studio → Site settings → Page templates. Defaults here apply until an editor overrides them.
@@ -51,6 +53,37 @@ export const TEMPLATE_FIELDS = [
   // Case study + articles
   { name: "projectCtaHeading", title: "Case study CTA heading", fieldset: "content", default: "Let's engineer your next project together" },
   { name: "postCtaHeading", title: "Article CTA heading", fieldset: "content", default: "Looking for containers built to your specification?" },
+
+  // Heading tags (SEO outline only; the look stays the same)
+  { name: "productSidebarTag", title: "Sidebar heading", fieldset: "productTags", default: "p", tag: true },
+  { name: "productSpecsTag", title: "Specification heading", fieldset: "productTags", default: "h3", tag: true },
+  { name: "productSpecGroupTag", title: "Specification table titles", fieldset: "productTags", default: "p", tag: true },
+  { name: "productFeaturesTag", title: "Features heading", fieldset: "productTags", default: "h4", tag: true },
+  { name: "productFeatureItemTag", title: "Feature titles and “Materials and construction”", fieldset: "productTags", default: "p", tag: true },
+  { name: "productApplicationsTag", title: "Applications heading", fieldset: "productTags", default: "h4", tag: true },
+  { name: "productIndustryItemTag", title: "Industry tile titles", fieldset: "productTags", default: "p", tag: true },
+  { name: "productGalleryTag", title: "Gallery heading", fieldset: "productTags", default: "h5", tag: true },
+  { name: "productDatasheetTag", title: "Datasheet heading", fieldset: "productTags", default: "p", tag: true },
+  { name: "productRelatedTag", title: "Related products heading", fieldset: "productTags", default: "h5", tag: true },
+  { name: "productRelatedItemTag", title: "Related product titles", fieldset: "productTags", default: "p", tag: true },
+  { name: "productFaqTag", title: "FAQ heading", fieldset: "productTags", default: "h4", tag: true },
+  { name: "productQuoteTag", title: "Quote form heading", fieldset: "productTags", default: "h5", tag: true },
+  { name: "categoryRangeTag", title: "Products heading", fieldset: "categoryTags", default: "h2", tag: true },
+  { name: "categoryRangeItemTag", title: "Product titles", fieldset: "categoryTags", default: "h3", tag: true },
+  { name: "categoryCtaTag", title: "CTA heading", fieldset: "categoryTags", default: "h2", tag: true },
+  { name: "categoryOthersTag", title: "Other categories heading", fieldset: "categoryTags", default: "h3", tag: true },
+  { name: "categoryOthersItemTag", title: "Other category titles", fieldset: "categoryTags", default: "h5", tag: true },
+  { name: "industryChallengeTag", title: "Challenge heading", fieldset: "industryTags", default: "h4", tag: true },
+  { name: "industrySolutionTag", title: "Solution heading", fieldset: "industryTags", default: "h4", tag: true },
+  { name: "industryProductsTag", title: "Recommended products heading", fieldset: "industryTags", default: "h2", tag: true },
+  { name: "industryProductsItemTag", title: "Recommended product titles", fieldset: "industryTags", default: "h5", tag: true },
+  { name: "industryQuoteTag", title: "Quote form heading", fieldset: "industryTags", default: "h3", tag: true },
+  { name: "industryOthersTag", title: "Other industries heading", fieldset: "industryTags", default: "h4", tag: true },
+  { name: "industryOthersItemTag", title: "Other industry titles", fieldset: "industryTags", default: "p", tag: true },
+  { name: "postNewsletterTag", title: "Newsletter heading", fieldset: "contentTags", default: "h5", tag: true },
+  { name: "postRelatedTag", title: "“More from…” heading", fieldset: "contentTags", default: "h5", tag: true },
+  { name: "postRelatedItemTag", title: "“More from…” article titles", fieldset: "contentTags", default: "p", tag: true },
+  { name: "postCtaTag", title: "Article CTA heading", fieldset: "contentTags", default: "h5", tag: true },
 ] as const;
 
 export type TemplateKey = (typeof TEMPLATE_FIELDS)[number]["name"];
@@ -62,6 +95,10 @@ export const TEMPLATE_FIELDSETS = [
   { name: "category", title: "Product category page" },
   { name: "industry", title: "Industry page" },
   { name: "content", title: "Case studies and articles" },
+  { name: "productTags", title: "Heading tags: product page" },
+  { name: "categoryTags", title: "Heading tags: product category page" },
+  { name: "industryTags", title: "Heading tags: industry page" },
+  { name: "contentTags", title: "Heading tags: news and blog articles" },
 ];
 
 /** Merge CMS overrides over defaults. */
@@ -75,3 +112,6 @@ export function resolveTemplates(cms?: Partial<Record<string, string>> | null, r
 }
 
 export const fill = (text: string, title: string) => text.replaceAll("{title}", title);
+
+/** Heading tag from a template "…Tag" field. */
+export const templateTag = (t: Templates, key: TemplateKey) => headingTag(t[key], headingTag(TEMPLATE_FIELDS.find((f) => f.name === key)?.default));

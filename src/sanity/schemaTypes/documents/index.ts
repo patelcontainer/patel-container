@@ -19,6 +19,7 @@ import { TagsIcon } from "@sanity/icons/Tags";
 import { pageBuilderMembers } from "../blocks";
 import { ICON_OPTIONS } from "../../../lib/icon-names";
 import { TEMPLATE_FIELDS, TEMPLATE_FIELDSETS } from "../../../lib/templates";
+import { HEADING_TAGS } from "../../../lib/headings";
 
 const seoField = defineField({ name: "seo", title: "SEO", type: "seo", group: "seo" });
 const orderField = defineField({
@@ -169,17 +170,26 @@ export const siteSettings = defineType({
       title: "Page template text",
       type: "object",
       group: "templates",
-      description: 'Wording used on product, category, industry, case study and article pages, the 404 page, forms and the callback popup. Leave a field empty to use the default shown as placeholder. Use {title} for the product/industry name and {time} for the response-time promise.',
+      description: 'Wording used on product, category, industry, case study and article pages, the 404 page, forms and the callback popup. Leave a field empty to use the default shown as placeholder. Use {title} for the product/industry name and {time} for the response-time promise. The "Heading tags" sections set the HTML tag of each heading for SEO; they do not change how headings look.',
       fieldsets: TEMPLATE_FIELDSETS.map((f) => ({ ...f, options: { collapsible: true, collapsed: f.name !== "general" } })),
       fields: TEMPLATE_FIELDS.map((f) =>
-        defineField({
-          name: f.name,
-          title: f.title,
-          type: "rows" in f ? "text" : "string",
-          ...("rows" in f ? { rows: f.rows } : {}),
-          fieldset: f.fieldset,
-          placeholder: f.default,
-        }),
+        "tag" in f
+          ? defineField({
+              name: f.name,
+              title: f.title,
+              type: "string",
+              fieldset: f.fieldset,
+              options: { list: [...HEADING_TAGS] },
+              description: `Default: ${HEADING_TAGS.find((t) => t.value === f.default)?.title}`,
+            })
+          : defineField({
+              name: f.name,
+              title: f.title,
+              type: "rows" in f ? "text" : "string",
+              ...("rows" in f ? { rows: f.rows } : {}),
+              fieldset: f.fieldset,
+              placeholder: f.default,
+            }),
       ),
     }),
     defineField({

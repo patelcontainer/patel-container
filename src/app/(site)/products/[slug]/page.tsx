@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Heading } from "@/components/ui/Heading";
 import { ProductCard } from "@/components/blocks/ProductCards";
 import { ImageGrid } from "@/components/blocks/Gallery";
 import { FaqList } from "@/components/blocks/MiscBlocks";
@@ -18,7 +19,7 @@ import { client, sanityFetch } from "@/sanity/lib/client";
 import { productQuery, productSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor, hasImage } from "@/sanity/lib/image";
 import { absoluteUrl, buildMetadata, getSettings, getTemplates } from "@/lib/seo";
-import { fill } from "@/lib/templates";
+import { fill, templateTag, type TemplateKey } from "@/lib/templates";
 import type { Block } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -66,6 +67,7 @@ export default async function ProductPage({ params }: Props) {
     { id: "faq", label: "FAQ", show: faqs.length > 0 },
     { id: "quote", label: t.quoteLabel, show: true },
   ].filter((n) => n.show);
+  const tag = (key: TemplateKey) => templateTag(t, key);
 
   return (
     <>
@@ -140,7 +142,7 @@ export default async function ProductPage({ params }: Props) {
           </div>
           <aside className="lg:pt-4">
             <div className="rounded-md bg-surface p-7 ring-1 ring-line lg:sticky lg:top-40">
-              <h2 className="font-display text-lg font-bold text-ink">{f(t.productSidebarHeading)}</h2>
+              <Heading as={tag("productSidebarTag")} className="font-display text-lg font-bold text-ink">{f(t.productSidebarHeading)}</Heading>
               <p className="mt-2 text-steel-600">{f(t.productSidebarText)}</p>
               <ul className="mt-5 space-y-2.5 text-sm font-medium text-ink">
                 {t.productSidebarPoints.split("\n").filter(Boolean).map((pt) => (
@@ -165,11 +167,11 @@ export default async function ProductPage({ params }: Props) {
       {!!specGroups.length && (
         <section id="specifications" className="section bg-surface">
           <div className="wrap">
-            <SectionHeading eyebrow="Technical data" heading={f(t.productSpecsHeading)} />
+            <SectionHeading as={tag("productSpecsTag")} eyebrow="Technical data" heading={f(t.productSpecsHeading)} />
             <div className="mt-10 grid gap-6 lg:grid-cols-2">
               {specGroups.map((g) => (
                 <Reveal key={g._key} className="overflow-hidden rounded-md bg-white ring-1 ring-line">
-                  {g.title && <h3 className="bg-navy-900 px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.1em] text-white">{g.title}</h3>}
+                  {g.title && <Heading as={tag("productSpecGroupTag")} className="bg-navy-900 px-5 py-3.5 text-sm font-semibold uppercase tracking-[0.1em] text-white">{g.title}</Heading>}
                   <table className="w-full text-left text-[0.95rem]">
                     <tbody>
                       {(g.rows || []).map((r: Block) => (
@@ -191,13 +193,13 @@ export default async function ProductPage({ params }: Props) {
       {(!!features.length || !!materials.length) && (
         <section id="features" className="section">
           <div className="wrap">
-            <SectionHeading eyebrow="Built to last" heading={f(t.productFeaturesHeading)} />
+            <SectionHeading as={tag("productFeaturesTag")} eyebrow="Built to last" heading={f(t.productFeaturesHeading)} />
             {!!features.length && (
               <div className="mt-10 grid gap-px overflow-hidden rounded-md bg-line ring-1 ring-line sm:grid-cols-2 lg:grid-cols-3">
                 {features.map((f, i) => (
                   <Reveal key={f._key} delay={(i % 3) * 70} className="bg-white p-7">
                     <span className="grid size-12 place-items-center rounded-md bg-accent-50 text-accent"><Icon name={f.icon} className="size-6" /></span>
-                    <h3 className="mt-5 text-lg font-bold text-ink">{f.title}</h3>
+                    <Heading as={tag("productFeatureItemTag")} className="mt-5 text-lg font-bold text-ink">{f.title}</Heading>
                     {f.text && <p className="mt-2 leading-relaxed text-steel-600">{f.text}</p>}
                   </Reveal>
                 ))}
@@ -205,7 +207,7 @@ export default async function ProductPage({ params }: Props) {
             )}
             {!!materials.length && (
               <div className="mt-10 rounded-md bg-surface p-7 ring-1 ring-line">
-                <h3 className="font-display text-lg font-bold text-ink">Materials and construction</h3>
+                <Heading as={tag("productFeatureItemTag")} className="font-display text-lg font-bold text-ink">Materials and construction</Heading>
                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                   {materials.map((m) => (
                     <li key={m} className="flex gap-2.5 text-steel-600"><Check className="mt-0.5 size-4 shrink-0 text-accent" strokeWidth={3} /> {m}</li>
@@ -220,7 +222,7 @@ export default async function ProductPage({ params }: Props) {
       {(!!applications.length || !!industries.length) && (
         <section id="applications" className="section corrugated bg-navy-900">
           <div className="wrap">
-            <SectionHeading eyebrow="Where it's used" heading={f(t.productApplicationsHeading)} dark />
+            <SectionHeading as={tag("productApplicationsTag")} eyebrow="Where it's used" heading={f(t.productApplicationsHeading)} dark />
             {!!applications.length && (
               <ul className="mt-10 flex flex-wrap gap-3">
                 {applications.map((a) => (
@@ -230,7 +232,7 @@ export default async function ProductPage({ params }: Props) {
             )}
             {!!industries.length && (
               <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {industries.map((ind, i) => <IndustryTile key={ind._id} ind={ind} index={i} />)}
+                {industries.map((ind, i) => <IndustryTile key={ind._id} ind={ind} index={i} headingAs={tag("productIndustryItemTag")} />)}
               </div>
             )}
           </div>
@@ -240,7 +242,7 @@ export default async function ProductPage({ params }: Props) {
       {(!!gallery.length || !!drawings.length) && (
         <section id="gallery" className="section">
           <div className="wrap">
-            <SectionHeading eyebrow="Gallery" heading={f(t.productGalleryHeading)} />
+            <SectionHeading as={tag("productGalleryTag")} eyebrow="Gallery" heading={f(t.productGalleryHeading)} />
             <div className="mt-10"><ImageGrid images={[...gallery, ...drawings]} /></div>
           </div>
         </section>
@@ -253,7 +255,7 @@ export default async function ProductPage({ params }: Props) {
               <FileText className="size-7" />
             </span>
             <div>
-              <h2 className="text-xl font-bold text-ink sm:text-2xl">{f(t.productDatasheetHeading)}</h2>
+              <Heading as={tag("productDatasheetTag")} className="text-xl font-bold text-ink sm:text-2xl">{f(t.productDatasheetHeading)}</Heading>
               <p className="mt-1.5 max-w-xl text-steel-600">{f(t.productDatasheetText)}</p>
             </div>
           </div>
@@ -268,9 +270,9 @@ export default async function ProductPage({ params }: Props) {
       {!!related.length && (
         <section className="section bg-surface">
           <div className="wrap">
-            <SectionHeading eyebrow="You may also need" heading={f(t.productRelatedHeading)} />
+            <SectionHeading as={tag("productRelatedTag")} eyebrow="You may also need" heading={f(t.productRelatedHeading)} />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((r, i) => <ProductCard key={r._id} p={r} index={i} />)}
+              {related.map((r, i) => <ProductCard key={r._id} p={r} index={i} headingAs={tag("productRelatedItemTag")} />)}
             </div>
           </div>
         </section>
@@ -279,7 +281,7 @@ export default async function ProductPage({ params }: Props) {
       {!!faqs.length && (
         <section id="faq" className="section">
           <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
-            <SectionHeading eyebrow="FAQ" heading={f(t.productFaqHeading)} />
+            <SectionHeading as={tag("productFaqTag")} eyebrow="FAQ" heading={f(t.productFaqHeading)} />
             <FaqList faqs={faqs} />
           </div>
         </section>
@@ -288,6 +290,7 @@ export default async function ProductPage({ params }: Props) {
       <section id="quote" className="section corrugated bg-navy-900">
         <div className="wrap grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
           <SectionHeading
+            as={tag("productQuoteTag")}
             eyebrow={t.quoteLabel}
             heading={f(t.productQuoteHeading)}
             intro={f(t.productQuoteText)}

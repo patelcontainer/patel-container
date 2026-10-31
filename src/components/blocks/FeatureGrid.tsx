@@ -3,6 +3,8 @@ import { Section } from "./Section";
 import { Icon } from "@/components/ui/Icon";
 import { Reveal } from "@/components/ui/Reveal";
 import { SanityImg } from "@/components/ui/SanityImg";
+import { Heading } from "@/components/ui/Heading";
+import { headingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 
 const cols: Record<number, string> = {
@@ -16,6 +18,7 @@ export function FeatureGrid({ block }: { block: Block }) {
   const items: Block[] = block.items || [];
   const variant = block.variant || "cards";
   const grid = cols[block.columns || 3] || cols[3];
+  const itemTag = headingTag(block.itemHeadingTag, "h3");
 
   if (variant === "list") {
     return (
@@ -51,7 +54,7 @@ export function FeatureGrid({ block }: { block: Block }) {
                 )}
               </div>
               <div className="p-6">
-                <h3 className="text-lg font-bold text-ink">{it.title}</h3>
+                <Heading as={itemTag} className="text-lg font-bold text-ink">{it.title}</Heading>
                 {it.text && <p className="mt-2 text-[0.95rem] leading-relaxed text-steel-600">{it.text}</p>}
               </div>
             </Reveal>
@@ -82,7 +85,7 @@ export function FeatureGrid({ block }: { block: Block }) {
                 <Icon name={it.icon} className="size-7" />
               </span>
             )}
-            <h3 className={`mt-6 text-xl font-bold leading-snug ${dark ? "text-white" : "text-ink"}`}>{it.title}</h3>
+            <Heading as={itemTag} className={`mt-6 text-xl font-bold leading-snug ${dark ? "text-white" : "text-ink"}`}>{it.title}</Heading>
             {it.text && <p className={`mt-3 leading-relaxed ${dark ? "text-steel-400" : "text-steel-600"}`}>{it.text}</p>}
           </Reveal>
         ))}

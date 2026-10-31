@@ -9,11 +9,12 @@ import { IndustryTile } from "@/components/blocks/InfoBlocks";
 import { RichText } from "@/components/ui/RichText";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Heading } from "@/components/ui/Heading";
 import { LeadForm } from "@/components/forms/LeadForm";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { industryQuery, industrySlugsQuery } from "@/sanity/lib/queries";
 import { buildMetadata, getTemplates } from "@/lib/seo";
-import { fill } from "@/lib/templates";
+import { fill, templateTag, type TemplateKey } from "@/lib/templates";
 import type { Block } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -39,6 +40,7 @@ export default async function IndustryPage({ params }: Props) {
   const points: string[] = ind.solutionPoints || [];
   const t = await getTemplates();
   const f = (text: string) => fill(text, ind.title);
+  const tag = (key: TemplateKey) => templateTag(t, key);
 
   return (
     <>
@@ -48,12 +50,12 @@ export default async function IndustryPage({ params }: Props) {
         <div className="wrap grid gap-6 lg:grid-cols-2">
           <Reveal className="rounded-md bg-surface p-8 ring-1 ring-line lg:p-12">
             <span className="grid size-12 place-items-center rounded-md bg-white text-accent ring-1 ring-line"><Target className="size-6" /></span>
-            <h2 className="mt-6 text-2xl font-bold text-ink lg:text-3xl">{f(t.industryChallengeHeading)}</h2>
+            <Heading as={tag("industryChallengeTag")} className="mt-6 text-2xl font-bold text-ink lg:text-3xl">{f(t.industryChallengeHeading)}</Heading>
             <RichText value={ind.challenge} className="mt-4" />
           </Reveal>
           <Reveal delay={100} className="corrugated rounded-md bg-navy-900 p-8 lg:p-12">
             <span className="grid size-12 place-items-center rounded-md bg-accent text-white"><Lightbulb className="size-6" /></span>
-            <h2 className="mt-6 text-2xl font-bold text-white lg:text-3xl">{f(t.industrySolutionHeading)}</h2>
+            <Heading as={tag("industrySolutionTag")} className="mt-6 text-2xl font-bold text-white lg:text-3xl">{f(t.industrySolutionHeading)}</Heading>
             <RichText value={ind.solution} dark className="mt-4" />
             {!!points.length && (
               <ul className="mt-6 space-y-3">
@@ -69,9 +71,9 @@ export default async function IndustryPage({ params }: Props) {
       {!!recs.length && (
         <section className="section bg-surface">
           <div className="wrap">
-            <SectionHeading eyebrow="Recommended" heading={f(t.industryProductsHeading)} />
+            <SectionHeading as={tag("industryProductsTag")} eyebrow="Recommended" heading={f(t.industryProductsHeading)} />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {recs.map((r, i) => (r._type === "productCategory" ? <CategoryCard key={r._id} c={r} index={i} /> : <ProductCard key={r._id} p={r} index={i} />))}
+              {recs.map((r, i) => (r._type === "productCategory" ? <CategoryCard key={r._id} c={r} index={i} headingAs={tag("industryProductsItemTag")} /> : <ProductCard key={r._id} p={r} index={i} headingAs={tag("industryProductsItemTag")} />))}
             </div>
           </div>
         </section>
@@ -95,7 +97,7 @@ export default async function IndustryPage({ params }: Props) {
 
       <section id="quote" className="section corrugated bg-navy-900">
         <div className="wrap grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-          <SectionHeading eyebrow="Talk to an engineer" heading={f(t.industryQuoteHeading)} intro={f(t.industryQuoteText)} dark />
+          <SectionHeading as={tag("industryQuoteTag")} eyebrow="Talk to an engineer" heading={f(t.industryQuoteHeading)} intro={f(t.industryQuoteText)} dark />
           <div className="relative min-w-0 rounded-lg bg-white p-6 shadow-lift sm:p-10">
             <div className="hazard absolute inset-x-0 top-0 h-1.5 rounded-t-lg" />
             <LeadForm type="enquiry" />
@@ -106,9 +108,9 @@ export default async function IndustryPage({ params }: Props) {
       {!!others.length && (
         <section className="section">
           <div className="wrap">
-            <SectionHeading eyebrow="Explore" heading={f(t.industryOthersHeading)} />
+            <SectionHeading as={tag("industryOthersTag")} eyebrow="Explore" heading={f(t.industryOthersHeading)} />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {others.slice(0, 3).map((o, i) => <IndustryTile key={o._id} ind={o} index={i} />)}
+              {others.slice(0, 3).map((o, i) => <IndustryTile key={o._id} ind={o} index={i} headingAs={tag("industryOthersItemTag")} />)}
             </div>
           </div>
         </section>

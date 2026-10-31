@@ -4,6 +4,8 @@ import { Section } from "./Section";
 import { CategoryCard, ProductCard } from "./ProductCards";
 import { Reveal } from "@/components/ui/Reveal";
 import { SanityImg } from "@/components/ui/SanityImg";
+import { Heading } from "@/components/ui/Heading";
+import { headingTag, type HeadingTag } from "@/lib/headings";
 import { urlFor } from "@/sanity/lib/image";
 import type { Block } from "@/lib/types";
 
@@ -13,7 +15,7 @@ export function ProductCategories({ block }: { block: Block }) {
     <Section block={block}>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cats.map((c, i) => (
-          <CategoryCard key={c._id} c={c} index={i} />
+          <CategoryCard key={c._id} c={c} index={i} headingAs={headingTag(block.itemHeadingTag, "h3")} />
         ))}
       </div>
     </Section>
@@ -26,7 +28,7 @@ export function Products({ block }: { block: Block }) {
     <Section block={block}>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((p, i) => (
-          <ProductCard key={p._id} p={p} index={i} />
+          <ProductCard key={p._id} p={p} index={i} headingAs={headingTag(block.itemHeadingTag, "h3")} />
         ))}
       </div>
     </Section>
@@ -99,7 +101,7 @@ export function Certifications({ block }: { block: Block }) {
                 </div>
                 {c.validity && <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-semibold text-green-700">{c.validity}</span>}
               </div>
-              <h3 className="mt-6 text-lg font-bold text-ink">{c.title}</h3>
+              <Heading as={headingTag(block.itemHeadingTag, "h3")} className="mt-6 text-lg font-bold text-ink">{c.title}</Heading>
               {c.issuer && <p className="mt-1 text-sm font-medium text-steel-500">{c.issuer}</p>}
               {c.description && <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-steel-600">{c.description}</p>}
               {c.fileUrl ? (
@@ -123,7 +125,7 @@ export function Certifications({ block }: { block: Block }) {
       <div className="wrap grid items-center gap-8 py-12 lg:grid-cols-[260px_1fr] lg:gap-12">
         <div>
           {block.eyebrow && <p className="eyebrow">{block.eyebrow}</p>}
-          {block.heading && <h2 className={`mt-2 text-2xl font-bold ${dark ? "text-white" : "text-ink"}`}>{block.heading}</h2>}
+          {block.heading && <Heading as={headingTag(block.headingTag)} className={`mt-2 text-2xl font-bold ${dark ? "text-white" : "text-ink"}`}>{block.heading}</Heading>}
         </div>
         <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {certs.map((c) => (
@@ -182,7 +184,7 @@ export function LogoCloud({ clients }: { clients: Block[] }) {
   );
 }
 
-export function ProjectCard({ p, index = 0 }: { p: Block; index?: number }) {
+export function ProjectCard({ p, index = 0, headingAs = "h3" }: { p: Block; index?: number; headingAs?: HeadingTag }) {
   const inner = (
     <>
       <div className="relative aspect-[4/3] overflow-hidden bg-navy-800">
@@ -191,7 +193,7 @@ export function ProjectCard({ p, index = 0 }: { p: Block; index?: number }) {
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
         {p.filter && <span className="absolute left-4 top-4 rounded-sm bg-accent px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-white">{p.filter}</span>}
-        <h3 className="absolute inset-x-5 bottom-4 text-xl font-bold leading-snug text-white">{p.title}</h3>
+        <Heading as={headingAs} className="absolute inset-x-5 bottom-4 text-xl font-bold leading-snug text-white">{p.title}</Heading>
       </div>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-3 p-5 text-sm">
         {[
@@ -232,7 +234,7 @@ export function Clients({ block }: { block: Block }) {
       {!!projects.length && (
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((p, i) => (
-            <ProjectCard key={p._id} p={p} index={i} />
+            <ProjectCard key={p._id} p={p} index={i} headingAs={headingTag(block.itemHeadingTag, "h3")} />
           ))}
         </div>
       )}

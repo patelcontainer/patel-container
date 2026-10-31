@@ -8,12 +8,14 @@ import { CtaBlock } from "@/components/blocks/MiscBlocks";
 import { Newsletter } from "@/components/forms/Newsletter";
 import { RichText } from "@/components/ui/RichText";
 import { SanityImg } from "@/components/ui/SanityImg";
+import { Heading } from "@/components/ui/Heading";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { postQuery, postSlugsQuery } from "@/sanity/lib/queries";
 import { absoluteUrl, buildMetadata, getSettings, getTemplates } from "@/lib/seo";
 import { urlFor, hasImage } from "@/sanity/lib/image";
 import { formatDate } from "@/lib/utils";
+import { templateTag } from "@/lib/templates";
 import type { Block } from "@/lib/types";
 
 export type PostType = "news" | "blog";
@@ -67,7 +69,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
         <RichText value={p.body} className="text-[1.1rem]" />
         <div className="mt-14 flex flex-col gap-6 rounded-md bg-navy-900 p-8 sm:p-10">
           <div>
-            <h2 className="text-2xl font-bold text-white">{settings.newsletterHeading || "Get new articles by email"}</h2>
+            <Heading as={templateTag(t, "postNewsletterTag")} className="text-2xl font-bold text-white">{settings.newsletterHeading || "Get new articles by email"}</Heading>
             {settings.newsletterText && <p className="mt-2 text-steel-300">{settings.newsletterText}</p>}
           </div>
           <Newsletter />
@@ -80,14 +82,14 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
       {!!related.length && (
         <section className="section bg-surface">
           <div className="wrap">
-            <h2 className="text-3xl font-bold text-ink">More from {LABEL[postType].toLowerCase()}</h2>
+            <Heading as={templateTag(t, "postRelatedTag")} className="text-3xl font-bold text-ink">More from {LABEL[postType].toLowerCase()}</Heading>
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((r, i) => <PostCard key={r._id} p={r} index={i} />)}
+              {related.map((r, i) => <PostCard key={r._id} p={r} index={i} headingAs={templateTag(t, "postRelatedItemTag")} />)}
             </div>
           </div>
         </section>
       )}
-      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", heading: t.postCtaHeading, buttons: [{ _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }, { _key: "b", label: "Browse Products", url: "/products", style: "outlineLight" }] }} />
+      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", heading: t.postCtaHeading, headingTag: templateTag(t, "postCtaTag"), buttons: [{ _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }, { _key: "b", label: "Browse Products", url: "/products", style: "outlineLight" }] }} />
 
       <JsonLd
         data={{

@@ -6,25 +6,27 @@ import { FilterGrid } from "./FilterGrid";
 import { ProjectCard } from "./CatalogBlocks";
 import { SanityImg } from "@/components/ui/SanityImg";
 import { Reveal } from "@/components/ui/Reveal";
+import { Heading } from "@/components/ui/Heading";
+import type { HeadingTag } from "@/lib/headings";
 import { formatDate } from "@/lib/utils";
 import type { Block } from "@/lib/types";
 
 const projectGroups = (p: Block) => [p.filter].filter(Boolean);
 const postGroups = (p: Block) => (p.categories || []).map((c: Block) => c.title);
 
-export function ProjectsList({ projects, showFilters }: { projects: Block[]; showFilters?: boolean }) {
+export function ProjectsList({ projects, showFilters, headingAs }: { projects: Block[]; showFilters?: boolean; headingAs?: HeadingTag }) {
   return (
     <FilterGrid
       items={projects}
       getGroups={showFilters === false ? () => [] : projectGroups}
       order={["Containers", "Rail", "EV", "Engineering"]}
-      render={(p, i) => <ProjectCard key={p._id} p={p} index={i} />}
+      render={(p, i) => <ProjectCard key={p._id} p={p} index={i} headingAs={headingAs} />}
       empty="Projects will be published here soon."
     />
   );
 }
 
-export function PostCard({ p, index = 0, large }: { p: Block; index?: number; large?: boolean }) {
+export function PostCard({ p, index = 0, large, headingAs = "h3" }: { p: Block; index?: number; large?: boolean; headingAs?: HeadingTag }) {
   const href = `/${p.postType === "news" ? "news" : "blog"}/${p.slug}`;
   return (
     <Reveal delay={(index % 3) * 80} className="h-full">
@@ -45,7 +47,7 @@ export function PostCard({ p, index = 0, large }: { p: Block; index?: number; la
             {formatDate(p.publishedAt)}
             {p.categories?.[0] && <span className="before:mr-2 before:content-['·']">{p.categories[0].title}</span>}
           </p>
-          <h3 className={`mt-3 font-bold leading-snug text-ink transition-colors group-hover:text-accent ${large ? "text-2xl lg:text-3xl" : "text-lg"}`}>{p.title}</h3>
+          <Heading as={headingAs} className={`mt-3 font-bold leading-snug text-ink transition-colors group-hover:text-accent ${large ? "text-2xl lg:text-3xl" : "text-lg"}`}>{p.title}</Heading>
           {p.excerpt && <p className={`mt-3 text-[0.95rem] leading-relaxed text-steel-600 ${large ? "" : "line-clamp-2"}`}>{p.excerpt}</p>}
           <span className="mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-accent">
             Read more <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -56,13 +58,13 @@ export function PostCard({ p, index = 0, large }: { p: Block; index?: number; la
   );
 }
 
-export function PostsList({ posts, full }: { posts: Block[]; full?: boolean }) {
+export function PostsList({ posts, full, headingAs, featuredHeadingAs }: { posts: Block[]; full?: boolean; headingAs?: HeadingTag; featuredHeadingAs?: HeadingTag }) {
   if (!posts.length) return <p className="text-steel-500">Articles will be published here soon.</p>;
   if (!full) {
     return (
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {posts.slice(0, 3).map((p, i) => (
-          <PostCard key={p._id} p={p} index={i} />
+          <PostCard key={p._id} p={p} index={i} headingAs={headingAs} />
         ))}
       </div>
     );
@@ -72,9 +74,9 @@ export function PostsList({ posts, full }: { posts: Block[]; full?: boolean }) {
   return (
     <>
       <div className="mb-12">
-        <PostCard p={featured} large />
+        <PostCard p={featured} large headingAs={featuredHeadingAs ?? headingAs} />
       </div>
-      {!!rest.length && <FilterGrid items={rest} getGroups={postGroups} render={(p, i) => <PostCard key={p._id} p={p} index={i} />} />}
+      {!!rest.length && <FilterGrid items={rest} getGroups={postGroups} render={(p, i) => <PostCard key={p._id} p={p} index={i} headingAs={headingAs} />} />}
     </>
   );
 }

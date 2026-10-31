@@ -10,7 +10,7 @@ import { CtaBlock } from "@/components/blocks/MiscBlocks";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { categoryQuery, categorySlugsQuery } from "@/sanity/lib/queries";
 import { buildMetadata, getTemplates } from "@/lib/seo";
-import { fill } from "@/lib/templates";
+import { fill, templateTag, type TemplateKey } from "@/lib/templates";
 import type { Block } from "@/lib/types";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -35,6 +35,7 @@ export default async function CategoryPage({ params }: Props) {
   const highlights: Block[] = c.highlights || [];
   const others: Block[] = c.otherCategories || [];
   const t = await getTemplates();
+  const tag = (key: TemplateKey) => templateTag(t, key);
 
   return (
     <>
@@ -69,9 +70,9 @@ export default async function CategoryPage({ params }: Props) {
       {!!products.length && (
         <section className="section bg-surface">
           <div className="wrap">
-            <SectionHeading eyebrow="Range" heading={fill(t.categoryRangeHeading, c.title)} />
+            <SectionHeading as={tag("categoryRangeTag")} eyebrow="Range" heading={fill(t.categoryRangeHeading, c.title)} />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {products.map((p, i) => <ProductCard key={p._id} p={p} index={i} />)}
+              {products.map((p, i) => <ProductCard key={p._id} p={p} index={i} headingAs={tag("categoryRangeItemTag")} />)}
             </div>
           </div>
         </section>
@@ -83,6 +84,7 @@ export default async function CategoryPage({ params }: Props) {
           _key: "cta",
           eyebrow: products.length ? "Custom builds" : "Built to order",
           heading: fill(t.categoryCtaHeading, c.title),
+          headingTag: tag("categoryCtaTag"),
           text: fill(t.categoryCtaText, c.title),
           buttons: [
             { _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" },
@@ -94,9 +96,9 @@ export default async function CategoryPage({ params }: Props) {
       {!!others.length && (
         <section className="section">
           <div className="wrap">
-            <SectionHeading eyebrow="Explore more" heading={fill(t.categoryOthersHeading, c.title)} />
+            <SectionHeading as={tag("categoryOthersTag")} eyebrow="Explore more" heading={fill(t.categoryOthersHeading, c.title)} />
             <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {others.slice(0, 3).map((o, i) => <CategoryCard key={o._id} c={o} index={i} />)}
+              {others.slice(0, 3).map((o, i) => <CategoryCard key={o._id} c={o} index={i} headingAs={tag("categoryOthersItemTag")} />)}
             </div>
           </div>
         </section>

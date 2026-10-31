@@ -3,9 +3,11 @@ import { ArrowUpRight, Boxes } from "lucide-react";
 import { SanityImg } from "@/components/ui/SanityImg";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
+import { Heading } from "@/components/ui/Heading";
+import type { HeadingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 
-export function CategoryCard({ c, index }: { c: Block; index: number }) {
+export function CategoryCard({ c, index, headingAs = "h3" }: { c: Block; index: number; headingAs?: HeadingTag }) {
   return (
     <Reveal delay={(index % 3) * 80}>
       <Link
@@ -29,7 +31,7 @@ export function CategoryCard({ c, index }: { c: Block; index: number }) {
           </span>
         </div>
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-xl font-bold text-ink transition-colors group-hover:text-accent">{c.title}</h3>
+          <Heading as={headingAs} className="text-xl font-bold text-ink transition-colors group-hover:text-accent">{c.title}</Heading>
           {c.shortDescription && <p className="mt-2 flex-1 leading-relaxed text-steel-600">{c.shortDescription}</p>}
           {c.productCount > 0 && (
             <p className="mt-4 text-xs font-semibold uppercase tracking-wider text-steel-500">
@@ -42,7 +44,7 @@ export function CategoryCard({ c, index }: { c: Block; index: number }) {
   );
 }
 
-export function ProductCard({ p, index = 0 }: { p: Block; index?: number }) {
+export function ProductCard({ p, index = 0, headingAs = "h3" }: { p: Block; index?: number; headingAs?: HeadingTag }) {
   const specs: Block[] = (p.keySpecs || []).slice(0, 3);
   return (
     <Reveal delay={(index % 3) * 80}>
@@ -65,7 +67,7 @@ export function ProductCard({ p, index = 0 }: { p: Block; index?: number }) {
           )}
         </div>
         <div className="flex flex-1 flex-col p-6">
-          <h3 className="text-xl font-bold text-ink transition-colors group-hover:text-accent">{p.title}</h3>
+          <Heading as={headingAs} className="text-xl font-bold text-ink transition-colors group-hover:text-accent">{p.title}</Heading>
           {p.shortDescription && <p className="mt-2 line-clamp-2 text-[0.95rem] leading-relaxed text-steel-600">{p.shortDescription}</p>}
           {!!specs.length && (
             <dl className="mt-5 grid grid-cols-3 divide-x divide-line rounded-sm border border-line bg-surface text-center">

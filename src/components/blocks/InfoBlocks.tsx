@@ -6,10 +6,12 @@ import { RichText, blockText } from "@/components/ui/RichText";
 import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { SanityImg } from "@/components/ui/SanityImg";
+import { Heading } from "@/components/ui/Heading";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { getSettings } from "@/lib/seo";
 import { formatBytes, slugify } from "@/lib/utils";
 import { telHref, whatsappHref } from "@/lib/links";
+import { headingTag, type HeadingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 import type { PortableTextBlock } from "@portabletext/types";
 
@@ -132,7 +134,7 @@ export function JobsBlock({ block }: { block: Block }) {
   );
 }
 
-export function IndustryTile({ ind, index }: { ind: Block; index: number }) {
+export function IndustryTile({ ind, index, headingAs = "h3" }: { ind: Block; index: number; headingAs?: HeadingTag }) {
   return (
     <Reveal delay={(index % 3) * 80} className="h-full">
       <Link href={`/industries/${ind.slug}`} className="group relative flex h-full min-h-[340px] flex-col justify-end overflow-hidden rounded-md bg-navy-900 p-7 text-white">
@@ -145,7 +147,7 @@ export function IndustryTile({ ind, index }: { ind: Block; index: number }) {
           <Icon name={ind.icon} className="size-7" />
         </span>
         <div className="relative">
-          <h3 className="text-2xl font-bold">{ind.title}</h3>
+          <Heading as={headingAs} className="text-2xl font-bold">{ind.title}</Heading>
           {ind.shortDescription && <p className="mt-2 text-steel-300">{ind.shortDescription}</p>}
           <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
             Explore solutions <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
@@ -162,7 +164,7 @@ export function IndustriesBlock({ block }: { block: Block }) {
     <Section block={block}>
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {industries.map((ind, i) => (
-          <IndustryTile key={ind._id} ind={ind} index={i} />
+          <IndustryTile key={ind._id} ind={ind} index={i} headingAs={headingTag(block.itemHeadingTag, "h3")} />
         ))}
       </div>
     </Section>
@@ -176,32 +178,33 @@ export async function ContactInfoBlock({ block }: { block: Block }) {
   const map = addresses.find((a) => a.mapEmbedUrl);
 
   const card = "flex flex-col rounded-md bg-white p-6 ring-1 ring-line";
+  const itemTag = headingTag(block.itemHeadingTag, "h3");
   return (
     <Section block={block}>
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         <div className={card}>
           <Phone className="size-6 text-accent" />
-          <h3 className="mt-4 font-bold text-ink">Call us</h3>
+          <Heading as={itemTag} className="mt-4 font-bold text-ink">Call us</Heading>
           {(s.phones || []).map((p) => (
             <a key={p} href={telHref(p)} className="mt-1 text-steel-600 hover:text-accent">{p}</a>
           ))}
         </div>
         <div className={card}>
           <Mail className="size-6 text-accent" />
-          <h3 className="mt-4 font-bold text-ink">Email</h3>
+          <Heading as={itemTag} className="mt-4 font-bold text-ink">Email</Heading>
           {[s.email, s.salesEmail].filter(Boolean).map((e) => (
             <a key={e} href={`mailto:${e}`} className="mt-1 break-all text-steel-600 hover:text-accent">{e}</a>
           ))}
         </div>
         <div className={card}>
           <WhatsAppIcon className="size-6 text-whatsapp" />
-          <h3 className="mt-4 font-bold text-ink">WhatsApp</h3>
+          <Heading as={itemTag} className="mt-4 font-bold text-ink">WhatsApp</Heading>
           <p className="mt-1 text-steel-600">Quick answers from our sales team.</p>
           {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent">Start chat <ArrowUpRight className="size-4" /></a>}
         </div>
         <div className={card}>
           <Clock className="size-6 text-accent" />
-          <h3 className="mt-4 font-bold text-ink">Business hours</h3>
+          <Heading as={itemTag} className="mt-4 font-bold text-ink">Business hours</Heading>
           <p className="mt-1 text-steel-600">{s.businessHours || "Mon–Sat"}</p>
         </div>
       </div>
@@ -212,7 +215,7 @@ export async function ContactInfoBlock({ block }: { block: Block }) {
             <div key={a._key} className="flex gap-4 rounded-md bg-white p-6 ring-1 ring-line">
               <MapPin className="mt-0.5 size-6 shrink-0 text-accent" />
               <div>
-                <h3 className="font-bold text-ink">{a.label || "Address"}</h3>
+                <Heading as={itemTag} className="font-bold text-ink">{a.label || "Address"}</Heading>
                 <p className="mt-1 whitespace-pre-line text-steel-600">{a.address}</p>
                 {a.directionsUrl && (
                   <a href={a.directionsUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent">
@@ -228,7 +231,7 @@ export async function ContactInfoBlock({ block }: { block: Block }) {
               <div className="relative flex gap-4">
                 <Globe className="mt-0.5 size-6 shrink-0 text-accent" />
                 <div>
-                  <h3 className="font-bold">Export enquiries</h3>
+                  <Heading as={itemTag} className="font-bold">Export enquiries</Heading>
                   <p className="mt-1 text-steel-300">{block.exportNote}</p>
                 </div>
               </div>

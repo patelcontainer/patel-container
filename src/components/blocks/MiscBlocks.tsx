@@ -8,6 +8,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { CmsButtons } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Heading } from "@/components/ui/Heading";
+import { headingTag } from "@/lib/headings";
 import { LeadForm, type LeadFormType } from "@/components/forms/LeadForm";
 import { Newsletter } from "@/components/forms/Newsletter";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -21,7 +23,7 @@ import type { PortableTextBlock } from "@portabletext/types";
 export function ProjectsBlock({ block }: { block: Block }) {
   return (
     <Section block={block}>
-      <ProjectsList projects={block.projects || []} showFilters={block.showFilters} />
+      <ProjectsList projects={block.projects || []} showFilters={block.showFilters} headingAs={headingTag(block.itemHeadingTag, "h3")} />
     </Section>
   );
 }
@@ -40,7 +42,7 @@ export function PostsBlock({ block }: { block: Block }) {
         ) : undefined
       }
     >
-      <PostsList posts={block.posts || []} full={full} />
+      <PostsList posts={block.posts || []} full={full} headingAs={headingTag(block.itemHeadingTag, "h3")} featuredHeadingAs={headingTag(block.featuredHeadingTag, "h3")} />
     </Section>
   );
 }
@@ -118,7 +120,7 @@ export function FaqBlock({ block }: { block: Block }) {
     <section id={block.sectionId || undefined} className={`section ${bgClass(block.background)}`}>
       <div className="wrap grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <div>
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} />
           <CmsButtons buttons={block.buttons} className="mt-8" />
         </div>
         <Reveal>
@@ -139,7 +141,7 @@ export async function FormBlock({ block }: { block: Block }) {
     <section id={block.sectionId || "enquiry"} className={`section relative overflow-hidden ${bgClass(block.background)} ${dark ? "corrugated" : ""}`}>
       <div className="wrap grid gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div>
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
           {!!points.length && (
             <ul className="mt-10 space-y-5">
               {points.map((p) => (
@@ -205,7 +207,7 @@ export function CtaBlock({ block }: { block: Block }) {
       <div className="wrap flex flex-col gap-8 py-16 lg:flex-row lg:items-center lg:justify-between lg:py-20">
         <Reveal className="max-w-2xl">
           {block.eyebrow && <p className="eyebrow">{block.eyebrow}</p>}
-          <h2 className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl">{block.heading}</h2>
+          <Heading as={headingTag(block.headingTag)} className="mt-3 text-3xl font-bold leading-tight text-white sm:text-4xl">{block.heading}</Heading>
           {block.text && <p className="mt-4 text-lg text-steel-300">{block.text}</p>}
         </Reveal>
         <CmsButtons buttons={block.buttons} dark size="lg" className="shrink-0" />
@@ -230,7 +232,7 @@ export function TimelineBlock({ block }: { block: Block }) {
               </span>
               <Reveal className={`${right ? "md:col-start-2" : "md:text-right"}`}>
                 <span className="font-display text-4xl font-extrabold text-accent">{it.year}</span>
-                <h3 className={`mt-2 text-xl font-bold ${dark ? "text-white" : "text-ink"}`}>{it.title}</h3>
+                <Heading as={headingTag(block.itemHeadingTag, "h3")} className={`mt-2 text-xl font-bold ${dark ? "text-white" : "text-ink"}`}>{it.title}</Heading>
                 {it.text && <p className={`mt-2 leading-relaxed ${dark ? "text-steel-400" : "text-steel-600"}`}>{it.text}</p>}
                 {it.image?.asset && (
                   <div className="mt-4 overflow-hidden rounded-md">
@@ -270,7 +272,7 @@ export function TeamBlock({ block }: { block: Block }) {
               )}
             </div>
             <div className="p-5">
-              <h3 className="text-lg font-bold text-ink">{m.name}</h3>
+              <Heading as={headingTag(block.itemHeadingTag, "h3")} className="text-lg font-bold text-ink">{m.name}</Heading>
               {m.role && <p className="text-sm font-semibold text-accent">{m.role}</p>}
               {m.bio && <p className="mt-2 text-sm leading-relaxed text-steel-600">{m.bio}</p>}
             </div>
@@ -299,7 +301,7 @@ export function MessageBlock({ block }: { block: Block }) {
           </div>
         </Reveal>
         <div>
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} dark={dark} />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} dark={dark} />
           <Reveal delay={100}>
             <Quote className="mt-8 size-12 fill-accent text-accent" />
             <RichText value={block.message} dark={dark} className="mt-4 text-lg" />
@@ -338,7 +340,7 @@ export function ProcessBlock({ block }: { block: Block }) {
                 <SanityImg image={s.image} aspect={16 / 10} sizes="(min-width:1024px) 25vw, 50vw" className="w-full" />
               </div>
             )}
-            <h3 className={`mt-5 text-lg font-bold ${dark ? "text-white" : "text-ink"}`}>{s.title}</h3>
+            <Heading as={headingTag(block.itemHeadingTag, "h3")} className={`mt-5 text-lg font-bold ${dark ? "text-white" : "text-ink"}`}>{s.title}</Heading>
             {s.text && <p className={`mt-2 flex-1 text-[0.95rem] leading-relaxed ${dark ? "text-steel-400" : "text-steel-600"}`}>{s.text}</p>}
             {s.qualityCheck && (
               <p className={`mt-5 flex items-start gap-2 rounded px-3 py-2 text-xs font-semibold ${dark ? "bg-white/5 text-steel-300" : "bg-green-50 text-green-800"}`}>
@@ -363,7 +365,7 @@ export function NewsletterBlock({ block }: { block: Block }) {
     <section id={block.sectionId || undefined} className={`newsletter-block ${bgClass(block.background)} ${dark ? "corrugated" : ""}`}>
       <div className="wrap py-14 lg:py-16">
         <div className={`grid items-center gap-8 rounded-lg p-6 sm:p-10 lg:grid-cols-[1fr_auto] lg:gap-12 [&>*]:min-w-0 ${dark ? "bg-white/5 ring-1 ring-white/10" : "bg-white shadow-card ring-1 ring-line"}`}>
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
           <Newsletter light={!dark} />
         </div>
       </div>
@@ -382,7 +384,7 @@ export function LinkCardsBlock({ block }: { block: Block }) {
               {c.image?.asset && <SanityImg image={c.image} fill sizes="(min-width:1024px) 25vw, 50vw" className="object-cover opacity-50 transition duration-700 group-hover:scale-105 group-hover:opacity-40" />}
               <div className="absolute inset-0 bg-gradient-to-t from-navy-950 via-navy-950/40 to-transparent" />
               <div className="relative">
-                <h3 className="text-xl font-bold">{c.title}</h3>
+                <Heading as={headingTag(block.itemHeadingTag, "h3")} className="text-xl font-bold">{c.title}</Heading>
                 {c.text && <p className="mt-2 text-sm text-steel-300">{c.text}</p>}
                 <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-accent">
                   {c.link?.label || "Explore"} <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />

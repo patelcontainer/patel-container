@@ -6,6 +6,7 @@ import { CmsButtons } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { VideoButton } from "./VideoButton";
 import { bgClass } from "@/lib/utils";
+import { headingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 
 export function SplitContent({ block }: { block: Block }) {
@@ -17,7 +18,7 @@ export function SplitContent({ block }: { block: Block }) {
     <section id={block.sectionId || undefined} className={`section ${bgClass(block.background)} ${dark ? "corrugated" : ""}`}>
       <div className={`wrap grid items-center gap-12 lg:gap-20 ${hasImage ? "lg:grid-cols-2" : ""}`}>
         <div className={imageLeft ? "lg:order-2" : ""}>
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={dark} />
           <Reveal delay={100}>
             <RichText value={block.body} dark={dark} className="mt-6" />
             {!!block.bullets?.length && (

@@ -1,5 +1,6 @@
 import { Counter } from "@/components/ui/Counter";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { headingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 
 export function Stats({ block }: { block: Block }) {
@@ -9,7 +10,7 @@ export function Stats({ block }: { block: Block }) {
     <section id={block.sectionId || undefined} className={`relative overflow-hidden ${light ? (block.background === "light" ? "bg-surface" : "bg-white") : "corrugated bg-navy-900"}`}>
       <div className="wrap py-16 lg:py-20">
         {(block.heading || block.eyebrow) && (
-          <SectionHeading eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={!light} align="center" className="mb-12" />
+          <SectionHeading as={headingTag(block.headingTag)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} dark={!light} align="center" className="mb-12" />
         )}
         <dl className={`grid grid-cols-2 ${stats.length === 3 ? "lg:grid-cols-3" : "lg:grid-cols-4"}`}>
           {stats.map((s, i) => (

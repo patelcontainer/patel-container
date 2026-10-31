@@ -142,12 +142,20 @@ async function run() {
     ["cat-ev", "Commercial EV", "commercial-ev", "zap", "Our eLCV range of electric light commercial vehicles.", null,
       "The group has entered the commercial electric vehicle space with the launch of two electric light commercial vehicles (eLCVs), bringing our load-body and fabrication expertise to clean last-mile mobility."],
   ];
+  const catSeo = {
+    "cat-standard": ["Standard ISO Shipping Containers | 20 ft & 40 ft Models", "Explore 20 ft and 40 ft standard ISO shipping containers for cargo transport, export and storage. Compare specifications and request a manufacturing quote."],
+    "cat-highcube": ["High Cube Shipping Containers | 20 ft & 40 ft Models", "Discover 20 ft and 40 ft High Cube containers with extra internal height for taller cargo and higher-volume loads. View specifications and enquire today."],
+    "cat-truck": ["Truck & Load-Body Containers for Commercial Vehicles", "Explore 10 ft, 20 ft and 40 ft truck containers and load bodies, engineered for commercial road transport, fleet operations and custom requirements."],
+    "cat-specialized": ["Specialized Containers | Custom & Refrigerated Solutions", "Explore custom-built and refrigerated containers, equipment enclosures and engineered units designed for industrial, energy and specialist applications."],
+    "cat-railway": ["Railway & Rolling Stock Products | Wagons & Components", "Explore railway wagons, passenger coach components and alloy steel castings engineered for rolling stock, railway infrastructure and track applications."],
+    "cat-ev": ["Electric Light Commercial Vehicles | Commercial EV Range", "Discover electric light commercial vehicles for commercial mobility, with practical configurations and engineering expertise for fleet applications."],
+  };
   cats.forEach(([id, title, s, icon, short, image, body], i) =>
     add({
       _id: id, _type: "productCategory", title, slug: slug(s), icon, shortDescription: short, order: i + 1,
       ...(image ? { image } : {}),
       body: pt(body),
-      seo: seo(`${title} Manufacturer in India`, `${short} Built by VAHANA in Bhavnagar, Gujarat. Request a quote.`),
+      seo: seo(...catSeo[id]),
     }),
   );
 
@@ -194,6 +202,13 @@ async function run() {
       ["Weather-tight, leak-tested boxes", "Portable and stackable", "Custom doors, vents and fittings"],
       ["p-20-iso", "p-20-hc"]],
   ];
+  const indSeo = {
+    "ind-shipping": ["ISO Shipping Containers for Logistics, Export & Cargo", "Source durable ISO containers for exporters, shipping lines and logistics operators. Explore container options for cargo movement, handling and storage."],
+    "ind-energy": ["Containers & Enclosures for Renewable Energy Applications", "Explore engineered enclosures and specialized containers for energy storage, battery systems and power equipment. Discuss your project needs with our team."],
+    "ind-railways": ["Railway Wagons, Coach Components & Rolling Stock Products", "Discover railway wagons, passenger coach components and alloy steel castings engineered for rolling stock, railway infrastructure and track applications."],
+    "ind-cv": ["Truck Containers, Load Bodies & Electric Commercial Vehicles", "Explore truck containers, commercial vehicle load bodies and electric LCV solutions engineered for road transport, fleet and commercial applications."],
+    "ind-storage": ["Industrial Storage Containers & On-Site Storage Solutions", "Explore secure, weather-resistant containers for on-site storage, equipment protection and industrial use. Share your requirements for a quote today."],
+  };
   industries.forEach(([id, title, s, icon, image, short, challenge, solution, points, recs], i) =>
     add({
       _id: id, _type: "industry", title, slug: slug(s), icon, shortDescription: short, order: i + 1,
@@ -201,7 +216,7 @@ async function run() {
       challenge: pt(challenge), solution: pt(solution), solutionPoints: points,
       recommendedProducts: refs(recs),
       ...(id === "ind-energy" ? { caseStudy: ref("proj-deflagration") } : {}),
-      seo: seo(`Containers for ${title} | VAHANA`, `${short} Engineered and built by VAHANA, Bhavnagar.`),
+      seo: seo(...indSeo[id]),
     }),
   );
 
@@ -227,7 +242,7 @@ async function run() {
       specs: [...dims(20, "6.058", 8.6, "2.591"), { _type: "specGroup", title: "Weights", rows: [kv("Max gross weight", "30,480 kg"), kv("Max payload", "28,800 kg")] }],
       apps: ["General cargo", "Export packing", "On-site storage", "Heavy, dense goods"],
       related: ["p-40-iso", "p-20-hc"], inds: ["ind-shipping", "ind-storage"], faqs: ["faq-weights", "faq-custom", "faq-testing"],
-      seo: seo("20 ft ISO Container Manufacturer in India", "20 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from VAHANA."),
+      seo: seo("20 ft ISO Shipping Container Manufacturer in India", "Explore 20 ft ISO container dimensions, payload capacity, features and applications for cargo transport and storage. Enquire about bulk and export orders."),
     },
     {
       _id: "p-40-iso", title: "40 ft ISO Container", s: "40-ft-iso-container", cat: "cat-standard", image: I.shipCranes, order: 2,
@@ -237,7 +252,7 @@ async function run() {
       specs: [...dims(40, "12.192", 8.6, "2.591"), { _type: "specGroup", title: "Weights", rows: [kv("Max gross weight", "32,500 kg"), kv("Max payload", "28,800 kg")] }],
       apps: ["Bulk shipments", "Furniture", "Machinery", "Consumer goods"],
       related: ["p-20-iso", "p-40-hc"], inds: ["ind-shipping"], faqs: ["faq-weights", "faq-hc-diff", "faq-export"],
-      seo: seo("40 ft ISO Container Manufacturer in India", "40 ft GP container, 8 ft wide, 8.6 ft high, 28,800 kg payload. Request a quote from VAHANA."),
+      seo: seo("40 ft ISO Shipping Container Manufacturer in India", "Explore 40 ft ISO container dimensions, payload capacity, features and applications for bulk cargo, export and storage. Request specifications and pricing."),
     },
     {
       _id: "p-20-hc", title: "20 ft High Cube Container", s: "20-ft-high-cube-container", cat: "cat-highcube", image: I.stack, order: 3,
@@ -247,7 +262,7 @@ async function run() {
       specs: [...dims(20, "6.058", 9.6, "2.896")],
       apps: ["Light, bulky cargo", "Equipment", "Storage"],
       related: ["p-20-iso", "p-40-hc"], inds: ["ind-shipping", "ind-storage"], faqs: ["faq-hc-diff", "faq-custom"],
-      seo: seo("20 ft High Cube Container Manufacturer", "20 ft High Cube container with extra height for taller loads. Built in Bhavnagar. Get a quote."),
+      seo: seo("20 ft High Cube Container Manufacturer in India", "Discover 20 ft High Cube container dimensions, capacity and features. Extra internal height makes it suitable for taller cargo and higher-volume storage."),
     },
     {
       _id: "p-40-hc", title: "40 ft High Cube Container", s: "40-ft-high-cube-container", cat: "cat-highcube", image: I.ship, order: 4,
@@ -257,7 +272,7 @@ async function run() {
       specs: [...dims(40, "12.192", 9.6, "2.896"), { _type: "specGroup", title: "Weights", rows: [kv("Max gross weight", "32,730 kg"), kv("Max payload", "28,800 kg")] }],
       apps: ["Voluminous cargo", "Apparel", "Furniture", "Packaged goods"],
       related: ["p-40-iso", "p-20-hc"], inds: ["ind-shipping"], faqs: ["faq-hc-diff", "faq-weights", "faq-export"],
-      seo: seo("40 ft High Cube Container Manufacturer", "40 ft High Cube container, 9.6 ft high, 28,800 kg payload. Built in Bhavnagar. Get a quote."),
+      seo: seo("40 ft High Cube Container Manufacturer in India", "Explore 40 ft High Cube container dimensions, payload and features for taller or higher-volume cargo. Compare specifications and request a quote."),
     },
     {
       _id: "p-truck", title: "Truck Container", s: "truck-container", cat: "cat-truck", image: I.portCranes, order: 5,
@@ -270,7 +285,7 @@ async function run() {
       ],
       apps: ["Goods transport", "Fuel and liquids", "Distribution fleets"],
       related: ["p-20-iso", "p-40-iso"], inds: ["ind-cv"], faqs: ["faq-custom", "faq-order"],
-      seo: seo("Truck Container Manufacturer in Gujarat", "Truck containers in 10, 20 and 40 ft, plus cylindrical containers for liquids. Request a quote."),
+      seo: seo("Truck Container & Load Body Manufacturer in India", "Explore truck containers and load bodies for commercial vehicles, available in multiple sizes and custom configurations for road transport and logistics."),
     },
   ];
   products.forEach((p) =>
@@ -294,7 +309,7 @@ async function run() {
     result: pt("VAHANA became the first company in Asia to perform the deflagration test. The project established a validated design approach that we now apply to specialised and energy enclosures."),
     resultStats: [kv("In Asia to perform the deflagration test", "1st"), kv("Design & development projects", "30+")],
     gallery: [I.deflag, I.enclosure],
-    seo: seo("Deflagration Test Case Study | VAHANA", "How VAHANA and GE Renewables India performed Asia's first deflagration test on an enclosure container."),
+    seo: seo("Deflagration-Tested Energy Enclosure | Engineering Case Study", "See how an energy enclosure was developed and validated through deflagration testing with GE Renewables India, demonstrating specialist engineering expertise."),
   });
   add({
     _id: "proj-enclosure", _type: "project", title: "Specialised equipment enclosure", slug: slug("specialised-equipment-enclosure"),
@@ -358,10 +373,18 @@ async function run() {
       body: "Every container we build follows the same disciplined sequence, with a quality check at each stage.\n\n## 1. Design and drawings\n\nOur engineers prepare 3D models, 2D drawings and CNC nesting programs in-house.\n\n## 2. Part processing\n\nSteel is cut, bent and sheared using laser cutting, CNC plasma cutting, CNC press brakes and shearing machines.\n\n## 3. Panel fabrication and welding\n\nPanels are corrugated with in-house tooling and welded on advanced fixtures with semi-automatic welding handlers.\n\n## 4. Container boxing\n\nFloor, walls, roof, frames and doors come together on our 20 ft and 40 ft assembly lines.\n\n## 5. Shot blasting\n\nThe surface is blasted clean to prepare it for coating.\n\n## 6. Primer and paint\n\nWe prime and paint containers up to 40 ft in-house.\n\n## 7. Leak and quality tests\n\nEvery container is leak-tested for water-tightness in our in-house facility.\n\n## 8. Final inspection and dispatch\n\nA final inspection confirms the container meets the specification before it leaves the plant.",
     },
   ];
+  const postSeo = {
+    "post-elcv": ["VAHANA Launches Two Electric Light Commercial Vehicles", "Read about the launch of two electric light commercial vehicles, expanding the product range into commercial electric mobility and fleet applications."],
+    "post-deflag-news": ["Asia's First Deflagration Test with GE Renewables India", "Learn how an engineered enclosure was developed and tested with GE Renewables India, marking a major milestone in energy storage safety validation."],
+    "post-20-vs-40": ["20 ft vs 40 ft Container: Size, Capacity & Key Differences", "Compare 20 ft and 40 ft containers by dimensions, capacity, payload, cost and applications to choose the right option for cargo transport and storage."],
+    "post-std-vs-hc": ["Standard vs High Cube Container: Sizes & Key Differences", "Compare standard and High Cube containers by dimensions, internal height, capacity and applications to choose the right container for your cargo."],
+    "post-what-deflag": ["What Is a Deflagration Test? Purpose, Process & Importance", "Understand what a deflagration test checks, why it matters for energy storage enclosures and how testing validates equipment safety and performance."],
+    "post-how-built": ["How an ISO Shipping Container Is Manufactured", "Explore how an ISO shipping container is made, from engineering and steel processing to fabrication, painting, quality inspection and final testing."],
+  };
   posts.forEach((p) =>
     add({
       _id: p._id, _type: "post", postType: p.postType, title: p.title, slug: slug(p.s), publishedAt: new Date(p.date + "T09:00:00Z").toISOString(),
-      categories: refs([p.cat]), excerpt: p.excerpt, mainImage: p.image, body: pt(p.body), featured: Boolean(p.featured), author: "VAHANA",
+      categories: refs([p.cat]), excerpt: p.excerpt, mainImage: p.image, body: pt(p.body), featured: Boolean(p.featured), author: "VAHANA", seo: seo(...postSeo[p._id]),
     }),
   );
 
@@ -376,7 +399,7 @@ async function run() {
     const header = opts.header ? { ...opts.header, buttons: opts.header.buttons || topCta[kind] } : undefined;
     add({ _id: id, _type: "page", title, slug: slug(s), pageBuilder: sections, ...opts, ...(header ? { header } : {}) });
   };
-  const cta = (heading, text, buttons) => ({ _type: "ctaBlock", heading, text, buttons, image: I.shipCranes });
+  const cta = (heading, text, buttons, headingTag) => ({ _type: "ctaBlock", heading, text, buttons, image: I.shipCranes, ...(headingTag ? { headingTag } : {}) });
   const quoteBtns = [btn("Get a Quote", "/get-a-quote"), btn("Contact Us", "/contact", "outlineLight")];
 
   page("page-home", "Home", "home", [
@@ -401,10 +424,10 @@ async function run() {
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Design & engineering projects", "30+"),
       buttons: [btn("Know More About Us", "/about-us")], imagePosition: "right", background: "white",
     },
-    { _type: "productCategoriesBlock", eyebrow: "Our products", heading: "Containers and mobility products for every load", intro: "From standard ISO boxes to specialized enclosures, rail and electric vehicles, all engineered and built in-house.", background: "light", buttons: [btn("View All Products", "/products", "secondary")] },
+    { _type: "productCategoriesBlock", eyebrow: "Our products", heading: "Containers and mobility products for every load", intro: "From standard ISO boxes to specialized enclosures, rail and electric vehicles, all engineered and built in-house.", background: "light", headingTag: "h3", itemHeadingTag: "h5", buttons: [btn("View All Products", "/products", "secondary")] },
     {
       _type: "featureGridBlock", eyebrow: "Why choose VAHANA", heading: "Engineers, not just manufacturers", intro: "Every container is designed, fabricated, painted and tested under one roof by a team that solves real engineering problems.",
-      columns: 3, variant: "cards", background: "white", buttons: [btn("Contact Us", null, "primary", "page-contact")],
+      columns: 3, variant: "cards", background: "white", headingTag: "h4", itemHeadingTag: "h5", buttons: [btn("Contact Us", null, "primary", "page-contact")],
       items: [
         item("compass", "Complete in-house engineering", "3D modelling, 2D drafting, CNC nesting, simulation, DFMEA and PFMEA, all done by our own team."),
         item("flame", "Asia's first deflagration test", "Developed jointly with GE Renewables India to prove enclosure safety under internal gas ignition."),
@@ -428,18 +451,18 @@ async function run() {
       body: pt("Our Bhavnagar plant covers container boxing, part processing, painting and testing under one roof. Laser cutting, CNC plasma cutting, CNC press brakes and advanced welding fixtures keep every panel precise.\n\nWe are the first in Asia to perform the **deflagration test**, in joint development with GE Renewables, India."),
       bullets: ["20 ft & 40 ft boxing lines", "Laser & CNC plasma cutting", "Shot blast, primer & paint", "In-house leak test"],
       image: I.laser, buttons: [btn("Explore Our Facility", "/capabilities/manufacturing-facility"), btn("Testing & Innovation", "/capabilities/testing-and-innovation", "outline")],
-      imagePosition: "left", background: "light",
+      imagePosition: "left", background: "light", headingTag: "h4",
     },
-    { _type: "certificationsBlock", eyebrow: "Standards & testing", heading: "Built and tested to standard", layout: "strip", background: "white" },
-    { _type: "clientsBlock", eyebrow: "Clients & projects", heading: "Trusted by industry and engineering partners", projects: refs(["proj-deflagration", "proj-enclosure", "proj-elcv"]), background: "light", buttons: [btn("View All Projects", "/projects", "secondary")] },
-    { _type: "postsBlock", eyebrow: "Latest news", heading: "News and updates", postType: "all", mode: "latest", background: "white" },
-    { _type: "faqBlock", eyebrow: "FAQ", heading: "Frequently asked questions", intro: "Quick answers on sizes, ordering, export and quality.", faqs: refs(["faq-types", "faq-hc-diff", "faq-weights", "faq-order", "faq-export"]), buttons: [btn("View All FAQs", "/faq", "outline")], background: "light" },
+    { _type: "certificationsBlock", eyebrow: "Standards & testing", heading: "Built and tested to standard", layout: "strip", background: "white", headingTag: "h5" },
+    { _type: "clientsBlock", eyebrow: "Clients & projects", heading: "Trusted by industry and engineering partners", projects: refs(["proj-deflagration", "proj-enclosure", "proj-elcv"]), background: "light", headingTag: "h3", itemHeadingTag: "p", buttons: [btn("View All Projects", "/projects", "secondary")] },
+    { _type: "postsBlock", eyebrow: "Latest news", heading: "News and updates", postType: "all", mode: "latest", background: "white", headingTag: "h5", itemHeadingTag: "p" },
+    { _type: "faqBlock", eyebrow: "FAQ", heading: "Frequently asked questions", intro: "Quick answers on sizes, ordering, export and quality.", faqs: refs(["faq-types", "faq-hc-diff", "faq-weights", "faq-order", "faq-export"]), buttons: [btn("View All FAQs", "/faq", "outline")], background: "light", headingTag: "h5" },
     {
       _type: "formBlock", eyebrow: "Enquiry", heading: "Tell us what you need", intro: "Share your requirement and our team will respond within one working day.",
-      formType: "enquiry", submitLabel: "Send Enquiry", background: "dark", sectionId: "enquiry",
+      formType: "enquiry", submitLabel: "Send Enquiry", background: "dark", sectionId: "enquiry", headingTag: "h5",
       points: [item("clock", "Reply within one working day"), item("compass", "Engineering support for custom builds"), item("globe", "Domestic and export orders")],
     },
-  ], { seo: seo("ISO Container Manufacturer in Bhavnagar | VAHANA", "VAHANA makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.") });
+  ], { seo: seo("ISO Container Manufacturer in India | VAHANA Containers", "Explore ISO shipping containers, specialized enclosures, railway products and electric LCVs, engineered in Bhavnagar, Gujarat, for export and industry.") });
 
   /* About */
   page("page-about", "About Us", "about-us", [
@@ -449,7 +472,7 @@ async function run() {
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Engineering projects", "30+"), imagePosition: "right",
     },
     {
-      _type: "featureGridBlock", eyebrow: "Vision & mission", heading: "What drives us", columns: 2, variant: "cards", background: "light",
+      _type: "featureGridBlock", eyebrow: "Vision & mission", heading: "What drives us", columns: 2, variant: "cards", background: "light", headingTag: "h3", itemHeadingTag: "h4",
       items: [
         item("eye", "Our vision", "To be a trusted global provider of complete mobility solutions, from containers to rail and electric vehicles."),
         item("target", "Our mission", "To engineer and build every product to international standards, test it before it ships, and support our customers with real engineering depth."),
@@ -459,10 +482,10 @@ async function run() {
       _type: "splitContentBlock", eyebrow: "Group overview", heading: "One engineering group, many mobility products",
       body: pt("The group also manufactures application-based load bodies for commercial vehicles and has entered the commercial EV space with the launch of two eLCVs."),
       bullets: ["ISO & specialized containers", "Refrigerated containers", "Railway wagons & coach components", "Alloy steel castings", "Commercial vehicle load bodies", "Electric LCVs"],
-      image: I.ship, imagePosition: "left",
+      image: I.ship, imagePosition: "left", headingTag: "h3",
     },
     {
-      _type: "featureGridBlock", eyebrow: "What sets us apart", heading: "Why customers choose VAHANA", columns: 4, variant: "numbered", background: "dark",
+      _type: "featureGridBlock", eyebrow: "What sets us apart", heading: "Why customers choose VAHANA", columns: 4, variant: "numbered", background: "dark", headingTag: "h4", itemHeadingTag: "p",
       items: [
         item("users", "Real engineers", "A team of real engineers solving real engineering problems."),
         item("flame", "Asia's first", "Asia's first deflagration test, developed with GE Renewables India."),
@@ -470,10 +493,10 @@ async function run() {
         item("factory", "One plant", "Design, fabrication, painting and testing in a single plant."),
       ],
     },
-    cta("Talk to our team", "Tell us about your project and we'll put you in touch with the right engineer.", [btn("Talk to Our Team", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
+    cta("Talk to our team", "Tell us about your project and we'll put you in touch with the right engineer.", [btn("Talk to Our Team", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")], "h5"),
   ], {
     header: { eyebrow: "About us", heading: "About VAHANA", intro: "A premier manufacturer of ISO marine shipping containers and specialized containers, with in-house engineering that goes beyond the standard.", image: I.portCranes },
-    seo: seo("About VAHANA | Container Manufacturer", "Learn about VAHANA, our engineering team, our journey and our vision for complete mobility solutions."),
+    seo: seo("About VAHANA Containers | Engineering & Manufacturing in India", "Discover VAHANA Containers, an Indian manufacturer of ISO shipping containers, specialized enclosures and mobility products, backed by in-house engineering."),
   });
   page("page-journey", "Our Journey", "about-us/our-journey", [
     {
@@ -487,7 +510,7 @@ async function run() {
     },
     { _type: "statsBlock", background: "dark", stats: [{ _type: "stat", value: 1, suffix: "st", label: "Deflagration test in Asia" }, { _type: "stat", value: 30, suffix: "+", label: "Engineering projects" }, { _type: "stat", value: 6, label: "Product categories" }] },
     cta("See what we build today", "Explore our containers, rail products and EVs.", [btn("See Our Products", "/products"), btn("Contact Us", "/contact", "outlineLight")]),
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Our Journey", intro: "From container manufacturing to a multi-product mobility group.", image: I.shipCranes }, seo: seo("Our Journey | VAHANA", "Milestones in the growth of VAHANA, from ISO containers to Asia's first deflagration test and commercial EVs.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Our Journey", intro: "From container manufacturing to a multi-product mobility group.", image: I.shipCranes }, seo: seo("Our Journey | Container & Mobility Manufacturing Milestones", "Explore the milestones behind VAHANA Containers, from ISO shipping container manufacturing to specialized enclosures, railway products and electric LCVs.") });
   page("page-leadership", "Leadership Team", "about-us/leadership-team", [
     {
       _type: "messageBlock", eyebrow: "Founder's message", heading: "Quality, engineering and our customers",
@@ -496,7 +519,7 @@ async function run() {
     },
     { _type: "teamBlock", eyebrow: "Leadership", heading: "The team behind VAHANA", background: "light" },
     cta("Want to talk to our leadership?", "We're always happy to discuss long-term partnerships and large projects.", [btn("Contact Us", "/contact"), btn("Careers", "/about-us/careers", "outlineLight")]),
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Leadership Team", intro: "The people who lead our engineering, manufacturing and customer relationships.", image: I.portAerial }, seo: seo("Leadership Team | VAHANA", "Meet the leadership team of VAHANA.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Leadership Team", intro: "The people who lead our engineering, manufacturing and customer relationships.", image: I.portAerial }, seo: seo("Leadership Team | Engineering & Manufacturing Expertise", "Meet the leadership guiding VAHANA Containers, with a focus on engineering excellence, manufacturing quality and long-term customer partnerships.") });
   page("page-careers", "Careers", "about-us/careers", [
     {
       _type: "featureGridBlock", eyebrow: "Why work here", heading: "Build things that move the world", columns: 3, variant: "cards",
@@ -508,13 +531,13 @@ async function run() {
     },
     { _type: "jobsBlock", eyebrow: "Open positions", heading: "Current openings", background: "light" },
     { _type: "formBlock", eyebrow: "How to apply", heading: "Apply now", intro: "Send your CV using the form, or email it to info@patelcontainer.com with the role in the subject line.", formType: "career", sectionId: "apply", showContactDetails: false, background: "white" },
-  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Careers", intro: "Join a team of engineers and craftspeople building containers, rail products and EVs.", image: I.laser }, seo: seo("Careers | VAHANA", "Engineering and manufacturing careers at VAHANA in Bhavnagar, Gujarat.") });
+  ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Careers", intro: "Join a team of engineers and craftspeople building containers, rail products and EVs.", image: I.laser }, seo: seo("Careers in Container Manufacturing & Engineering | VAHANA", "Explore career opportunities in engineering, manufacturing and operations. Join VAHANA Containers in building products for global mobility and industry.") });
 
   /* Products overview */
   page("page-products", "Products", "products", [
-    { _type: "productCategoriesBlock", eyebrow: "Categories", heading: "Choose a product category", intro: "From standard ISO boxes to specialized and rail products, VAHANA builds to international standards with in-house engineering. Choose a category to see specifications and request a quote." },
+    { _type: "productCategoriesBlock", eyebrow: "Categories", heading: "Choose a product category", itemHeadingTag: "h5", intro: "From standard ISO boxes to specialized and rail products, VAHANA builds to international standards with in-house engineering. Choose a category to see specifications and request a quote." },
     {
-      _type: "comparisonTableBlock", eyebrow: "Compare sizes", heading: "20 ft vs 40 ft vs High Cube", background: "light",
+      _type: "comparisonTableBlock", eyebrow: "Compare sizes", heading: "20 ft vs 40 ft vs High Cube", background: "light", headingTag: "h3",
       columns: ["Product", "Length", "Width", "Height", "Max gross weight", "Max payload"],
       rows: [
         { _type: "row", cells: ["20 ft ISO", "20 ft", "8 ft", "8.6 ft", "30,480 kg", "28,800 kg"], product: ref("p-20-iso") },
@@ -524,14 +547,14 @@ async function run() {
       ],
       note: "Nominal values. Custom specifications available on request.",
     },
-    { _type: "productsBlock", eyebrow: "All products", heading: "Product range" },
-    cta("Not sure which size fits?", "Talk to our team and we'll recommend the right container for your cargo.", quoteBtns),
-  ], { header: { eyebrow: "Products", heading: "Containers & Mobility Products", intro: "ISO, High Cube, truck and specialized containers, plus railway products and commercial EVs.", image: I.portAerial, buttons: [btn("Get a Quote", "/get-a-quote")] }, seo: seo("ISO and High Cube Containers | VAHANA", "Browse 20 ft and 40 ft ISO containers, High Cube containers and truck containers made in Bhavnagar, Gujarat.") });
+    { _type: "productsBlock", eyebrow: "All products", heading: "Product range", headingTag: "h4", itemHeadingTag: "h5" },
+    cta("Not sure which size fits?", "Talk to our team and we'll recommend the right container for your cargo.", quoteBtns, "h4"),
+  ], { header: { eyebrow: "Products", heading: "Containers & Mobility Products", intro: "ISO, High Cube, truck and specialized containers, plus railway products and commercial EVs.", image: I.portAerial, buttons: [btn("Get a Quote", "/get-a-quote")] }, seo: seo("ISO Shipping Containers, Specialized Containers & Mobility", "Explore standard ISO, High Cube, truck and specialized containers, railway products and electric commercial vehicles for diverse industrial applications.") });
 
   /* Capabilities */
   page("page-capabilities", "Capabilities", "capabilities", [
     {
-      _type: "linkCardsBlock", eyebrow: "How we build", heading: "Engineering and manufacturing under one roof", intro: "Explore how VAHANA designs, builds and tests its products.",
+      _type: "linkCardsBlock", eyebrow: "How we build", heading: "Engineering and manufacturing under one roof", intro: "Explore how VAHANA designs, builds and tests its products.", itemHeadingTag: "h5",
       cards: [
         { _type: "linkCard", title: "Manufacturing Facility", text: "Boxing, part processing, painting and leak testing.", image: I.laser, link: link("Explore", "page-cap-facility") },
         { _type: "linkCard", title: "Design & Engineering", text: "In-house CAD/CAE, simulation, DFMEA and PFMEA.", image: I.enclosure, link: link("Explore", "page-cap-design") },
@@ -540,8 +563,8 @@ async function run() {
       ],
     },
     { _type: "statsBlock", background: "dark", stats: [{ _type: "stat", value: 30, suffix: "+", label: "Engineering projects" }, { _type: "stat", value: 40, suffix: " ft", label: "Max container size painted" }, { _type: "stat", value: 1, suffix: "st", label: "Deflagration test in Asia" }, { _type: "stat", value: 8, label: "Production stages, each QC-checked" }] },
-    cta("See how we build to your specification", "Book a factory visit or discuss your drawings with our engineers.", quoteBtns),
-  ], { header: { eyebrow: "Capabilities", heading: "Our Capabilities", intro: "In-house design, fabrication, painting and testing, including Asia's first deflagration test.", image: I.laser }, seo: seo("Manufacturing and Engineering Capabilities", "In-house design, fabrication, painting and testing, including Asia's first deflagration test.") });
+    cta("See how we build to your specification", "Book a factory visit or discuss your drawings with our engineers.", quoteBtns, "h4"),
+  ], { header: { eyebrow: "Capabilities", heading: "Our Capabilities", intro: "In-house design, fabrication, painting and testing, including Asia's first deflagration test.", image: I.laser }, seo: seo("Container Manufacturing, Design, Engineering & Testing", "Explore integrated container manufacturing capabilities, including in-house design, CAD/CAE engineering, fabrication, painting, quality checks and testing.") });
   page("page-cap-facility", "Manufacturing Facility", "capabilities/manufacturing-facility", [
     {
       _type: "splitContentBlock", eyebrow: "Overview", heading: "Every stage of container manufacturing in one place",
@@ -558,7 +581,7 @@ async function run() {
       ],
     },
     {
-      _type: "featureGridBlock", eyebrow: "Workshop stages", heading: "From raw steel to finished container", columns: 4, variant: "cards", background: "light",
+      _type: "featureGridBlock", eyebrow: "Workshop stages", heading: "From raw steel to finished container", columns: 4, variant: "cards", background: "light", headingTag: "h3", itemHeadingTag: "p",
       items: [
         item("container", "Container boxing", "40 ft and 20 ft container assembly lines."),
         item("scissors", "Part processing", "Laser and CNC plasma cutting, CNC press brakes, shearing and welding fixtures."),
@@ -567,12 +590,12 @@ async function run() {
       ],
     },
     {
-      _type: "featureGridBlock", eyebrow: "Machinery", heading: "Part-processing equipment", columns: 3, variant: "list",
+      _type: "featureGridBlock", eyebrow: "Machinery", heading: "Part-processing equipment", columns: 3, variant: "list", headingTag: "h3",
       items: [item("check", "Special purpose machines (SPMs)"), item("check", "Laser cutting"), item("check", "CNC plasma cutting"), item("check", "CNC press brakes"), item("check", "Shearing machines"), item("check", "Manipulators"), item("check", "Advanced welding fixtures"), item("check", "In-house tools for panel corrugations"), item("check", "Semi-automatic welding handlers")],
     },
-    { _type: "galleryBlock", eyebrow: "Gallery", heading: "Inside our plant", source: "inline", images: [I.laser, I.enclosure, I.deflag], background: "light" },
-    cta("Visit our plant", "Book a factory tour and see our production lines for yourself.", [btn("Book a Factory Tour", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Manufacturing Facility", intro: "Container boxing, part processing, painting and leak testing under one roof in Bhavnagar.", image: I.laser }, seo: seo("Container Manufacturing Facility | VAHANA", "Our Bhavnagar plant: 20 ft and 40 ft boxing lines, laser and CNC cutting, shot blasting, painting and leak testing.") });
+    { _type: "galleryBlock", eyebrow: "Gallery", heading: "Inside our plant", source: "inline", images: [I.laser, I.enclosure, I.deflag], background: "light", headingTag: "h4" },
+    cta("Visit our plant", "Book a factory tour and see our production lines for yourself.", [btn("Book a Factory Tour", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")], "h5"),
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Manufacturing Facility", intro: "Container boxing, part processing, painting and leak testing under one roof in Bhavnagar.", image: I.laser }, seo: seo("ISO Container Manufacturing Facility in Bhavnagar, Gujarat", "Explore the manufacturing facility in Bhavnagar, with container fabrication, material processing, welding, painting and quality checks under one roof.") });
   page("page-cap-design", "Design & Engineering", "capabilities/design-and-engineering", [
     {
       _type: "splitContentBlock", eyebrow: "Engineering firm", heading: "More than a manufacturer",
@@ -592,7 +615,7 @@ async function run() {
     },
     { _type: "projectsBlock", eyebrow: "Sample projects", heading: "Engineering we have delivered", projects: refs(["proj-deflagration", "proj-enclosure", "proj-elcv"]), showFilters: false, background: "light" },
     cta("Discuss your design requirement", "Share your drawings or idea and our engineers will propose a solution.", quoteBtns),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Design & Engineering", intro: "A team of real engineers with in-house CAD/CAE, simulation and failure-mode analysis.", image: I.enclosure }, seo: seo("Container Design & Engineering | VAHANA", "In-house 3D modelling, 2D drafting, CNC nesting, simulation, DFMEA and PFMEA. 30+ engineering projects delivered.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Design & Engineering", intro: "A team of real engineers with in-house CAD/CAE, simulation and failure-mode analysis.", image: I.enclosure }, seo: seo("Container Design & Engineering | CAD, CAE & Simulation", "Discover in-house container design using CAD, CAE, 3D modelling and simulation to develop standard and custom-built products for demanding applications.") });
   page("page-cap-testing", "Testing & Innovation", "capabilities/testing-and-innovation", [
     {
       _type: "featureGridBlock", eyebrow: "Testing facilities", heading: "We test what we build, and we test beyond the standard", columns: 3, variant: "cards",
@@ -612,7 +635,7 @@ async function run() {
       items: [item("zap", "Commercial EV launch", "Two electric light commercial vehicles from the group."), item("lightbulb", "New container designs", "Specialized enclosures and custom builds for energy and industry.")],
     },
     cta("Request test reports", "Ask our team for test documentation for your project.", [btn("Request Test Reports", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Testing & Innovation", intro: "We test what we build, and we test beyond the standard.", image: I.deflag }, seo: seo("Container Testing & Deflagration Test | VAHANA", "Asia's first deflagration test with GE Renewables India, plus in-house leak testing and stage-wise inspection.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Testing & Innovation", intro: "We test what we build, and we test beyond the standard.", image: I.deflag }, seo: seo("Container Testing & Deflagration Testing Capabilities", "Learn about in-house container testing, leak checks and specialized enclosure validation, including deflagration testing with GE Renewables India.") });
   page("page-cap-process", "Production Process", "capabilities/production-process", [
     {
       _type: "processBlock", eyebrow: "Step by step", heading: "From drawings to dispatch", note: "A quality check is done at each stage.",
@@ -628,22 +651,22 @@ async function run() {
       ],
     },
     cta("See how we build to your specification", "Send your requirement and we'll walk you through the build.", quoteBtns),
-  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Production Process", intro: "Eight disciplined stages, with a quality check at every step.", image: I.shipCranes }, seo: seo("Container Production Process | VAHANA", "How an ISO container is built at VAHANA: eight production stages from design to final inspection and dispatch.") });
+  ], { parent: ref("page-capabilities"), header: { eyebrow: "Capabilities", heading: "Production Process", intro: "Eight disciplined stages, with a quality check at every step.", image: I.shipCranes }, seo: seo("Container Manufacturing Process | Eight Quality-Control Stages", "Explore the eight-stage container production process, from material processing and fabrication to painting, inspection and final product testing.") });
 
   /* Quality */
   page("page-quality", "Quality & Certifications", "quality", [
     { _type: "splitContentBlock", eyebrow: "Quality policy", heading: "We test before we ship", body: pt("We build every container to meet customer specifications and international standards, and we test before we ship."), image: I.enclosure },
     {
-      _type: "featureGridBlock", eyebrow: "Standards followed", heading: "The standards we build to", columns: 3, variant: "list", background: "light",
+      _type: "featureGridBlock", eyebrow: "Standards followed", heading: "The standards we build to", columns: 3, variant: "list", background: "light", headingTag: "h3",
       items: [
         item("check", "ISO 1496 series", "Freight container specification and testing dimensions."),
         item("check", "Customer specifications", "Project drawings and approved specifications."),
         item("check", "DFMEA & PFMEA", "Design and process failure-mode analysis."),
       ],
     },
-    { _type: "certificationsBlock", eyebrow: "Certificates", heading: "Certificates and approvals", intro: "Download certificates where available, or request a copy from our team.", layout: "cards" },
+    { _type: "certificationsBlock", eyebrow: "Certificates", heading: "Certificates and approvals", intro: "Download certificates where available, or request a copy from our team.", layout: "cards", headingTag: "h3", itemHeadingTag: "p" },
     {
-      _type: "processBlock", eyebrow: "Inspection & QA", heading: "Our quality process", background: "light",
+      _type: "processBlock", eyebrow: "Inspection & QA", heading: "Our quality process", background: "light", headingTag: "h4", itemHeadingTag: "p",
       steps: [
         { _type: "step", title: "Incoming material check", text: "Steel and components checked on arrival." },
         { _type: "step", title: "In-process inspection", text: "Inspection at each production stage." },
@@ -651,24 +674,24 @@ async function run() {
         { _type: "step", title: "Final inspection", text: "Checked against specification before dispatch." },
       ],
     },
-    { _type: "featureGridBlock", eyebrow: "Third-party approvals", heading: "Inspection agencies and customer approvals", intro: "Details of third-party inspection agencies and customer approvals are available on request.", columns: 2, variant: "cards", items: [item("badge", "Inspection agencies", "Third-party inspection can be arranged on request."), item("handshake", "Customer approvals", "Joint development and approvals with partners such as GE Renewables India.")] },
-    cta("Request our quality documents", "Ask for certificates, test reports and inspection records.", [btn("Request Documents", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { header: { eyebrow: "Quality", heading: "Quality & Certifications", intro: "Our quality process, standards and certificates for container manufacturing.", image: I.deflag }, seo: seo("Quality and Certifications | VAHANA", "Our quality process, standards and certificates for container manufacturing.") });
+    { _type: "featureGridBlock", eyebrow: "Third-party approvals", heading: "Inspection agencies and customer approvals", intro: "Details of third-party inspection agencies and customer approvals are available on request.", columns: 2, variant: "cards", headingTag: "h4", itemHeadingTag: "p", items: [item("badge", "Inspection agencies", "Third-party inspection can be arranged on request."), item("handshake", "Customer approvals", "Joint development and approvals with partners such as GE Renewables India.")] },
+    cta("Request our quality documents", "Ask for certificates, test reports and inspection records.", [btn("Request Documents", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")], "h5"),
+  ], { header: { eyebrow: "Quality", heading: "Quality & Certifications", intro: "Our quality process, standards and certificates for container manufacturing.", image: I.deflag }, seo: seo("Container Quality Control, Inspection & Testing Standards", "Learn about quality controls, material inspection, fabrication checks and product testing that support reliable container manufacturing and delivery.") });
 
   /* Industries */
   page("page-industries", "Industries", "industries", [
     { _type: "industriesBlock", eyebrow: "Industries", heading: "Solutions for every industry we serve" },
-    cta("Have a specific application?", "Tell us about your industry and requirement.", quoteBtns),
-  ], { header: { eyebrow: "Industries / Solutions", heading: "Industries We Serve", intro: "Containers and engineered products for shipping, energy, rail and commercial vehicles.", image: I.portCranes }, seo: seo("Container Solutions by Industry", "Containers and engineered products for shipping, energy, rail and commercial vehicles.") });
+    cta("Have a specific application?", "Tell us about your industry and requirement.", quoteBtns, "h5"),
+  ], { header: { eyebrow: "Industries / Solutions", heading: "Industries We Serve", intro: "Containers and engineered products for shipping, energy, rail and commercial vehicles.", image: I.portCranes }, seo: seo("Container & Mobility Solutions for Multiple Industries", "Discover engineered solutions for shipping, renewable energy, railways, commercial vehicles, industrial storage and on-site use across key sectors.") });
 
   /* Projects & gallery */
   page("page-projects", "Projects", "projects", [
     { _type: "projectsBlock", eyebrow: "Our work", heading: "A selection of containers and engineered products delivered to customers", showFilters: true },
-    cta("Have a project in mind?", "Let's engineer it together.", quoteBtns),
-  ], { header: { eyebrow: "Projects", heading: "Our Work", intro: "A selection of containers and engineered products delivered to customers.", image: I.shipCranes, buttons: [btn("View Gallery", "/gallery", "outlineLight")] }, seo: seo("Projects and Case Studies | VAHANA", "See containers and engineered products delivered by VAHANA.") });
+    cta("Have a project in mind?", "Let's engineer it together.", quoteBtns, "h4"),
+  ], { header: { eyebrow: "Projects", heading: "Our Work", intro: "A selection of containers and engineered products delivered to customers.", image: I.shipCranes, buttons: [btn("View Gallery", "/gallery", "outlineLight")] }, seo: seo("Container Manufacturing Projects & Engineering Case Studies", "Explore container, railway and mobility projects showcasing custom engineering, manufacturing capabilities and application-led product solutions.") });
   page("page-gallery", "Gallery", "gallery", [
     { _type: "galleryBlock", source: "albums" },
-  ], { header: { eyebrow: "Media", heading: "Gallery", intro: "Photos and videos of our products, plant, machinery, testing and events.", image: I.portAerial }, seo: seo("Gallery | VAHANA", "Photos and videos of VAHANA's containers, plant, machinery and testing.") });
+  ], { header: { eyebrow: "Media", heading: "Gallery", intro: "Photos and videos of our products, plant, machinery, testing and events.", image: I.portAerial }, seo: seo("Container Manufacturing, Products & Facility Gallery", "View shipping containers, specialized enclosures, manufacturing facilities, engineering processes, quality testing and mobility products made in Gujarat.") });
 
   /* Media */
   page("page-media", "Media", "media", [
@@ -685,15 +708,15 @@ async function run() {
   ], { header: { eyebrow: "Media", heading: "News, Blog & Downloads", intro: "News, articles and brochures from VAHANA.", image: I.ship }, seo: seo("News, Blog and Downloads", "News, articles and brochures from VAHANA.") });
   page("page-news", "News", "news", [
     { _type: "postsBlock", postType: "news", mode: "full" },
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "News and Updates", intro: "Company, product, event and award news from VAHANA.", image: I.portCranes }, seo: seo("News and Updates | VAHANA", "The latest company, product and event news from VAHANA.") });
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "News and Updates", intro: "Company, product, event and award news from VAHANA.", image: I.portCranes }, seo: seo("Company News, Product Launches & Manufacturing Updates", "Read company announcements, product launches, engineering milestones and updates across containers, railway products and electric commercial mobility.") });
   page("page-blog", "Blog", "blog", [
-    { _type: "postsBlock", postType: "blog", mode: "full" },
-    { _type: "newsletterBlock", eyebrow: "Newsletter", heading: "Get new articles by email", intro: "Container guides, product news and engineering updates. No spam.", background: "light" },
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Container Knowledge Hub", intro: "Practical guides on choosing, specifying and using containers.", image: I.portAerial }, seo: seo("Container Knowledge Hub | VAHANA", "Guides on container sizes, High Cube vs standard, deflagration testing and how ISO containers are built.") });
+    { _type: "postsBlock", postType: "blog", mode: "full", featuredHeadingTag: "h2" },
+    { _type: "newsletterBlock", eyebrow: "Newsletter", heading: "Get new articles by email", intro: "Container guides, product news and engineering updates. No spam.", background: "light", headingTag: "h4" },
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Container Knowledge Hub", intro: "Practical guides on choosing, specifying and using containers.", image: I.portAerial }, seo: seo("Container Guides, Engineering Insights & Industry Articles", "Explore practical guides on container sizes, specifications, manufacturing, testing and applications to make informed product and project decisions.") });
   page("page-downloads", "Downloads", "media/downloads", [
     { _type: "downloadsBlock" },
     cta("Need a specific document?", "Ask us for datasheets, drawings, certificates or test reports.", [btn("Request a Document", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Downloads", intro: "Company brochure, product datasheets and certificates.", image: I.laser }, seo: seo("Brochures & Downloads | VAHANA", "Download the VAHANA brochure, product datasheets and certificates.") });
+  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Downloads", intro: "Company brochure, product datasheets and certificates.", image: I.laser }, seo: seo("Container Product Brochures, Specifications & Downloads", "Access product brochures, technical datasheets and company resources to review container specifications, product features and mobility solutions.") });
 
   /* Contact & quote */
   page("page-contact", "Contact", "contact", [
@@ -702,16 +725,16 @@ async function run() {
       formType: "contact", submitLabel: "Send Message", sectionId: "form",
       points: [item("clock", "Reply within one working day"), item("users", "Talk directly to our engineers")],
     },
-    { _type: "contactInfoBlock", eyebrow: "Reach us", heading: "Contact details", background: "light", exportNote: "Planning an export order? Share your destination port and quantity and we will quote delivered or ex-works prices." },
-  ], { header: { eyebrow: "Contact", heading: "Contact VAHANA", intro: "Call, WhatsApp or send an enquiry. Our team in Bhavnagar is ready to help.", image: I.portCranes }, seo: seo("Contact VAHANA | Bhavnagar", "Call (+91) 7046468484 or send an enquiry. Kumbharwada, Bhavnagar, Gujarat 364006.") });
+    { _type: "contactInfoBlock", eyebrow: "Reach us", heading: "Contact details", background: "light", headingTag: "h3", itemHeadingTag: "p" },
+  ], { header: { eyebrow: "Contact", heading: "Contact VAHANA", intro: "Call, WhatsApp or send an enquiry. Our team in Bhavnagar is ready to help.", image: I.portCranes }, seo: seo("Contact VAHANA Containers | Bhavnagar, Gujarat, India", "Contact VAHANA Containers in Bhavnagar, Gujarat, for ISO shipping containers, specialized enclosures, railway products and electric commercial vehicles.") });
   page("page-quote", "Get a Quote", "get-a-quote", [
     {
       _type: "formBlock", eyebrow: "Request a quote", heading: "Share your requirement", intro: "Share your requirement and get a detailed quote within one working day.",
       formType: "quote", submitLabel: "Request Quote", sectionId: "form",
       points: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design and engineering"), item("droplets", "In-house leak testing"), item("ruler", "Built to ISO standard dimensions")],
     },
-    { _type: "badgesBlock", eyebrow: "Why VAHANA", heading: "Trusted engineering", background: "light", items: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design & engineering"), item("droplets", "In-house leak testing"), item("badge", "ISO 1496 dimensions")] },
-  ], { header: { eyebrow: "Get a quote", heading: "Request a Quote", intro: "Tell us your size, quantity and destination and get a detailed quote within one working day." }, seo: seo("Get a Container Quote | VAHANA", "Tell us your size, quantity and destination and get a quote within one working day.") });
+    { _type: "badgesBlock", eyebrow: "Why VAHANA", heading: "Trusted engineering", background: "light", headingTag: "h3", items: [item("flame", "Asia's first deflagration test"), item("compass", "In-house design & engineering"), item("droplets", "In-house leak testing"), item("badge", "ISO 1496 dimensions")] },
+  ], { header: { eyebrow: "Get a quote", heading: "Request a Quote", intro: "Tell us your size, quantity and destination and get a detailed quote within one working day." }, seo: seo("Request a Quote for ISO & Specialized Shipping Containers", "Share your container type, size, quantity and project requirements to receive pricing and product information for standard or custom-engineered solutions.") });
   page("page-thanks", "Thank You", "get-a-quote/thank-you", [
     {
       _type: "linkCardsBlock", eyebrow: "Next steps", heading: "Thank you, we have your request.", intro: "Our team will contact you within one working day. In the meantime:",
@@ -763,7 +786,7 @@ You can ask to access, correct or delete your personal data. Questions about pri
 
 We may update this policy from time to time. The latest version will always be on this page.`),
     },
-  ], { header: { eyebrow: "Legal", heading: "Privacy Policy" }, seo: seo("Privacy Policy | VAHANA", "How VAHANA collects, uses and protects your personal data.") });
+  ], { header: { eyebrow: "Legal", heading: "Privacy Policy" }, seo: seo("Website Privacy Policy & Data Protection | VAHANA Containers", "Read the privacy policy to understand how VAHANA Containers collects, uses, stores and protects personal information submitted through this website.") });
   page("page-terms", "Terms and Conditions", "terms-and-conditions", [
     {
       _type: "richTextBlock", showToc: true,
@@ -793,7 +816,7 @@ We are not liable for any loss arising from the use of information on this websi
 
 These terms are governed by the laws of India, and the courts of Bhavnagar, Gujarat have jurisdiction.`),
     },
-  ], { header: { eyebrow: "Legal", heading: "Terms and Conditions" }, seo: seo("Terms and Conditions | VAHANA", "Terms and conditions for using the VAHANA website.") });
+  ], { header: { eyebrow: "Legal", heading: "Terms and Conditions" }, seo: seo("Website Terms & Conditions | VAHANA Containers", "Review the terms governing website use, product information, specifications, quotations, orders, intellectual property, liability and Indian law.") });
 
   /* Site settings */
   const mapQ = (q) => `https://maps.google.com/maps?q=${encodeURIComponent(q)}&z=13&output=embed`;

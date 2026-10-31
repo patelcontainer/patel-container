@@ -23,6 +23,22 @@ import { UsersIcon } from "@sanity/icons/Users";
 import { CaseIcon } from "@sanity/icons/Case";
 import { PinIcon } from "@sanity/icons/Pin";
 import { ComposeIcon } from "@sanity/icons/Compose";
+import { HEADING_TAGS } from "../../../lib/headings";
+
+/** HTML tag for a heading (SEO outline only; the look never changes). */
+function tagField(name: string, title: string, initialValue: string, description?: string) {
+  return defineField({
+    name,
+    title,
+    type: "string",
+    group: "settings",
+    initialValue,
+    options: { list: [...HEADING_TAGS] },
+    description: `${description ? `${description} ` : ""}Changes the HTML tag for SEO only; the heading looks the same. Empty means ${initialValue.toUpperCase()}.`,
+  });
+}
+const headingTagField = tagField("headingTag", "Heading tag", "h2");
+const itemHeadingTagField = (what: string) => tagField("itemHeadingTag", `${what} tag`, "h3");
 
 /** Fields shared by every section: anchor, background, heading. */
 function sectionFields(opts: { heading?: boolean } = {}): FieldDefinition[] {
@@ -32,6 +48,7 @@ function sectionFields(opts: { heading?: boolean } = {}): FieldDefinition[] {
       defineField({ name: "eyebrow", title: "Small label above heading", type: "string", group: "content" }),
       defineField({ name: "heading", type: "string", group: "content" }),
       defineField({ name: "intro", type: "text", rows: 3, group: "content" }),
+      headingTagField,
     );
   }
   fields.push(
@@ -202,6 +219,7 @@ export const featureGridBlock = defineType({
       },
     }),
     buttonsField,
+    itemHeadingTagField("Item title"),
   ],
   preview: preview("Feature grid"),
 });
@@ -255,6 +273,7 @@ export const productCategoriesBlock = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "productCategory" }] })],
     }),
     buttonsField,
+    itemHeadingTagField("Category title"),
   ],
   preview: preview("Product categories"),
 });
@@ -275,6 +294,7 @@ export const productsBlock = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "product" }] })],
     }),
     buttonsField,
+    itemHeadingTagField("Product title"),
   ],
   preview: preview("Products"),
 });
@@ -353,6 +373,7 @@ export const certificationsBlock = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "certificate" }] })],
     }),
     buttonsField,
+    itemHeadingTagField("Certificate title (cards layout)"),
   ],
   preview: preview("Certifications"),
 });
@@ -380,6 +401,7 @@ export const clientsBlock = defineType({
       of: [defineArrayMember({ type: "reference", to: [{ type: "project" }] })],
     }),
     buttonsField,
+    itemHeadingTagField("Project title"),
   ],
   preview: preview("Clients & projects"),
 });
@@ -401,6 +423,7 @@ export const projectsBlock = defineType({
     }),
     defineField({ name: "showFilters", type: "boolean", initialValue: true, group: "settings" }),
     buttonsField,
+    itemHeadingTagField("Project title"),
   ],
   preview: preview("Projects list"),
 });
@@ -451,6 +474,8 @@ export const postsBlock = defineType({
       },
     }),
     buttonsField,
+    itemHeadingTagField("Post title"),
+    tagField("featuredHeadingTag", "Featured post title tag", "h3", "Full listing only: tag for the large featured post at the top."),
   ],
   preview: preview("Posts"),
 });
@@ -529,6 +554,7 @@ export const ctaBlock = defineType({
     defineField({ name: "text", type: "text", rows: 2, group: "content" }),
     buttonsField,
     defineField({ name: "image", title: "Background image", type: "imageWithAlt", group: "content" }),
+    headingTagField,
     defineField({ name: "sectionId", title: "Anchor ID", type: "string", group: "settings" }),
   ],
   preview: preview("CTA"),
@@ -560,6 +586,7 @@ export const timelineBlock = defineType({
         }),
       ],
     }),
+    itemHeadingTagField("Milestone title"),
   ],
   preview: preview("Timeline"),
 });
@@ -579,6 +606,7 @@ export const teamBlock = defineType({
       description: "Leave empty to show everyone in their set order.",
       of: [defineArrayMember({ type: "reference", to: [{ type: "teamMember" }] })],
     }),
+    itemHeadingTagField("Member name"),
   ],
   preview: preview("Team"),
 });
@@ -627,6 +655,7 @@ export const processBlock = defineType({
       ],
     }),
     defineField({ name: "note", type: "string", group: "content" }),
+    itemHeadingTagField("Step title"),
   ],
   preview: preview("Process"),
 });
@@ -740,6 +769,7 @@ export const industriesBlock = defineType({
       description: "Leave empty to show all.",
       of: [defineArrayMember({ type: "reference", to: [{ type: "industry" }] })],
     }),
+    itemHeadingTagField("Industry title"),
   ],
   preview: preview("Industries"),
 });
@@ -760,6 +790,7 @@ export const contactInfoBlock = defineType({
       group: "content",
     }),
     defineField({ name: "showMap", type: "boolean", initialValue: true, group: "settings" }),
+    itemHeadingTagField("Card title"),
   ],
   preview: preview("Contact details"),
 });
@@ -790,6 +821,7 @@ export const linkCardsBlock = defineType({
         }),
       ],
     }),
+    itemHeadingTagField("Card title"),
   ],
   preview: preview("Link cards"),
 });
