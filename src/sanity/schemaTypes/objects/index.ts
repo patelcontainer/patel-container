@@ -120,7 +120,7 @@ export const button = defineType({
       name: "url",
       title: "…or URL / path",
       type: "string",
-      description: 'E.g. "/get-a-quote", "https://…". Use "#brochure" to download the company brochure, "#callback" to open the callback form.',
+      description: 'E.g. "/get-a-quote", "https://…". Use "#callback" to open the callback form.',
     }),
     defineField({
       name: "style",

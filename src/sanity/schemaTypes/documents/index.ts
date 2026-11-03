@@ -11,7 +11,6 @@ import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
 import { CheckmarkCircleIcon } from "@sanity/icons/CheckmarkCircle";
 import { UserIcon } from "@sanity/icons/User";
 import { CaseIcon } from "@sanity/icons/Case";
-import { DownloadIcon } from "@sanity/icons/Download";
 import { StarIcon } from "@sanity/icons/Star";
 import { ArrowRightIcon } from "@sanity/icons/ArrowRight";
 import { InboxIcon } from "@sanity/icons/Inbox";
@@ -64,7 +63,6 @@ export const siteSettings = defineType({
     defineField({ name: "siteName", type: "string", group: "brand", validation: (r) => r.required() }),
     defineField({ name: "legalName", type: "string", group: "brand" }),
     defineField({ name: "tagline", type: "string", group: "brand" }),
-    defineField({ name: "brochure", title: "Company brochure (PDF)", type: "file", group: "brand" }),
     defineField({ name: "foundingYear", type: "string", group: "brand" }),
 
     defineField({
@@ -370,7 +368,6 @@ export const product = defineType({
     }),
     defineField({ name: "gallery", type: "array", group: "media", of: [defineArrayMember({ type: "imageWithAlt" })], options: { layout: "grid" } }),
     defineField({ name: "drawings", title: "Technical drawings", type: "array", group: "media", of: [defineArrayMember({ type: "imageWithAlt" })], options: { layout: "grid" } }),
-    defineField({ name: "datasheet", title: "Datasheet (PDF)", type: "file", group: "media" }),
     defineField({
       name: "relatedProducts",
       type: "array",
@@ -592,7 +589,6 @@ export const certificate = defineType({
     defineField({ name: "description", type: "text", rows: 2 }),
     defineField({ name: "validity", type: "string", description: 'E.g. "Valid until March 2028"' }),
     defineField({ name: "logo", type: "image" }),
-    defineField({ name: "file", title: "Certificate PDF", type: "file" }),
     defineField({ name: "order", title: "Sort order", type: "number" }),
   ],
   orderings: [{ title: "Sort order", name: "order", by: [{ field: "order", direction: "asc" }] }],
@@ -632,33 +628,6 @@ export const job = defineType({
     defineField({ name: "postedAt", type: "date" }),
   ],
   preview: { select: { title: "title", subtitle: "location" } },
-});
-
-export const download = defineType({
-  name: "download",
-  title: "Download",
-  type: "document",
-  icon: DownloadIcon,
-  fields: [
-    defineField({ name: "title", type: "string", validation: (r) => r.required() }),
-    defineField({
-      name: "group",
-      type: "string",
-      options: {
-        list: [
-          { title: "Company Brochure", value: "brochure" },
-          { title: "Product Datasheets", value: "datasheet" },
-          { title: "Certificates", value: "certificate" },
-          { title: "Other", value: "other" },
-        ],
-      },
-      validation: (r) => r.required(),
-    }),
-    defineField({ name: "description", type: "string" }),
-    defineField({ name: "file", type: "file", validation: (r) => r.required() }),
-    defineField({ name: "order", title: "Sort order", type: "number" }),
-  ],
-  preview: { select: { title: "title", subtitle: "group" } },
 });
 
 export const client = defineType({
@@ -743,7 +712,6 @@ export const documentTypes = [
   certificate,
   teamMember,
   job,
-  download,
   client,
   redirect,
   submission,

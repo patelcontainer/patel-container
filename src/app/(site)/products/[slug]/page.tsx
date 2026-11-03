@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Check, Download, FileText } from "lucide-react";
+import { Check } from "lucide-react";
 import { cache } from "react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { SanityImg } from "@/components/ui/SanityImg";
@@ -63,7 +63,6 @@ export default async function ProductPage({ params }: Props) {
     { id: "features", label: "Features", show: features.length > 0 || materials.length > 0 },
     { id: "applications", label: "Applications", show: applications.length > 0 || industries.length > 0 },
     { id: "gallery", label: "Gallery", show: gallery.length + drawings.length > 0 },
-    { id: "datasheet", label: "Datasheet", show: true },
     { id: "faq", label: "FAQ", show: faqs.length > 0 },
     { id: "quote", label: t.quoteLabel, show: true },
   ].filter((n) => n.show);
@@ -88,11 +87,7 @@ export default async function ProductPage({ params }: Props) {
             {p.shortDescription && <p className="mt-6 max-w-xl text-lg leading-relaxed text-steel-600">{p.shortDescription}</p>}
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
               <Button href="#quote" size="lg" className="w-full sm:w-auto">{t.quoteLabel}</Button>
-              {p.datasheetUrl ? (
-                <Button href={`${p.datasheetUrl}?dl=`} style="outline" size="lg" icon="download" className="w-full sm:w-auto">Download Datasheet</Button>
-              ) : (
-                <Button href="#whatsapp" style="whatsapp" size="lg" className="w-full sm:w-auto">{t.whatsappLabel}</Button>
-              )}
+              <Button href="#whatsapp" style="whatsapp" size="lg" className="w-full sm:w-auto">{t.whatsappLabel}</Button>
             </div>
           </div>
           <div className="relative">
@@ -151,13 +146,6 @@ export default async function ProductPage({ params }: Props) {
               </ul>
               <div className="mt-6 flex flex-col gap-3">
                 <Button href="#quote">{f(t.productSidebarButton)}</Button>
-                {p.datasheetUrl && (
-                  <a href={`${p.datasheetUrl}?dl=`} className="flex items-center gap-3 rounded-md bg-white p-3 text-sm font-semibold text-ink ring-1 ring-line transition hover:ring-accent">
-                    <FileText className="size-8 text-accent" />
-                    <span className="flex-1">Product datasheet<span className="block text-xs font-normal text-steel-500">PDF download</span></span>
-                    <Download className="size-4 text-steel-500" />
-                  </a>
-                )}
               </div>
             </div>
           </aside>
@@ -247,25 +235,6 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </section>
       )}
-
-      <section id="datasheet" className="border-y border-line bg-white">
-        <div className="wrap flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between lg:py-12">
-          <div className="flex items-start gap-5">
-            <span className="grid size-14 shrink-0 place-items-center rounded-md bg-accent-50 text-accent">
-              <FileText className="size-7" />
-            </span>
-            <div>
-              <Heading as={tag("productDatasheetTag")} className="text-xl font-bold text-ink sm:text-2xl">{f(t.productDatasheetHeading)}</Heading>
-              <p className="mt-1.5 max-w-xl text-steel-600">{f(t.productDatasheetText)}</p>
-            </div>
-          </div>
-          {p.datasheetUrl ? (
-            <Button href={`${p.datasheetUrl}?dl=`} icon="download" className="w-full shrink-0 md:w-auto">Download PDF</Button>
-          ) : (
-            <Button href="#quote" style="outline" className="w-full shrink-0 md:w-auto">Request datasheet</Button>
-          )}
-        </div>
-      </section>
 
       {!!related.length && (
         <section className="section bg-surface">

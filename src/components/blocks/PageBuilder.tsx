@@ -7,7 +7,7 @@ import { ProductCategories, Products, ComparisonTable, Certifications, Clients }
 import {
   ProjectsBlock, PostsBlock, FaqBlock, FormBlock, CtaBlock, TimelineBlock, TeamBlock, MessageBlock, ProcessBlock, LinkCardsBlock, BadgesBlock, NewsletterBlock,
 } from "./MiscBlocks";
-import { GalleryBlock, RichTextBlock, DownloadsBlock, JobsBlock, IndustriesBlock, ContactInfoBlock } from "./InfoBlocks";
+import { GalleryBlock, RichTextBlock, JobsBlock, IndustriesBlock, ContactInfoBlock } from "./InfoBlocks";
 import type { Block } from "@/lib/types";
 
 const BLOCKS: Record<string, ComponentType<{ block: Block }>> = {
@@ -31,7 +31,6 @@ const BLOCKS: Record<string, ComponentType<{ block: Block }>> = {
   processBlock: ProcessBlock,
   galleryBlock: GalleryBlock,
   richTextBlock: RichTextBlock,
-  downloadsBlock: DownloadsBlock,
   jobsBlock: JobsBlock,
   industriesBlock: IndustriesBlock,
   contactInfoBlock: ContactInfoBlock,

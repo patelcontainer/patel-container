@@ -17,7 +17,6 @@ export type Settings = {
   siteName: string;
   legalName?: string;
   tagline?: string;
-  brochureUrl?: string;
   foundingYear?: string;
   phones?: string[];
   email?: string;

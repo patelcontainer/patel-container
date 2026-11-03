@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight, BadgeCheck, Download } from "lucide-react";
+import { ArrowRight, BadgeCheck } from "lucide-react";
 import { Section } from "./Section";
 import { CategoryCard, ProductCard } from "./ProductCards";
 import { Reveal } from "@/components/ui/Reveal";
@@ -104,15 +104,9 @@ export function Certifications({ block }: { block: Block }) {
               <Heading as={headingTag(block.itemHeadingTag, "h3")} className="mt-6 text-lg font-bold text-ink">{c.title}</Heading>
               {c.issuer && <p className="mt-1 text-sm font-medium text-steel-500">{c.issuer}</p>}
               {c.description && <p className="mt-3 flex-1 text-[0.95rem] leading-relaxed text-steel-600">{c.description}</p>}
-              {c.fileUrl ? (
-                <a href={`${c.fileUrl}?dl=`} className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline">
-                  <Download className="size-4" /> Download certificate (PDF)
-                </a>
-              ) : (
-                <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-steel-500 hover:text-accent">
-                  Request a copy <ArrowRight className="size-4" />
-                </Link>
-              )}
+              <Link href="/contact" className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-steel-500 hover:text-accent">
+                Request a copy <ArrowRight className="size-4" />
+              </Link>
             </Reveal>
           ))}
         </div>

@@ -408,7 +408,7 @@ async function run() {
       eyebrow: "ISO container manufacturer · Bhavnagar, Gujarat",
       heading: "Complete Mobility Solutions, Built in India",
       subheading: "ISO shipping containers, specialized containers and engineered mobility products from Bhavnagar.",
-      buttons: [btn("Get a Quote", "/get-a-quote"), btn("Download Brochure", "#brochure", "outlineLight")],
+      buttons: [btn("Get a Quote", "/get-a-quote"), btn("Explore Products", "/products", "outlineLight")],
       images: [I.portCranes, I.ship, I.portAerial],
       highlights: [
         item("flame", "Asia's first deflagration test", "With GE Renewables India"),
@@ -664,7 +664,7 @@ async function run() {
         item("check", "DFMEA & PFMEA", "Design and process failure-mode analysis."),
       ],
     },
-    { _type: "certificationsBlock", eyebrow: "Certificates", heading: "Certificates and approvals", intro: "Download certificates where available, or request a copy from our team.", layout: "cards", headingTag: "h3", itemHeadingTag: "p" },
+    { _type: "certificationsBlock", eyebrow: "Certificates", heading: "Certificates and approvals", intro: "Request a copy of any certificate from our team.", layout: "cards", headingTag: "h3", itemHeadingTag: "p" },
     {
       _type: "processBlock", eyebrow: "Inspection & QA", heading: "Our quality process", background: "light", headingTag: "h4", itemHeadingTag: "p",
       steps: [
@@ -696,16 +696,15 @@ async function run() {
   /* Media */
   page("page-media", "Media", "media", [
     {
-      _type: "linkCardsBlock", eyebrow: "Media", heading: "News, articles and downloads",
+      _type: "linkCardsBlock", eyebrow: "Media", heading: "News, articles and gallery",
       cards: [
         { _type: "linkCard", title: "News", text: "Company, product and event updates.", image: I.portCranes, link: link("Read news", null, "/news") },
         { _type: "linkCard", title: "Blog", text: "The Container Knowledge Hub.", image: I.portAerial, link: link("Read articles", null, "/blog") },
-        { _type: "linkCard", title: "Downloads", text: "Brochure, datasheets and certificates.", image: I.laser, link: link("Downloads", "page-downloads") },
         { _type: "linkCard", title: "Gallery", text: "Photos and videos.", image: I.ship, link: link("View gallery", "page-gallery") },
       ],
     },
     { _type: "postsBlock", eyebrow: "Latest", heading: "Latest from VAHANA", postType: "all", mode: "latest", background: "light" },
-  ], { header: { eyebrow: "Media", heading: "News, Blog & Downloads", intro: "News, articles and brochures from VAHANA.", image: I.ship }, seo: seo("News, Blog and Downloads", "News, articles and brochures from VAHANA.") });
+  ], { header: { eyebrow: "Media", heading: "News, Blog & Gallery", intro: "News, articles and photos from VAHANA.", image: I.ship }, seo: seo("News, Blog and Gallery", "News, articles and photos from VAHANA.") });
   page("page-news", "News", "news", [
     { _type: "postsBlock", postType: "news", mode: "full" },
   ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "News and Updates", intro: "Company, product, event and award news from VAHANA.", image: I.portCranes }, seo: seo("Company News, Product Launches & Manufacturing Updates", "Read company announcements, product launches, engineering milestones and updates across containers, railway products and electric commercial mobility.") });
@@ -713,10 +712,6 @@ async function run() {
     { _type: "postsBlock", postType: "blog", mode: "full", featuredHeadingTag: "h2" },
     { _type: "newsletterBlock", eyebrow: "Newsletter", heading: "Get new articles by email", intro: "Container guides, product news and engineering updates. No spam.", background: "light", headingTag: "h4" },
   ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Container Knowledge Hub", intro: "Practical guides on choosing, specifying and using containers.", image: I.portAerial }, seo: seo("Container Guides, Engineering Insights & Industry Articles", "Explore practical guides on container sizes, specifications, manufacturing, testing and applications to make informed product and project decisions.") });
-  page("page-downloads", "Downloads", "media/downloads", [
-    { _type: "downloadsBlock" },
-    cta("Need a specific document?", "Ask us for datasheets, drawings, certificates or test reports.", [btn("Request a Document", "/contact"), btn("Get a Quote", "/get-a-quote", "outlineLight")]),
-  ], { parent: ref("page-media"), header: { eyebrow: "Media", heading: "Downloads", intro: "Company brochure, product datasheets and certificates.", image: I.laser }, seo: seo("Container Product Brochures, Specifications & Downloads", "Access product brochures, technical datasheets and company resources to review container specifications, product features and mobility solutions.") });
 
   /* Contact & quote */
   page("page-contact", "Contact", "contact", [
@@ -739,7 +734,6 @@ async function run() {
     {
       _type: "linkCardsBlock", eyebrow: "Next steps", heading: "Thank you, we have your request.", intro: "Our team will contact you within one working day. In the meantime:",
       cards: [
-        { _type: "linkCard", title: "Download the brochure", text: "Our company and product overview.", image: I.laser, link: link("Downloads", "page-downloads") },
         { _type: "linkCard", title: "Browse products", text: "Specifications for every container.", image: I.portAerial, link: link("Products", "page-products") },
         { _type: "linkCard", title: "See our capabilities", text: "How we design, build and test.", image: I.enclosure, link: link("Capabilities", "page-capabilities") },
         { _type: "linkCard", title: "Read case studies", text: "Projects we've delivered.", image: I.deflag, link: link("Projects", "page-projects") },
@@ -863,7 +857,6 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
       { _type: "navItem", label: "Media", internal: ref("page-media"), children: [
         { _type: "navChild", label: "News", internal: ref("page-news") },
         { _type: "navChild", label: "Blog", internal: ref("page-blog") },
-        { _type: "navChild", label: "Brochures & Downloads", internal: ref("page-downloads") },
       ] },
       { _type: "navItem", label: "Contact", internal: ref("page-contact") },
     ],
@@ -890,6 +883,7 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
     ["/40 Feet High Cube Container.html", "/products/40-ft-high-cube-container"],
     ["/Truck Container.html", "/products/truck-container"],
     ["/news/patel-group-launches-two-elcvs", "/news/vahana-launches-two-elcvs"],
+    ["/media/downloads", "/media"],
   ].forEach(([source, destination], i) => add({ _id: `redirect-${i + 1}`, _type: "redirect", source, destination, permanent: true }));
 
   /* Write */

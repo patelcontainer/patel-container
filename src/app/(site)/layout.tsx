@@ -38,7 +38,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   const s = await getSettings();
   const site = {
     siteName: s.siteName,
-    brochureUrl: s.brochureUrl,
     whatsappUrl: whatsappHref(s.whatsappNumber, s.whatsappMessage),
     phones: s.phones || [],
     email: s.email,

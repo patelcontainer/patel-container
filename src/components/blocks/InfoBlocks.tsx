@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Briefcase, Clock, Download, FileText, Globe, Mail, MapPin, Phone, Plus } from "lucide-react";
+import { ArrowUpRight, Briefcase, Clock, Globe, Mail, MapPin, Phone, Plus } from "lucide-react";
 import { Section } from "./Section";
 import { ImageGrid, AlbumsGallery } from "./Gallery";
 import { RichText, blockText } from "@/components/ui/RichText";
@@ -9,7 +9,7 @@ import { SanityImg } from "@/components/ui/SanityImg";
 import { Heading } from "@/components/ui/Heading";
 import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { getSettings } from "@/lib/seo";
-import { formatBytes, slugify } from "@/lib/utils";
+import { slugify } from "@/lib/utils";
 import { telHref, whatsappHref } from "@/lib/links";
 import { headingTag, type HeadingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
@@ -44,52 +44,6 @@ export function RichTextBlock({ block }: { block: Block }) {
           </nav>
         )}
         <RichText value={content} dark={block.background === "dark"} className={toc.length ? "max-w-3xl" : ""} />
-      </div>
-    </Section>
-  );
-}
-
-const GROUP_LABELS: Record<string, string> = {
-  brochure: "Company Brochure",
-  datasheet: "Product Datasheets",
-  certificate: "Certificates",
-  other: "Other Documents",
-};
-
-export function DownloadsBlock({ block }: { block: Block }) {
-  const downloads: Block[] = block.downloads || [];
-  const groups = Object.keys(GROUP_LABELS).filter((g) => downloads.some((d) => d.group === g));
-  return (
-    <Section block={block}>
-      {!downloads.length && <p className="text-steel-500">Downloads will be available here soon. Need a document now? <Link href="/contact" className="font-semibold text-accent">Contact us</Link>.</p>}
-      <div className="space-y-12">
-        {groups.map((g) => (
-          <div key={g}>
-            <h3 className="mb-4 text-xl font-bold text-ink">{GROUP_LABELS[g]}</h3>
-            <ul className="divide-y divide-line overflow-hidden rounded-md bg-white ring-1 ring-line">
-              {downloads.filter((d) => d.group === g).map((d) => (
-                <li key={d._id} className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="flex items-center gap-4">
-                    <span className="grid size-12 shrink-0 place-items-center rounded bg-accent-50 text-accent">
-                      <FileText className="size-6" />
-                    </span>
-                    <div>
-                      <p className="font-semibold text-ink">{d.title}</p>
-                      <p className="text-sm text-steel-500">
-                        {[d.ext?.toUpperCase(), formatBytes(d.size), d.description].filter(Boolean).join(" · ")}
-                      </p>
-                    </div>
-                  </div>
-                  {d.fileUrl && (
-                    <a href={`${d.fileUrl}?dl=`} className="inline-flex h-10 items-center justify-center gap-2 rounded-md border border-ink/15 px-4 text-sm font-semibold text-ink transition hover:border-accent hover:bg-accent hover:text-white">
-                      <Download className="size-4" /> Download
-                    </a>
-                  )}
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
       </div>
     </Section>
   );

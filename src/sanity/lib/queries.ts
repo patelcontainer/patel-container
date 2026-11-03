@@ -24,7 +24,7 @@ const pageBuilder = `pageBuilder[]{
   },
   _type == "comparisonTableBlock" => { rows[]{..., "href": "/products/" + product->slug.current} },
   _type == "certificationsBlock" => {
-    "certificates": select(count(certificates) > 0 => certificates[]->{..., "fileUrl": file.asset->url}, *[_type == "certificate"] | order(order asc){..., "fileUrl": file.asset->url})
+    "certificates": select(count(certificates) > 0 => certificates[]->{...}, *[_type == "certificate"] | order(order asc){...})
   },
   _type == "clientsBlock" => {
     "clients": select(count(clients) > 0 => clients[]->, *[_type == "client"] | order(order asc)),
@@ -47,11 +47,6 @@ const pageBuilder = `pageBuilder[]{
   _type == "galleryBlock" => {
     "albums": select(source == "albums" => *[_type == "galleryAlbum"] | order(order asc))
   },
-  _type == "downloadsBlock" => {
-    "downloads": *[_type == "download" && (!defined(^.groups) || count(^.groups) == 0 || group in ^.groups)] | order(order asc){
-      _id, title, group, description, "fileUrl": file.asset->url, "size": file.asset->size, "ext": file.asset->extension
-    }
-  },
   _type == "jobsBlock" => { "jobs": *[_type == "job" && isOpen != false] | order(postedAt desc) },
   _type == "industriesBlock" => {
     "industries": select(count(industries) > 0 => industries[]->{${industryCard}}, *[_type == "industry"] | order(order asc){${industryCard}})
@@ -67,7 +62,6 @@ const pageBuilder = `pageBuilder[]{
 
 export const settingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
   ...,
-  "brochureUrl": brochure.asset->url,
   mainNav[]{..., ${internalRef}, children[]{..., ${internalRef}}},
   headerCta{${link}},
   footerColumns[]{..., links[]{${link}}},
@@ -95,7 +89,6 @@ export const productQuery = defineQuery(`*[_type == "product" && slug.current ==
   ...,
   "slug": slug.current,
   "category": category->{title, "slug": slug.current},
-  "datasheetUrl": datasheet.asset->url,
   "industries": industries[]->{${industryCard}},
   "relatedProducts": coalesce(relatedProducts[]->{${productCard}}, *[_type == "product" && category._ref == ^.category._ref && _id != ^._id][0...3]{${productCard}}),
   "faqs": faqs[]->{${faqItem}},

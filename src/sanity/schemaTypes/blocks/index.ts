@@ -3,7 +3,6 @@ import { BlockContentIcon } from "@sanity/icons/BlockContent";
 import { BulbOutlineIcon } from "@sanity/icons/BulbOutline";
 import { CheckmarkCircleIcon } from "@sanity/icons/CheckmarkCircle";
 import { CommentIcon } from "@sanity/icons/Comment";
-import { DocumentPdfIcon } from "@sanity/icons/DocumentPdf";
 import { DocumentsIcon } from "@sanity/icons/Documents";
 import { EnvelopeIcon } from "@sanity/icons/Envelope";
 import { HelpCircleIcon } from "@sanity/icons/HelpCircle";
@@ -360,7 +359,7 @@ export const certificationsBlock = defineType({
       options: {
         list: [
           { title: "Logo strip", value: "strip" },
-          { title: "Cards with downloads", value: "cards" },
+          { title: "Cards", value: "cards" },
         ],
         layout: "radio",
       },
@@ -714,33 +713,6 @@ export const richTextBlock = defineType({
   preview: preview("Rich text"),
 });
 
-export const downloadsBlock = defineType({
-  name: "downloadsBlock",
-  title: "Downloads",
-  type: "object",
-  icon: DocumentPdfIcon,
-  groups,
-  fields: [
-    ...sectionFields(),
-    defineField({
-      name: "groups",
-      title: "Only show these groups",
-      type: "array",
-      group: "content",
-      of: [{ type: "string" }],
-      options: {
-        list: [
-          { title: "Company Brochure", value: "brochure" },
-          { title: "Product Datasheets", value: "datasheet" },
-          { title: "Certificates", value: "certificate" },
-          { title: "Other", value: "other" },
-        ],
-      },
-    }),
-  ],
-  preview: preview("Downloads"),
-});
-
 export const jobsBlock = defineType({
   name: "jobsBlock",
   title: "Open positions",
@@ -860,7 +832,6 @@ export const blockTypes = [
   processBlock,
   galleryBlock,
   richTextBlock,
-  downloadsBlock,
   jobsBlock,
   industriesBlock,
   contactInfoBlock,

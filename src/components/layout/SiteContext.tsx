@@ -5,7 +5,6 @@ import { resolveTemplates, type Templates } from "@/lib/templates";
 
 export type SiteInfo = {
   siteName: string;
-  brochureUrl?: string;
   whatsappUrl?: string;
   phones: string[];
   email?: string;

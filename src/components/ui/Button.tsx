@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Download, PhoneCall } from "lucide-react";
+import { ArrowRight, PhoneCall } from "lucide-react";
 import type { ReactNode } from "react";
 import { isExternal, linkHref, type LinkLike } from "@/lib/links";
 import { openCallback, useSite } from "@/components/layout/SiteContext";
@@ -18,7 +18,7 @@ type Props = {
   newTab?: boolean;
   children: ReactNode;
   className?: string;
-  icon?: "arrow" | "download" | "none";
+  icon?: "arrow" | "none";
 };
 
 export function Button({ href, style = "primary", size = "md", newTab, children, className = "", icon }: Props) {
@@ -35,13 +35,7 @@ export function Button({ href, style = "primary", size = "md", newTab, children,
   }
 
   let target = href;
-  let resolvedIcon = icon;
-  let download = false;
-  if (href === "#brochure") {
-    target = site.brochureUrl ? `${site.brochureUrl}?dl=` : "/media/downloads";
-    resolvedIcon = "download";
-    download = Boolean(site.brochureUrl);
-  }
+  const resolvedIcon = icon;
   if (href === "#whatsapp" || style === "whatsapp") {
     target = href === "#whatsapp" ? site.whatsappUrl || "/contact" : href;
   }
@@ -50,15 +44,13 @@ export function Button({ href, style = "primary", size = "md", newTab, children,
     <>
       {style === "whatsapp" && <WhatsAppIcon className="size-[18px]" />}
       {children}
-      {resolvedIcon === "download" ? (
-        <Download className="size-4" />
-      ) : resolvedIcon !== "none" && style !== "whatsapp" ? (
+      {resolvedIcon !== "none" && style !== "whatsapp" ? (
         <ArrowRight className="size-4 transition-transform group-hover:translate-x-0.5" />
       ) : null}
     </>
   );
 
-  if (isExternal(target) || download) {
+  if (isExternal(target)) {
     const blank = newTab || target.startsWith("http");
     return (
       <a href={target} className={cls} target={blank ? "_blank" : undefined} rel={blank ? "noopener noreferrer" : undefined}>
