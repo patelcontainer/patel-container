@@ -419,7 +419,7 @@ async function run() {
     },
     {
       _type: "splitContentBlock", eyebrow: "Who we are", heading: "A premier manufacturer of ISO marine shipping containers",
-      body: pt("VAHANA, from Patel Containers India Pvt. Ltd., is a premier manufacturer of ISO marine shipping containers and specialized containers. Our group also builds refrigerated containers, railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track.\n\nWe make load bodies for commercial vehicles and have entered the commercial EV space with two eLCVs."),
+      body: pt("Vahana Containers is a premier manufacturer of ISO marine shipping containers and specialized containers. Our group also builds refrigerated containers, railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track.\n\nWe make load bodies for commercial vehicles and have entered the commercial EV space with two eLCVs."),
       bullets: ["ISO & High Cube containers", "Specialized enclosures", "Railway & rolling stock", "Commercial EV (eLCV)"],
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Design & engineering projects", "30+"),
       buttons: [btn("Know More About Us", "/about-us")], imagePosition: "right", background: "white",
@@ -468,7 +468,7 @@ async function run() {
   page("page-about", "About Us", "about-us", [
     {
       _type: "splitContentBlock", eyebrow: "Company profile", heading: "Complete mobility solutions from Bhavnagar",
-      body: pt("VAHANA, the brand of Patel Containers India Pvt. Ltd. (PCIPL), is a premier manufacturer of ISO marine shipping containers, specialized containers and refrigerated containers. We also build railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track."),
+      body: pt("Vahana Containers is a premier manufacturer of ISO marine shipping containers, specialized containers and refrigerated containers. We also build railway wagons, components for passenger coaches and alloy steel castings for rolling stock and track."),
       image: I.enclosure, secondaryImage: I.laser, badge: kv("Engineering projects", "30+"), imagePosition: "right",
     },
     {
@@ -502,7 +502,7 @@ async function run() {
     {
       _type: "timelineBlock", eyebrow: "Milestones", heading: "How we grew into a multi-product manufacturer",
       items: [
-        { _type: "milestone", year: "Founded", title: "Patel Containers India is established", text: "The company is founded in Bhavnagar, Gujarat to manufacture containers." },
+        { _type: "milestone", year: "Founded", title: "Vahana Containers is established", text: "The company is founded in Bhavnagar, Gujarat to manufacture containers." },
         { _type: "milestone", year: "Growth", title: "First ISO containers delivered", text: "ISO marine shipping containers roll off our 20 ft and 40 ft boxing lines." },
         { _type: "milestone", year: "Milestone", title: "Deflagration test with GE Renewables", text: "We become the first in Asia to perform the deflagration test, in joint development with GE Renewables India.", image: I.deflag },
         { _type: "milestone", year: "Today", title: "Entering commercial EV", text: "The group launches two electric light commercial vehicles (eLCVs)." },
@@ -514,8 +514,8 @@ async function run() {
   page("page-leadership", "Leadership Team", "about-us/leadership-team", [
     {
       _type: "messageBlock", eyebrow: "Founder's message", heading: "Quality, engineering and our customers",
-      message: pt("When we started Patel Containers India, we set out to build more than steel boxes. We wanted to build an engineering company: one that understands why a product works, tests it before it ships, and stands behind it in the field.\n\nThat approach led us to perform Asia's first deflagration test with GE Renewables India, and it guides every container, wagon component and vehicle we make today.\n\nOur promise to customers is simple: honest specifications, careful workmanship, and a team of engineers who will solve your problem with you."),
-      name: "Founder & Managing Director", role: "Patel Containers India Pvt. Ltd.",
+      message: pt("When we started Vahana Containers, we set out to build more than steel boxes. We wanted to build an engineering company: one that understands why a product works, tests it before it ships, and stands behind it in the field.\n\nThat approach led us to perform Asia's first deflagration test with GE Renewables India, and it guides every container, wagon component and vehicle we make today.\n\nOur promise to customers is simple: honest specifications, careful workmanship, and a team of engineers who will solve your problem with you."),
+      name: "Founder & Managing Director", role: "Vahana Containers",
     },
     { _type: "teamBlock", eyebrow: "Leadership", heading: "The team behind VAHANA", background: "light" },
     cta("Want to talk to our leadership?", "We're always happy to discuss long-term partnerships and large projects.", [btn("Contact Us", "/contact"), btn("Careers", "/about-us/careers", "outlineLight")]),
@@ -530,7 +530,7 @@ async function run() {
       ],
     },
     { _type: "jobsBlock", eyebrow: "Open positions", heading: "Current openings", background: "light" },
-    { _type: "formBlock", eyebrow: "How to apply", heading: "Apply now", intro: "Send your CV using the form, or email it to info@patelcontainer.com with the role in the subject line.", formType: "career", sectionId: "apply", showContactDetails: false, background: "white" },
+    { _type: "formBlock", eyebrow: "How to apply", heading: "Apply now", intro: "Send your CV using the form, or email it to info@vahanacontainers.com with the role in the subject line.", formType: "career", sectionId: "apply", showContactDetails: false, background: "white" },
   ], { parent: ref("page-about"), header: { eyebrow: "About us", heading: "Careers", intro: "Join a team of engineers and craftspeople building containers, rail products and EVs.", image: I.laser }, seo: seo("Careers in Container Manufacturing & Engineering | VAHANA", "Explore career opportunities in engineering, manufacturing and operations. Join VAHANA Containers in building products for global mobility and industry.") });
 
   /* Products overview */
@@ -756,7 +756,7 @@ async function run() {
   page("page-privacy", "Privacy Policy", "privacy-policy", [
     {
       _type: "richTextBlock", showToc: true,
-      content: pt(`This policy explains how VAHANA, a brand of Patel Containers India Pvt. Ltd. ("we", "us"), collects and uses personal information through this website.
+      content: pt(`This policy explains how Vahana Containers ("we", "us") collects and uses personal information through this website.
 
 ## What data we collect
 
@@ -780,7 +780,7 @@ We keep enquiry and quotation records for as long as needed to serve you and mee
 
 ## Your rights and how to contact us
 
-You can ask to access, correct or delete your personal data. Questions about privacy? Write to info@patelcontainer.com.
+You can ask to access, correct or delete your personal data. Questions about privacy? Write to info@vahanacontainers.com.
 
 ## Changes to this policy
 
@@ -802,11 +802,11 @@ Product descriptions and specifications are for general information and may chan
 
 ## Quotes and orders
 
-Quotations are valid for the period stated on them. Orders are subject to written confirmation by Patel Containers India Pvt. Ltd.
+Quotations are valid for the period stated on them. Orders are subject to written confirmation by Vahana Containers.
 
 ## Intellectual property
 
-All content on this website, including text, images, logos and drawings, belongs to Patel Containers India Pvt. Ltd. unless stated otherwise.
+All content on this website, including text, images, logos and drawings, belongs to Vahana Containers unless stated otherwise.
 
 ## Limitation of liability
 
@@ -823,16 +823,16 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
   const dirQ = (q) => `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(q)}`;
   add({
     _id: "siteSettings", _type: "siteSettings",
-    siteName: "VAHANA", legalName: "Patel Containers India Pvt. Ltd.",
+    siteName: "VAHANA", legalName: "Vahana Containers",
     tagline: "Complete Mobility Solutions, Built in India",
     phones: ["+91 70464 68484", "+91 94281 81618"],
-    email: "info@patelcontainer.com",
+    email: "info@vahanacontainers.com",
     whatsappNumber: "917046468484",
     whatsappMessage: "Hi, I am interested in your containers. Please share details and pricing.",
     addresses: [
       {
         _type: "address", label: "Plant & office",
-        address: "Patel Containers India Pvt. Ltd.\nPlot No.374, Nr. Red Colour,\nNr. Banuben ni wadi, Kumbharwada,\nBhavnagar, Gujarat, India, 364006",
+        address: "Vahana Containers\nPlot No.374, Nr. Red Colour,\nNr. Banuben ni wadi, Kumbharwada,\nBhavnagar, Gujarat, India, 364006",
         mapEmbedUrl: mapQ("Kumbharwada, Bhavnagar, Gujarat 364006"), directionsUrl: dirQ("Plot No.374, Kumbharwada, Bhavnagar, Gujarat 364006"),
       },
     ],
@@ -876,7 +876,7 @@ These terms are governed by the laws of India, and the courts of Bhavnagar, Guja
     legalLinks: [link("Privacy Policy", "page-privacy"), link("Terms and Conditions", "page-terms"), link("Sitemap", null, "/site-map")],
     newsletterHeading: "Get new articles by email",
     newsletterText: "Container guides, product news and engineering updates. No spam.",
-    copyright: "© {year} VAHANA, a brand of Patel Containers India Pvt. Ltd. All rights reserved.",
+    copyright: "© {year} Vahana Containers. All rights reserved.",
     titleTemplate: "%s | VAHANA",
     templates: { _type: "object", ...templateDefaults() },
     defaultSeo: seo("ISO Container Manufacturer in Bhavnagar | VAHANA", "VAHANA makes ISO shipping containers, specialized containers and mobility products in Bhavnagar, Gujarat. Get a quote today.", { keywords: ["ISO container manufacturer", "shipping container manufacturer India", "High Cube container", "container manufacturer Gujarat", "Bhavnagar container"] }),

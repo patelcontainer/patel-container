@@ -1,4 +1,4 @@
-# VAHANA (Patel Containers India Pvt. Ltd.) — Website
+# Vahana Containers — Website
 
 Next.js 16 (App Router) + Sanity 6 (embedded Studio) + Tailwind CSS 4.
 

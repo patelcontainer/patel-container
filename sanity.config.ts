@@ -8,7 +8,7 @@ import { schemaTypes, SINGLETONS } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 
 export default defineConfig({
-  name: "patel-container",
+  name: "vahana-containers",
   title: "VAHANA",
   basePath: "/studio",
   projectId,
