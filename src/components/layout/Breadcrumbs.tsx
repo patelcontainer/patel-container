@@ -17,7 +17,7 @@ export function Breadcrumbs({ items, dark }: { items: Crumb[]; dark?: boolean })
               <li key={i} className="flex items-center gap-1.5">
                 {i > 0 && <ChevronRight className="size-3.5 opacity-50" />}
                 {c.href && !last ? (
-                  <Link href={c.href} className={`flex items-center gap-1 transition ${dark ? "hover:text-white" : "hover:text-accent"}`}>
+                  <Link href={c.href} className={`flex items-center gap-1 transition ${i === 0 ? "-m-1 min-h-6 min-w-6 justify-center p-1 " : ""}${dark ? "hover:text-white" : "hover:text-accent"}`}>
                     {i === 0 && <Home className="size-3.5" />}
                     {i === 0 ? <span className="sr-only">{c.label}</span> : c.label}
                   </Link>

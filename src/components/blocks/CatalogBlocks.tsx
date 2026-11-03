@@ -6,7 +6,7 @@ import { Reveal } from "@/components/ui/Reveal";
 import { SanityImg } from "@/components/ui/SanityImg";
 import { Heading } from "@/components/ui/Heading";
 import { headingTag, type HeadingTag } from "@/lib/headings";
-import { urlFor } from "@/sanity/lib/image";
+import { urlFor, logoSize } from "@/sanity/lib/image";
 import type { Block } from "@/lib/types";
 
 export function ProductCategories({ block }: { block: Block }) {
@@ -94,7 +94,7 @@ export function Certifications({ block }: { block: Block }) {
                 <div className="grid size-16 shrink-0 place-items-center overflow-hidden rounded-md bg-surface">
                   {c.logo?.asset ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={urlFor(c.logo).height(128).url()} alt="" className="max-h-12 w-auto" />
+                    <img src={urlFor(c.logo).height(128).url()} {...logoSize(c.logo, 48)} alt="" className="max-h-12 w-auto" />
                   ) : (
                     <BadgeCheck className="size-8 text-accent" strokeWidth={1.5} />
                   )}
@@ -150,7 +150,7 @@ export function LogoCloud({ clients }: { clients: Block[] }) {
   const logo = (c: Block) =>
     c.logo?.asset ? (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={urlFor(c.logo).height(120).url()} alt={c.name} className="max-h-12 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
+      <img src={urlFor(c.logo).height(120).url()} {...logoSize(c.logo, 48)} alt={c.name} className="max-h-12 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
     ) : (
       <span className="text-center font-display text-lg font-bold text-steel-500">{c.name}</span>
     );
@@ -173,7 +173,7 @@ export function LogoCloud({ clients }: { clients: Block[] }) {
           <li key={`${c._id}-${i}`} className="grid h-24 w-52 place-items-center rounded-md bg-white px-6 ring-1 ring-line">
             {c.logo?.asset ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img src={urlFor(c.logo).height(120).url()} alt={c.name} className="max-h-12 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
+              <img src={urlFor(c.logo).height(120).url()} {...logoSize(c.logo, 48)} alt={c.name} className="max-h-12 w-auto object-contain opacity-70 grayscale transition hover:opacity-100 hover:grayscale-0" />
             ) : (
               <span className="font-display text-lg font-bold text-steel-500">{c.name}</span>
             )}
@@ -192,7 +192,7 @@ export function ProjectCard({ p, index = 0, headingAs = "h3" }: { p: Block; inde
           <SanityImg image={p.mainImage} fill sizes="(min-width:1024px) 33vw, 100vw" className="object-cover transition duration-700 group-hover:scale-105" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
-        {p.filter && <span className="absolute left-4 top-4 rounded-sm bg-accent px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-white">{p.filter}</span>}
+        {p.filter && <span className="absolute left-4 top-4 rounded-sm bg-accent px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-white">{p.filter}</span>}
         <Heading as={headingAs} className="absolute inset-x-5 bottom-4 text-xl font-bold leading-snug text-white">{p.title}</Heading>
       </div>
       <dl className="grid grid-cols-2 gap-x-4 gap-y-3 p-5 text-sm">
@@ -205,7 +205,7 @@ export function ProjectCard({ p, index = 0, headingAs = "h3" }: { p: Block; inde
           .filter(([, v]) => v)
           .map(([k, v]) => (
             <div key={k}>
-              <dt className="text-[0.7rem] font-semibold uppercase tracking-wider text-steel-500">{k}</dt>
+              <dt className="text-xs font-semibold uppercase tracking-wider text-steel-500">{k}</dt>
               <dd className="mt-0.5 font-semibold text-ink">{v}</dd>
             </div>
           ))}

@@ -61,7 +61,7 @@ export function ProductCard({ p, index = 0, headingAs = "h3" }: { p: Block; inde
             </div>
           )}
           {p.category && (
-            <span className="absolute left-4 top-4 rounded-sm bg-white/95 px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider text-ink">
+            <span className="absolute left-4 top-4 rounded-sm bg-white/95 px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-ink">
               {p.category}
             </span>
           )}

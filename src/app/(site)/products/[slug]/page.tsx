@@ -111,7 +111,7 @@ export default async function ProductPage({ params }: Props) {
             <dl className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5">
               {keySpecs.map((s, i) => (
                 <div key={s._key} className={`border-white/10 px-2 py-7 sm:px-6 ${i > 0 ? "lg:border-l" : ""} ${i % 2 ? "border-l sm:border-l-0" : ""} ${i >= 2 ? "border-t sm:border-t-0" : ""}`}>
-                  <dt className="text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-steel-400">{s.label}</dt>
+                  <dt className="text-xs font-semibold uppercase tracking-[0.16em] text-steel-400">{s.label}</dt>
                   <dd className="mt-2 font-display text-2xl font-bold text-white sm:text-[1.65rem]">{s.value}</dd>
                 </div>
               ))}

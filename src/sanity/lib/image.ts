@@ -34,3 +34,9 @@ export function fileUrl(file?: { asset?: { _ref?: string; url?: string } } | nul
   const m = file.asset._ref?.match(/^file-([a-f0-9]+)-(\w+)$/);
   return m ? `https://cdn.sanity.io/files/${projectId}/${dataset}/${m[1]}.${m[2]}` : undefined;
 }
+
+/** width/height attributes for a logo shown at a fixed height, so the browser reserves its space. */
+export function logoSize(img: SanityImage | null | undefined, height: number) {
+  const d = imageDimensions(img);
+  return { width: Math.round((d.width / d.height) * height), height };
+}

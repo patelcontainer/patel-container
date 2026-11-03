@@ -33,7 +33,7 @@ export function SanityImg({ image, alt, className, sizes = "100vw", priority, ea
   };
 
   if (fill) {
-    return <Image loader={loader} src={urlFor(image).url()} alt={altText} fill sizes={sizes} preload={priority} loading={priority || eager ? "eager" : undefined} className={className} />;
+    return <Image loader={loader} src={urlFor(image).url()} alt={altText} fill sizes={sizes} preload={priority} fetchPriority={priority ? "high" : undefined} loading={priority || eager ? "eager" : undefined} className={className} />;
   }
   return (
     <Image
@@ -44,6 +44,7 @@ export function SanityImg({ image, alt, className, sizes = "100vw", priority, ea
       height={height}
       sizes={sizes}
       preload={priority}
+      fetchPriority={priority ? "high" : undefined}
       loading={priority || eager ? "eager" : undefined}
       className={className}
     />

@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: Props) {
           <dl className="wrap grid grid-cols-2 gap-6 py-8 sm:grid-cols-3 lg:grid-cols-6">
             {facts.map(([k, v]) => (
               <div key={k}>
-                <dt className="text-[0.7rem] font-semibold uppercase tracking-[0.14em] text-steel-500">{k}</dt>
+                <dt className="text-xs font-semibold uppercase tracking-[0.14em] text-steel-500">{k}</dt>
                 <dd className="mt-1 font-semibold text-ink">{v}</dd>
               </div>
             ))}

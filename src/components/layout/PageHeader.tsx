@@ -25,7 +25,7 @@ export function PageHeader({
     <section className="relative isolate overflow-hidden bg-navy-900">
       {image && (
         <div className="absolute inset-0 -z-10">
-          <SanityImg image={image} fill priority sizes="100vw" className="object-cover opacity-30" />
+          <SanityImg image={image} fill priority sizes="100vw" quality={60} className="object-cover opacity-30" />
         </div>
       )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-900/90 to-navy-900/40" />

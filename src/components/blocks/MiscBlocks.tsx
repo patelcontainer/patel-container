@@ -198,7 +198,7 @@ export function CtaBlock({ block }: { block: Block }) {
     <section id={block.sectionId || undefined} className="relative isolate overflow-hidden bg-navy-900">
       {block.image?.asset && (
         <div className="absolute inset-0 -z-10">
-          <SanityImg image={block.image} fill sizes="100vw" className="object-cover opacity-25" />
+          <SanityImg image={block.image} fill sizes="100vw" quality={60} className="object-cover opacity-25" />
         </div>
       )}
       <div className="absolute inset-0 -z-10 bg-gradient-to-r from-navy-950 via-navy-900/95 to-navy-900/60" />

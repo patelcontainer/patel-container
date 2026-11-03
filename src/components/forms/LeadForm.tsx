@@ -179,7 +179,7 @@ export function LeadForm({ type, submitLabel, productOptions, jobOptions, defaul
           <legend className="px-1 text-[0.8125rem] font-semibold text-ink">Customisation needed?</legend>
           <div className="flex gap-6">
             {["no", "yes"].map((v) => (
-              <label key={v} className="flex cursor-pointer items-center gap-2 text-sm">
+              <label key={v} className="flex cursor-pointer items-center gap-2 py-1.5 text-sm">
                 <input type="radio" name="customisationNeeded" value={v} checked={custom === v} onChange={() => setCustom(v)} className="size-4 accent-accent" />
                 {v === "yes" ? "Yes" : "No, standard spec"}
               </label>

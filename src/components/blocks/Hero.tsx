@@ -9,6 +9,19 @@ import type { Block } from "@/lib/types";
 export function Hero({ block }: { block: Block }) {
   const images = block.images || [];
   const [active, setActive] = useState(0);
+  // Later slides start downloading only after the page has loaded, so they don't compete with the first (LCP) image.
+  const [restReady, setRestReady] = useState(false);
+
+  useEffect(() => {
+    if (images.length < 2) return;
+    const onLoad = () => setRestReady(true);
+    if (document.readyState === "complete") {
+      const t = setTimeout(onLoad, 0);
+      return () => clearTimeout(t);
+    }
+    window.addEventListener("load", onLoad, { once: true });
+    return () => window.removeEventListener("load", onLoad);
+  }, [images.length]);
 
   useEffect(() => {
     if (images.length < 2) return;
@@ -23,7 +36,7 @@ export function Hero({ block }: { block: Block }) {
         {images.map((img: Block, i: number) => (
           <div key={img._key || i} className={`absolute inset-0 transition-opacity duration-[1500ms] ${i === active ? "opacity-100" : "opacity-0"}`}>
             <div key={i === active ? `on-${active}` : "off"} className="absolute inset-0 animate-kenburns">
-              <SanityImg image={img} fill priority={i === 0} eager sizes="100vw" className="object-cover" />
+              {(i === 0 || restReady || i === active) && <SanityImg image={img} fill priority={i === 0} eager sizes="100vw" quality={75} className="object-cover" />}
             </div>
           </div>
         ))}

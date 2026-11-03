@@ -37,7 +37,7 @@ export function PostCard({ p, index = 0, large, headingAs = "h3" }: { p: Block; 
           ) : (
             <div className="corrugated size-full" />
           )}
-          <span className={`absolute left-4 top-4 rounded-sm px-2.5 py-1 text-[0.7rem] font-semibold uppercase tracking-wider ${p.postType === "news" ? "bg-accent text-white" : "bg-white text-ink"}`}>
+          <span className={`absolute left-4 top-4 rounded-sm px-2.5 py-1 text-xs font-semibold uppercase tracking-wider ${p.postType === "news" ? "bg-accent text-white" : "bg-white text-ink"}`}>
             {p.postType === "news" ? "News" : "Blog"}
           </span>
         </div>
