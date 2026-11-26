@@ -6,7 +6,7 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import type { Crumb } from "@/components/layout/Breadcrumbs";
 import { sanityFetch } from "@/sanity/lib/client";
 import { pageQuery } from "@/sanity/lib/queries";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, getSettings } from "@/lib/seo";
 import type { Block, Seo } from "@/lib/types";
 import type { SanityImage } from "@/sanity/lib/image";
 
@@ -41,9 +41,10 @@ export async function cmsPageMetadata(slug: string): Promise<Metadata> {
   });
 }
 
-function crumbsFor(page: CmsPageData): Crumb[] {
+function crumbsFor(page: CmsPageData, showNews?: boolean): Crumb[] {
   const chain: Crumb[] = [];
-  let p = page.parent;
+  // With News switched off, Blog stands on its own in the menu, so drop the "Media" crumb.
+  let p = !showNews && page.slug === "blog" ? null : page.parent;
   while (p) {
     chain.unshift({ label: p.title, href: pagePath(p.slug) });
     p = p.parent ?? null;
@@ -55,6 +56,7 @@ export async function CmsPage({ slug }: { slug: string }) {
   const page = await getPage(slug);
   if (!page) notFound();
   const startsWithHero = page.pageBuilder?.[0]?._type === "heroBlock";
+  const { showNews } = await getSettings();
 
   return (
     <>
@@ -65,7 +67,7 @@ export async function CmsPage({ slug }: { slug: string }) {
           intro={page.header?.intro}
           image={page.header?.image}
           buttons={page.header?.buttons}
-          crumbs={crumbsFor(page)}
+          crumbs={crumbsFor(page, showNews)}
         />
       )}
       <PageBuilder blocks={page.pageBuilder} />
