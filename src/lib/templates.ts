@@ -4,6 +4,7 @@ import { headingTag } from "./headings";
  * Text used by the fixed page templates (product, category, industry, case study, article, 404, forms).
  * Editable in Studio → Site settings → Page templates. Defaults here apply until an editor overrides them.
  * "{title}" is replaced with the product / industry name; "{time}" with the response-time promise.
+ * In the AI summary prompt, "{site}" is the site name and "{url}" the article link.
  */
 export const TEMPLATE_FIELDS = [
   // General
@@ -51,6 +52,13 @@ export const TEMPLATE_FIELDS = [
   // Case study + articles
   { name: "projectCtaHeading", title: "Case study CTA heading", fieldset: "content", default: "Let's engineer your next project together" },
   { name: "postCtaHeading", title: "Article CTA heading", fieldset: "content", default: "Looking for containers built to your specification?" },
+  { name: "postTocHeading", title: "Article: table of contents heading", fieldset: "content", default: "In this article" },
+  { name: "postAiHeading", title: "Article: AI summary heading", fieldset: "content", default: "Summarize this article with AI" },
+  { name: "postAiPrompt", title: "Article: AI summary prompt", fieldset: "content", default: "Summarize the key points of this article from {site} in simple language: {url}", rows: 2 },
+  { name: "postShareLabel", title: "Article: share label", fieldset: "content", default: "Share this article" },
+  { name: "postAuthorHeading", title: "Article: author box label", fieldset: "content", default: "About the author" },
+  { name: "postRelatedHeading", title: "Article: related posts heading", fieldset: "content", default: "Related articles" },
+  { name: "postSeeAllLabel", title: "Article: “see all” link", fieldset: "content", default: "See all posts" },
 
   // Heading tags (SEO outline only; the look stays the same)
   { name: "productSidebarTag", title: "Sidebar heading", fieldset: "productTags", default: "p", tag: true },
@@ -81,6 +89,8 @@ export const TEMPLATE_FIELDS = [
   { name: "postRelatedTag", title: "“More from…” heading", fieldset: "contentTags", default: "h5", tag: true },
   { name: "postRelatedItemTag", title: "“More from…” article titles", fieldset: "contentTags", default: "p", tag: true },
   { name: "postCtaTag", title: "Article CTA heading", fieldset: "contentTags", default: "h5", tag: true },
+  { name: "postTocTag", title: "Table of contents heading", fieldset: "contentTags", default: "p", tag: true },
+  { name: "postAuthorTag", title: "Author name in “About the author”", fieldset: "contentTags", default: "p", tag: true },
 ] as const;
 
 export type TemplateKey = (typeof TEMPLATE_FIELDS)[number]["name"];

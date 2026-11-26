@@ -68,6 +68,7 @@ export const structure: StructureResolver = (S) =>
                 .child(S.documentList().title("Blog").schemaType("post").filter('_type == "post" && postType == "blog"')),
               S.documentTypeListItem("post").title("All posts"),
               S.documentTypeListItem("postCategory").title("Post categories"),
+              S.documentTypeListItem("author").title("Authors"),
             ]),
         ),
       S.listItem()

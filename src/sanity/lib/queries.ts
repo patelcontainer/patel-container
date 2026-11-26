@@ -138,6 +138,8 @@ export const postQuery = defineQuery(`*[_type == "post" && slug.current == $slug
   ...,
   "slug": slug.current,
   "categories": categories[]->{title, "slug": slug.current},
+  "authorProfile": authorRef->{name, role, photo, bio, linkedin},
+  "wordCount": length(string::split(pt::text(body), " ")),
   "related": *[_type == "post" && postType == ^.postType && slug.current != $slug] | order(publishedAt desc)[0...3]{${postCard}},
   ${seo}
 }`);
