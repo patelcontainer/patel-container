@@ -47,7 +47,15 @@ export function Turnstile({ siteKey, action, resetKey }: { siteKey: string; acti
     loadScript()
       .then(() => {
         if (cancelled || !ref.current || !window.turnstile || widgetId.current) return;
-        widgetId.current = window.turnstile.render(ref.current, { sitekey: siteKey, action, size: "flexible" });
+        widgetId.current = window.turnstile.render(ref.current, {
+          sitekey: siteKey,
+          action,
+          // Light theme to match the site (not the visitor's OS dark mode), full form width,
+          // and only visible when Cloudflare needs the visitor to click; otherwise it runs silently.
+          theme: "light",
+          size: "flexible",
+          appearance: "interaction-only",
+        });
       })
       .catch((err) => console.error(err));
     return () => {
@@ -61,5 +69,5 @@ export function Turnstile({ siteKey, action, resetKey }: { siteKey: string; acti
     if (resetKey && widgetId.current && window.turnstile) window.turnstile.reset(widgetId.current);
   }, [resetKey]);
 
-  return <div ref={ref} className="min-h-[65px]" />;
+  return <div ref={ref} className="[&_iframe]:!w-full" />;
 }
