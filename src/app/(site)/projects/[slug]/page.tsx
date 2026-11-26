@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: Props) {
 
   return (
     <>
-      <PageHeader eyebrow="Case study" heading={p.title} intro={p.summary} image={p.mainImage} crumbs={[{ label: "Projects", href: "/projects" }, { label: p.title }]} buttons={[{ _key: "q", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }]} />
+      <PageHeader eyebrow="Case study" heading={p.title} intro={p.summary} image={p.mainImage} crumbs={[{ label: "Projects", href: "/projects" }, { label: p.title }]} buttons={[{ _key: "q", label: "Contact Us", url: "/contact", style: "primary" }]} />
 
       {!!facts.length && (
         <div className="border-b border-line bg-surface">
@@ -109,7 +109,7 @@ export default async function ProjectPage({ params }: Props) {
         </section>
       )}
 
-      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", eyebrow: "Similar requirement?", heading: t.projectCtaHeading, buttons: [{ _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }, { _key: "b", label: "Contact Us", url: "/contact", style: "outlineLight" }] }} />
+      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", eyebrow: "Similar requirement?", heading: t.projectCtaHeading, buttons: [{ _key: "a", label: "Contact Us", url: "/contact", style: "primary" }] }} />
 
       {!!more.length && (
         <section className="section">

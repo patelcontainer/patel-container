@@ -29,6 +29,7 @@ const nextConfig: NextConfig = {
     return [
       { source: "/index.php", destination: "/", permanent: true },
       { source: "/index.html", destination: "/", permanent: true },
+      { source: "/get-a-quote/:path*", destination: "/contact", permanent: true },
       ...(await cmsRedirects()),
     ];
   },

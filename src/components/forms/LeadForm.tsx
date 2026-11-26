@@ -1,8 +1,7 @@
 "use client";
 
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { CheckCircle2, Loader2, Paperclip, Send } from "lucide-react";
 import { submitLead, type FormState } from "@/app/actions/forms";
 import { useSite } from "@/components/layout/SiteContext";
@@ -37,18 +36,13 @@ function Field({ label, name, error, required, children }: { label: string; name
 
 export function LeadForm({ type, submitLabel, productOptions, jobOptions, defaultProduct, compact, onDone }: Props) {
   const site = useSite();
-  const router = useRouter();
   const [state, action, pending] = useActionState<FormState, FormData>(submitLead, null);
   const [custom, setCustom] = useState("no");
   const [fileName, setFileName] = useState("");
   const products = productOptions?.length ? productOptions : site.productOptions;
   const e = state?.errors || {};
 
-  useEffect(() => {
-    if (state?.ok && type === "quote") router.push("/get-a-quote/thank-you");
-  }, [state, type, router]);
-
-  if (state?.ok && type !== "quote") {
+  if (state?.ok) {
     return (
       <div className="flex flex-col items-start gap-4 rounded-lg border border-green-200 bg-green-50 p-6 sm:p-8" role="status">
         <CheckCircle2 className="size-10 text-green-600" />

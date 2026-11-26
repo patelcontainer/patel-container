@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Briefcase, Clock, Globe, Mail, MapPin, Phone, Plus } from "lucide-react";
+import { ArrowUpRight, Briefcase, Clock, Globe, MapPin, Plus } from "lucide-react";
 import { Section } from "./Section";
 import { ImageGrid, AlbumsGallery } from "./Gallery";
 import { RichText, blockText } from "@/components/ui/RichText";
@@ -7,10 +7,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { Icon } from "@/components/ui/Icon";
 import { SanityImg } from "@/components/ui/SanityImg";
 import { Heading } from "@/components/ui/Heading";
-import { WhatsAppIcon } from "@/components/ui/SocialIcons";
 import { getSettings } from "@/lib/seo";
 import { slugify } from "@/lib/utils";
-import { telHref, whatsappHref } from "@/lib/links";
 import { headingTag, type HeadingTag } from "@/lib/headings";
 import type { Block } from "@/lib/types";
 import type { PortableTextBlock } from "@portabletext/types";
@@ -127,43 +125,13 @@ export function IndustriesBlock({ block }: { block: Block }) {
 
 export async function ContactInfoBlock({ block }: { block: Block }) {
   const s = await getSettings();
-  const wa = whatsappHref(s.whatsappNumber, s.whatsappMessage);
   const addresses = s.addresses || [];
   const map = addresses.find((a) => a.mapEmbedUrl);
 
-  const card = "flex flex-col rounded-md bg-white p-6 ring-1 ring-line";
   const itemTag = headingTag(block.itemHeadingTag, "h3");
   return (
     <Section block={block}>
-      <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-        <div className={card}>
-          <Phone className="size-6 text-accent" />
-          <Heading as={itemTag} className="mt-4 font-bold text-ink">Call us</Heading>
-          {(s.phones || []).map((p) => (
-            <a key={p} href={telHref(p)} className="mt-1 text-steel-600 hover:text-accent">{p}</a>
-          ))}
-        </div>
-        <div className={card}>
-          <Mail className="size-6 text-accent" />
-          <Heading as={itemTag} className="mt-4 font-bold text-ink">Email</Heading>
-          {[s.email, s.salesEmail].filter(Boolean).map((e) => (
-            <a key={e} href={`mailto:${e}`} className="mt-1 break-all text-steel-600 hover:text-accent">{e}</a>
-          ))}
-        </div>
-        <div className={card}>
-          <WhatsAppIcon className="size-6 text-whatsapp" />
-          <Heading as={itemTag} className="mt-4 font-bold text-ink">WhatsApp</Heading>
-          <p className="mt-1 text-steel-600">Quick answers from our sales team.</p>
-          {wa && <a href={wa} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-accent">Start chat <ArrowUpRight className="size-4" /></a>}
-        </div>
-        <div className={card}>
-          <Clock className="size-6 text-accent" />
-          <Heading as={itemTag} className="mt-4 font-bold text-ink">Business hours</Heading>
-          <p className="mt-1 text-steel-600">{s.businessHours || "Mon–Sat"}</p>
-        </div>
-      </div>
-
-      <div className="mt-8 grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
+      <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div className="space-y-5">
           {addresses.map((a) => (
             <div key={a._key} className="flex gap-4 rounded-md bg-white p-6 ring-1 ring-line">

@@ -99,7 +99,7 @@ export const link = defineType({
       name: "url",
       title: "…or URL / path",
       type: "string",
-      description: 'E.g. "/get-a-quote", "/contact#form", "https://…", "tel:+91…", "mailto:…"',
+      description: 'E.g. "/contact", "/contact#form", "https://…", "tel:+91…", "mailto:…"',
     }),
     defineField({ name: "newTab", title: "Open in new tab", type: "boolean", initialValue: false }),
   ],
@@ -120,7 +120,7 @@ export const button = defineType({
       name: "url",
       title: "…or URL / path",
       type: "string",
-      description: 'E.g. "/get-a-quote", "https://…". Use "#callback" to open the callback form.',
+      description: 'E.g. "/contact", "https://…". Use "#callback" to open the callback form.',
     }),
     defineField({
       name: "style",

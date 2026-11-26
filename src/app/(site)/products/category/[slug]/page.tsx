@@ -45,7 +45,7 @@ export default async function CategoryPage({ params }: Props) {
         intro={c.shortDescription}
         image={c.image}
         crumbs={[{ label: "Products", href: "/products" }, { label: c.title }]}
-        buttons={[{ _key: "q", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }, { _key: "w", label: t.whatsappLabel, url: "#whatsapp", style: "whatsapp" }]}
+        buttons={[{ _key: "q", label: "Contact Us", url: "/contact", style: "primary" }, { _key: "w", label: t.whatsappLabel, url: "#whatsapp", style: "whatsapp" }]}
       />
 
       {(c.body?.length || highlights.length > 0) && (
@@ -87,8 +87,7 @@ export default async function CategoryPage({ params }: Props) {
           headingTag: tag("categoryCtaTag"),
           text: fill(t.categoryCtaText, c.title),
           buttons: [
-            { _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" },
-            { _key: "b", label: "Contact Us", url: "/contact", style: "outlineLight" },
+            { _key: "a", label: "Contact Us", url: "/contact", style: "primary" },
           ],
         }}
       />

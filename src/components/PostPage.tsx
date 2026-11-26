@@ -89,7 +89,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
           </div>
         </section>
       )}
-      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", heading: t.postCtaHeading, headingTag: templateTag(t, "postCtaTag"), buttons: [{ _key: "a", label: t.quoteLabel, url: "/get-a-quote", style: "primary" }, { _key: "b", label: "Browse Products", url: "/products", style: "outlineLight" }] }} />
+      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", heading: t.postCtaHeading, headingTag: templateTag(t, "postCtaTag"), buttons: [{ _key: "a", label: "Contact Us", url: "/contact", style: "primary" }, { _key: "b", label: "Browse Products", url: "/products", style: "outlineLight" }] }} />
 
       <JsonLd
         data={{
