@@ -51,7 +51,6 @@ export const TEMPLATE_FIELDS = [
 
   // Case study + articles
   { name: "projectCtaHeading", title: "Case study CTA heading", fieldset: "content", default: "Let's engineer your next project together" },
-  { name: "postCtaHeading", title: "Article CTA heading", fieldset: "content", default: "Looking for containers built to your specification?" },
   { name: "postTocHeading", title: "Article: table of contents heading", fieldset: "content", default: "In this article" },
   { name: "postAiHeading", title: "Article: AI summary heading", fieldset: "content", default: "Summarize this article with AI" },
   { name: "postAiPrompt", title: "Article: AI summary prompt", fieldset: "content", default: "Summarize the key points of this article from {site} in simple language: {url}", rows: 2 },
@@ -89,7 +88,6 @@ export const TEMPLATE_FIELDS = [
   { name: "postNewsletterTag", title: "Newsletter heading", fieldset: "contentTags", default: "h5", tag: true },
   { name: "postRelatedTag", title: "“More from…” heading", fieldset: "contentTags", default: "h5", tag: true },
   { name: "postRelatedItemTag", title: "“More from…” article titles", fieldset: "contentTags", default: "p", tag: true },
-  { name: "postCtaTag", title: "Article CTA heading", fieldset: "contentTags", default: "h5", tag: true },
   { name: "postFaqTag", title: "FAQ section heading", fieldset: "contentTags", default: "h3", tag: true },
   { name: "postTocTag", title: "Table of contents heading", fieldset: "contentTags", default: "p", tag: true },
   { name: "postAuthorTag", title: "Author name in “About the author”", fieldset: "contentTags", default: "p", tag: true },

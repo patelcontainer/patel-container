@@ -9,10 +9,10 @@ const TOOLS = [
   { name: "Grok", href: (q: string) => `https://grok.com/?q=${q}` },
 ];
 
-export function AiSummary({ heading, prompt }: { heading: string; prompt: string }) {
+export function AiSummary({ heading, prompt, className = "bg-surface" }: { heading: string; prompt: string; className?: string }) {
   const q = encodeURIComponent(prompt);
   return (
-    <div className="rounded-md bg-surface p-5 ring-1 ring-line sm:p-6">
+    <div className={`rounded-md p-5 ring-1 ring-line sm:p-6 ${className}`}>
       <p className="flex items-center gap-2 font-semibold text-ink">
         <Sparkles className="size-5 text-accent" /> {heading}
       </p>

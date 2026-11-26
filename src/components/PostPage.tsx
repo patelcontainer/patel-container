@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, ChevronDown, Clock } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PostCard } from "@/components/blocks/ListingBlocks";
-import { CtaBlock, FaqList } from "@/components/blocks/MiscBlocks";
+import { FaqList } from "@/components/blocks/MiscBlocks";
 import { Newsletter } from "@/components/forms/Newsletter";
 import { RichText, blockText } from "@/components/ui/RichText";
 import { SocialIcon } from "@/components/ui/SocialIcons";
@@ -108,6 +108,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
                 <span className="flex items-center gap-1.5"><Calendar className="size-4" /> <time dateTime={p.publishedAt}>{formatDate(p.publishedAt)}</time></span>
                 {readTime && <span className="flex items-center gap-1.5"><Clock className="size-4" /> {readTime}</span>}
               </div>
+              <AiSummary heading={t.postAiHeading} prompt={aiPrompt} className="mt-8 bg-white" />
             </div>
             {hasImage(p.mainImage) && (
               <div className="overflow-hidden rounded-md shadow-lift">
@@ -142,8 +143,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
                 <nav aria-label={t.postTocHeading} className="px-5 pb-5">{tocList}</nav>
               </details>
             )}
-            <AiSummary heading={t.postAiHeading} prompt={aiPrompt} />
-            <RichText value={p.body} className="mt-10 text-[1.1rem]" />
+            <RichText value={p.body} className="text-[1.1rem]" />
 
             {!!faqs.length && (
               <section id="faqs" className="mt-14" aria-label={t.postFaqHeading}>
@@ -199,7 +199,6 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
           </div>
         </section>
       )}
-      <CtaBlock block={{ _type: "ctaBlock", _key: "cta", heading: t.postCtaHeading, headingTag: templateTag(t, "postCtaTag"), buttons: [{ _key: "a", label: "Contact Us", url: "/contact", style: "primary" }, { _key: "b", label: "Browse Products", url: "/products", style: "outlineLight" }] }} />
 
       <JsonLd
         data={{
