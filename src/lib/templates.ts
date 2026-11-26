@@ -55,6 +55,7 @@ export const TEMPLATE_FIELDS = [
   { name: "postTocHeading", title: "Article: table of contents heading", fieldset: "content", default: "In this article" },
   { name: "postAiHeading", title: "Article: AI summary heading", fieldset: "content", default: "Summarize this article with AI" },
   { name: "postAiPrompt", title: "Article: AI summary prompt", fieldset: "content", default: "Summarize the key points of this article from {site} in simple language: {url}", rows: 2 },
+  { name: "postFaqHeading", title: "Article: FAQ section heading", fieldset: "content", default: "Frequently Asked Questions" },
   { name: "postShareLabel", title: "Article: share label", fieldset: "content", default: "Share this article" },
   { name: "postAuthorHeading", title: "Article: author box label", fieldset: "content", default: "About the author" },
   { name: "postRelatedHeading", title: "Article: related posts heading", fieldset: "content", default: "Related articles" },
@@ -89,6 +90,7 @@ export const TEMPLATE_FIELDS = [
   { name: "postRelatedTag", title: "“More from…” heading", fieldset: "contentTags", default: "h5", tag: true },
   { name: "postRelatedItemTag", title: "“More from…” article titles", fieldset: "contentTags", default: "p", tag: true },
   { name: "postCtaTag", title: "Article CTA heading", fieldset: "contentTags", default: "h5", tag: true },
+  { name: "postFaqTag", title: "FAQ section heading", fieldset: "contentTags", default: "h3", tag: true },
   { name: "postTocTag", title: "Table of contents heading", fieldset: "contentTags", default: "p", tag: true },
   { name: "postAuthorTag", title: "Author name in “About the author”", fieldset: "contentTags", default: "p", tag: true },
 ] as const;

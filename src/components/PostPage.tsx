@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, Calendar, ChevronDown, Clock } from "lucide-react";
 import { Breadcrumbs } from "@/components/layout/Breadcrumbs";
 import { PostCard } from "@/components/blocks/ListingBlocks";
-import { CtaBlock } from "@/components/blocks/MiscBlocks";
+import { CtaBlock, FaqList } from "@/components/blocks/MiscBlocks";
 import { Newsletter } from "@/components/forms/Newsletter";
 import { RichText, blockText } from "@/components/ui/RichText";
 import { SocialIcon } from "@/components/ui/SocialIcons";
@@ -65,6 +65,8 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
     .map((b) => blockText(b).trim())
     .filter(Boolean)
     .map((text) => ({ text, id: slugify(text) }));
+  const faqs: Block[] = (p.faqs || []).filter((f: Block) => f.question).map((f: Block) => ({ ...f, _id: f._key }));
+  if (faqs.length) toc.push({ text: t.postFaqHeading, id: "faqs" });
   const aiPrompt = t.postAiPrompt.replaceAll("{site}", settings.siteName).replaceAll("{url}", url);
 
   const tocList = (
@@ -82,37 +84,39 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
   return (
     <article>
       <header className="bg-surface">
-        <div className="wrap max-w-4xl py-12 lg:py-16">
+        <div className="wrap max-w-6xl py-12 lg:py-16">
           <Breadcrumbs items={[{ label: LABEL[postType], href: `/${postType}` }, { label: p.title }]} />
-          {!!p.categories?.length && (
-            <div className="mt-8 flex flex-wrap gap-2">
-              {p.categories.map((c: Block) => (
-                <span key={c.slug} className="rounded-sm bg-accent px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-white">{c.title}</span>
-              ))}
+          <div className={`mt-8 grid items-center gap-10 ${hasImage(p.mainImage) ? "lg:grid-cols-2 xl:gap-14" : "max-w-4xl"}`}>
+            <div>
+              {!!p.categories?.length && (
+                <div className="mb-5 flex flex-wrap gap-2">
+                  {p.categories.map((c: Block) => (
+                    <span key={c.slug} className="rounded-sm bg-accent px-2.5 py-1 text-xs font-semibold uppercase tracking-wider text-white">{c.title}</span>
+                  ))}
+                </div>
+              )}
+              <h1 className="text-4xl font-extrabold leading-[1.1] text-ink sm:text-5xl lg:text-[2.75rem] xl:text-5xl">{p.title}</h1>
+              {p.excerpt && <p className="mt-5 text-lg leading-relaxed text-steel-600 sm:text-xl">{p.excerpt}</p>}
+              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-steel-500">
+                <span className="flex items-center gap-3">
+                  <AuthorAvatar author={author} size="sm" />
+                  <span>
+                    <span className="block font-semibold text-ink">{author.name}</span>
+                    {author.role && <span className="block text-xs">{author.role}</span>}
+                  </span>
+                </span>
+                <span className="flex items-center gap-1.5"><Calendar className="size-4" /> <time dateTime={p.publishedAt}>{formatDate(p.publishedAt)}</time></span>
+                {readTime && <span className="flex items-center gap-1.5"><Clock className="size-4" /> {readTime}</span>}
+              </div>
             </div>
-          )}
-          <h1 className={`${p.categories?.length ? "mt-5" : "mt-8"} text-4xl font-extrabold leading-[1.1] text-ink sm:text-5xl`}>{p.title}</h1>
-          {p.excerpt && <p className="mt-5 text-xl leading-relaxed text-steel-600">{p.excerpt}</p>}
-          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-steel-500">
-            <span className="flex items-center gap-3">
-              <AuthorAvatar author={author} size="sm" />
-              <span>
-                <span className="block font-semibold text-ink">{author.name}</span>
-                {author.role && <span className="block text-xs">{author.role}</span>}
-              </span>
-            </span>
-            <span className="flex items-center gap-1.5"><Calendar className="size-4" /> <time dateTime={p.publishedAt}>{formatDate(p.publishedAt)}</time></span>
-            {readTime && <span className="flex items-center gap-1.5"><Clock className="size-4" /> {readTime}</span>}
+            {hasImage(p.mainImage) && (
+              <div className="overflow-hidden rounded-md shadow-lift">
+                <SanityImg image={p.mainImage} aspect={16 / 10} priority sizes="(min-width:1280px) 560px, (min-width:1024px) 50vw, 100vw" className="w-full" />
+              </div>
+            )}
           </div>
         </div>
       </header>
-      {p.mainImage?.asset && (
-        <div className="wrap max-w-6xl">
-          <div className="overflow-hidden rounded-md shadow-lift lg:mt-10">
-            <SanityImg image={p.mainImage} aspect={16 / 8} priority sizes="(min-width:1280px) 1152px, 100vw" className="w-full" />
-          </div>
-        </div>
-      )}
 
       <div className="wrap max-w-6xl py-14 lg:py-20">
         <div className="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)] xl:gap-16">
@@ -140,6 +144,13 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
             )}
             <AiSummary heading={t.postAiHeading} prompt={aiPrompt} />
             <RichText value={p.body} className="mt-10 text-[1.1rem]" />
+
+            {!!faqs.length && (
+              <section id="faqs" className="mt-14" aria-label={t.postFaqHeading}>
+                <Heading as={templateTag(t, "postFaqTag")} className="mb-6 text-[1.75rem] font-bold leading-tight text-ink">{t.postFaqHeading}</Heading>
+                <FaqList faqs={faqs} />
+              </section>
+            )}
 
             <div className="mt-12 border-t border-line pt-8 lg:hidden">
               <ShareButtons title={p.title} url={url} label={t.postShareLabel} />

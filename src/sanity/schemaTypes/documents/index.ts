@@ -575,7 +575,50 @@ export const post = defineType({
       name: "body",
       type: "blockContent",
       group: "content",
-      description: "Every “Heading 2” becomes an entry in the table of contents.",
+      description: "Every “Heading 2” becomes an entry in the table of contents. Put FAQs in the FAQs field below, not here.",
+    }),
+    defineField({
+      name: "faqs",
+      title: "FAQs",
+      type: "array",
+      group: "content",
+      description: "Shown as an FAQ section after the article, linked from the table of contents and marked up for Google (FAQ schema).",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "postFaq",
+          fields: [
+            defineField({ name: "question", type: "string", validation: (r) => r.required() }),
+            defineField({
+              name: "answer",
+              type: "array",
+              of: [
+                defineArrayMember({
+                  type: "block",
+                  styles: [{ title: "Normal", value: "normal" }],
+                  lists: [{ title: "Bullet", value: "bullet" }, { title: "Numbered", value: "number" }],
+                  marks: {
+                    decorators: [{ title: "Bold", value: "strong" }, { title: "Italic", value: "em" }],
+                    annotations: [
+                      defineArrayMember({
+                        name: "link",
+                        type: "object",
+                        title: "Link",
+                        fields: [
+                          defineField({ name: "href", type: "string", title: "URL or path" }),
+                          defineField({ name: "newTab", type: "boolean", title: "Open in new tab" }),
+                        ],
+                      }),
+                    ],
+                  },
+                }),
+              ],
+              validation: (r) => r.required(),
+            }),
+          ],
+          preview: { select: { title: "question" } },
+        }),
+      ],
     }),
     defineField({ name: "featured", title: "Featured post", type: "boolean", group: "settings" }),
     seoField,
