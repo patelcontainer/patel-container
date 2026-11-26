@@ -3,6 +3,7 @@
 import { headers } from "next/headers";
 import { randomUUID } from "node:crypto";
 import { writeClient } from "@/sanity/lib/write-client";
+import { turnstileEnabled, verifyTurnstile } from "@/lib/turnstile";
 
 export type FormState = { ok: boolean; message?: string; errors?: Record<string, string> } | null;
 
@@ -47,6 +48,14 @@ export async function submitLead(_prev: FormState, fd: FormData): Promise<FormSt
   if (!emailOk) errors.email = "Please enter a valid email address.";
   if (!phoneOk) errors.phone = "Please enter a valid phone number.";
   if (Object.keys(errors).length) return { ok: false, errors, message: "Please check the highlighted fields." };
+
+  // Cloudflare Turnstile on the contact form (only when both keys are configured).
+  if (formType === "contact" && turnstileEnabled()) {
+    const ip = (await headers()).get("x-forwarded-for")?.split(",")[0]?.trim();
+    if (!(await verifyTurnstile(str(fd, "cf-turnstile-response", 4096), ip))) {
+      return { ok: false, errors: { turnstile: "Please complete the security check and try again." } };
+    }
+  }
 
   if (!process.env.SANITY_API_WRITE_TOKEN) {
     console.error("[forms] SANITY_API_WRITE_TOKEN is not set");

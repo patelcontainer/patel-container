@@ -5,6 +5,9 @@ import Link from "next/link";
 import { CheckCircle2, Loader2, Paperclip, Send } from "lucide-react";
 import { submitLead, type FormState } from "@/app/actions/forms";
 import { useSite } from "@/components/layout/SiteContext";
+import { Turnstile } from "./Turnstile";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 export type LeadFormType = "enquiry" | "contact" | "quote" | "career" | "callback";
 
@@ -215,6 +218,13 @@ export function LeadForm({ type, submitLabel, productOptions, jobOptions, defaul
             onChange={(ev) => setFileName(ev.target.files?.[0]?.name || "")}
           />
         </Field>
+      )}
+
+      {type === "contact" && TURNSTILE_SITE_KEY && (
+        <div>
+          <Turnstile siteKey={TURNSTILE_SITE_KEY} action="contact" resetKey={state} />
+          {e.turnstile && <p className="mt-1.5 text-xs font-medium text-red-600">{e.turnstile}</p>}
+        </div>
       )}
 
       {state && !state.ok && state.message && (
