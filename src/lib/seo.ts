@@ -75,43 +75,93 @@ export async function buildMetadata({ seo, title, description, image, path, type
   };
 }
 
+/* ── Structured data (JSON-LD), as specified in the client's schema document ── */
+
+const ORG_ID = `${SITE_URL}/#organization`;
+const WEBSITE_ID = `${SITE_URL}/#website`;
+const LOGO = `${SITE_URL}/brand/vahana-logo.png`;
+const BRAND_NAME = "Vahana";
+const BRAND_DESCRIPTION =
+  "Explore ISO shipping containers, specialized enclosures, railway products and electric LCVs, engineered in Bhavnagar, Gujarat, for export and industry.";
+const SCHEMA_LANGUAGE = "en-IN";
+
+/** "+91 70464 68484" → "+91 7046468484" */
+const schemaPhone = (p?: string) => p?.replace(/[^\d+]/g, "").replace(/^\+91/, "+91 ");
+
+/** Sitewide. */
 export function organizationSchema(s: Settings) {
-  const addr = s.addresses?.[0];
   return {
     "@context": "https://schema.org",
-    "@type": ["Organization", "Manufacturer"],
-    "@id": `${SITE_URL}/#organization`,
-    name: s.siteName,
-    legalName: s.legalName,
-    url: SITE_URL,
-    logo: `${SITE_URL}/brand/vahana-logo.png`,
-    slogan: s.tagline,
-    foundingDate: s.foundingYear,
-    email: s.email,
-    telephone: s.phones?.[0],
-    sameAs: (s.socialLinks || []).map((l) => l.url).filter(Boolean),
-    address: addr?.address
-      ? {
-          "@type": "PostalAddress",
-          // Address lines minus the company name and the city/state/PIN line
-          streetAddress: addr.address
-            .split("\n")
-            .map((l) => l.trim().replace(/,$/, ""))
-            .filter((l) => l && l !== s.legalName && l !== s.siteName)
-            .slice(0, -1)
-            .join(", "),
-          addressLocality: "Bhavnagar",
-          addressRegion: "Gujarat",
-          postalCode: addr.address.match(/\b\d{6}\b/)?.[0],
-          addressCountry: "IN",
-        }
-      : undefined,
-    contactPoint: (s.phones || []).map((p) => ({
-      "@type": "ContactPoint",
-      telephone: p,
-      contactType: "sales",
-      areaServed: ["IN", "Worldwide"],
-      availableLanguage: ["en", "hi", "gu"],
-    })),
+    "@type": "Organization",
+    "@id": ORG_ID,
+    name: BRAND_NAME,
+    url: `${SITE_URL}/`,
+    logo: { "@type": "ImageObject", url: LOGO },
+    description: BRAND_DESCRIPTION,
+    telephone: schemaPhone(s.phones?.[0]) || "+91 7046468484",
+    email: s.email || "info@vahanacontainers.com",
+    areaServed: { "@type": "Place", name: "Worldwide" },
+    ...(s.socialLinks?.length ? { sameAs: s.socialLinks.map((l) => l.url).filter(Boolean) } : {}),
   };
 }
+
+/** Home page only: the Ahmedabad headquarters. */
+export function localBusinessSchema(s: Settings) {
+  const org = organizationSchema(s);
+  return {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": `${SITE_URL}/#localbusiness`,
+    name: BRAND_NAME,
+    url: `${SITE_URL}/`,
+    description: BRAND_DESCRIPTION,
+    image: LOGO,
+    telephone: org.telephone,
+    email: org.email,
+    address: {
+      "@type": "PostalAddress",
+      streetAddress: "407, Sun orbit complex, Nr pandit Dindiyal Auditorium, Raj path Rangoli Road, Bodakdev",
+      addressLocality: "Ahmedabad",
+      addressRegion: "Gujarat",
+      postalCode: "380054",
+      addressCountry: "India",
+    },
+    geo: { "@type": "GeoCoordinates", latitude: "23.03550599772161", longitude: "72.50341255092339" },
+  };
+}
+
+/** Home page only. */
+export function websiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": WEBSITE_ID,
+    url: `${SITE_URL}/`,
+    name: BRAND_NAME,
+    description: BRAND_DESCRIPTION,
+    inLanguage: SCHEMA_LANGUAGE,
+    publisher: { "@id": ORG_ID },
+  };
+}
+
+/** Every page: name and description match the page's meta title and description. */
+export async function webPageSchema(meta: MetaInput & { createdAt?: string; updatedAt?: string }) {
+  const m = await buildMetadata(meta);
+  const url = typeof m.alternates?.canonical === "string" ? m.alternates.canonical : absoluteUrl(meta.path);
+  const title = m.title && typeof m.title === "object" && "absolute" in m.title ? m.title.absolute : undefined;
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${url.replace(/\/$/, "")}/#webpage`,
+    url,
+    name: title,
+    description: m.description || undefined,
+    inLanguage: SCHEMA_LANGUAGE,
+    isPartOf: { "@id": WEBSITE_ID },
+    publisher: { "@id": ORG_ID },
+    ...(meta.createdAt ? { datePublished: meta.createdAt } : {}),
+    ...(meta.updatedAt ? { dateModified: meta.updatedAt } : {}),
+  };
+}
+
+export const ORGANIZATION_REF = { "@id": ORG_ID };

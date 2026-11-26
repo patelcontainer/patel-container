@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { WebPageJsonLd } from "@/components/seo/JsonLd";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { sanityFetch } from "@/sanity/lib/client";
 import { sitemapQuery } from "@/sanity/lib/queries";
@@ -45,6 +46,7 @@ export default async function HtmlSitemap() {
           ))}
         </div>
       </section>
+      <WebPageJsonLd title="Sitemap" description="A list of every page on the VAHANA website." path="/site-map" />
     </>
   );
 }

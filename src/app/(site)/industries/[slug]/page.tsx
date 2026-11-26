@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { WebPageJsonLd } from "@/components/seo/JsonLd";
 import { cache } from "react";
 import Link from "next/link";
 import { ArrowUpRight, Check, Target, Lightbulb } from "lucide-react";
@@ -115,6 +116,7 @@ export default async function IndustryPage({ params }: Props) {
           </div>
         </section>
       )}
+      <WebPageJsonLd seo={ind.seo} title={ind.title} description={ind.shortDescription} image={ind.image} path={`/industries/${slug}`} createdAt={ind._createdAt} updatedAt={ind._updatedAt} />
     </>
   );
 }

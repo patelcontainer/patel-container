@@ -30,6 +30,31 @@ const components: PortableTextComponents = {
         {value?.caption && <figcaption className="mt-2 text-sm text-steel-500">{value.caption}</figcaption>}
       </figure>
     ),
+    table: ({ value }) => {
+      const rows: string[][] = (value?.rows || []).map((r: { cells?: string[] }) => r.cells || []);
+      if (!rows.length) return null;
+      const head = value?.headerRow === false ? null : rows[0];
+      const body = head ? rows.slice(1) : rows;
+      return (
+        <figure className="rich-table">
+          <div className="overflow-x-auto">
+            <table>
+              {head && (
+                <thead>
+                  <tr>{head.map((c, i) => <th key={i} scope="col">{c}</th>)}</tr>
+                </thead>
+              )}
+              <tbody>
+                {body.map((r, i) => (
+                  <tr key={i}>{r.map((c, j) => <td key={j}>{c}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {value?.caption && <figcaption>{value.caption}</figcaption>}
+        </figure>
+      );
+    },
   },
 };
 

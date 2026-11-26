@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { WebPageJsonLd } from "@/components/seo/JsonLd";
 import { cache } from "react";
 import { Quote } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
@@ -121,6 +122,7 @@ export default async function ProjectPage({ params }: Props) {
           </div>
         </section>
       )}
+      <WebPageJsonLd seo={p.seo} title={p.title} description={p.summary} image={p.mainImage} path={`/projects/${slug}`} type="article" createdAt={p._createdAt} updatedAt={p._updatedAt} />
     </>
   );
 }

@@ -2,6 +2,8 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { LinkIcon } from "@sanity/icons/Link";
 import { SearchIcon } from "@sanity/icons/Search";
 import { ImageIcon } from "@sanity/icons/Image";
+import { ThListIcon } from "@sanity/icons/ThList";
+import { BlockContentInput } from "../../components/BlockContentInput";
 import { ICON_OPTIONS } from "../../../lib/icon-names";
 
 /** Document types an internal link can point to. */
@@ -254,7 +256,46 @@ export const blockContent = defineType({
       },
     }),
     defineArrayMember({ type: "imageWithAlt" }),
+    defineArrayMember({ type: "table" }),
   ],
+  components: { input: BlockContentInput },
 });
 
-export const objectTypes = [imageWithAlt, seo, link, button, navItem, keyValue, iconItem, address, blockContent];
+/** A simple text table inside rich text. Usually created by pasting a table from Google Docs, Word or Excel. */
+export const table = defineType({
+  name: "table",
+  title: "Table",
+  type: "object",
+  icon: ThListIcon,
+  fields: [
+    defineField({ name: "caption", type: "string", description: "Optional, shown under the table." }),
+    defineField({ name: "headerRow", title: "First row is a header", type: "boolean", initialValue: true }),
+    defineField({
+      name: "rows",
+      type: "array",
+      description: "Tip: copy a table from Google Docs, Word or Excel and paste it straight into the content.",
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "tableRow",
+          title: "Row",
+          fields: [defineField({ name: "cells", type: "array", of: [defineArrayMember({ type: "string" })] })],
+          preview: {
+            select: { cells: "cells" },
+            prepare: ({ cells }) => ({ title: (cells || []).join("  |  ") || "Empty row" }),
+          },
+        }),
+      ],
+    }),
+  ],
+  preview: {
+    select: { rows: "rows", caption: "caption" },
+    prepare: ({ rows, caption }) => ({
+      title: caption || (rows?.[0]?.cells || []).join("  |  ") || "Table",
+      subtitle: `Table · ${rows?.length || 0} rows`,
+      media: ThListIcon,
+    }),
+  },
+});
+
+export const objectTypes = [imageWithAlt, seo, link, button, navItem, keyValue, iconItem, address, blockContent, table];

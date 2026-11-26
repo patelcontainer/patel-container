@@ -14,7 +14,7 @@ import { ImageGrid } from "@/components/blocks/Gallery";
 import { FaqList } from "@/components/blocks/MiscBlocks";
 import { IndustryTile } from "@/components/blocks/InfoBlocks";
 import { LeadForm } from "@/components/forms/LeadForm";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, WebPageJsonLd } from "@/components/seo/JsonLd";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { productQuery, productSlugsQuery } from "@/sanity/lib/queries";
 import { urlFor, hasImage } from "@/sanity/lib/image";
@@ -286,6 +286,7 @@ export default async function ProductPage({ params }: Props) {
           additionalProperty: keySpecs.map((s) => ({ "@type": "PropertyValue", name: s.label, value: s.value })),
         }}
       />
+      <WebPageJsonLd seo={p.seo} title={p.title} description={p.shortDescription} image={p.mainImage} path={`/products/${slug}`} createdAt={p._createdAt} updatedAt={p._updatedAt} />
     </>
   );
 }

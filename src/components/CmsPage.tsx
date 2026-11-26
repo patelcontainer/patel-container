@@ -6,7 +6,8 @@ import { PageHeader } from "@/components/layout/PageHeader";
 import type { Crumb } from "@/components/layout/Breadcrumbs";
 import { sanityFetch } from "@/sanity/lib/client";
 import { pageQuery } from "@/sanity/lib/queries";
-import { buildMetadata, getSettings } from "@/lib/seo";
+import { JsonLd, WebPageJsonLd } from "@/components/seo/JsonLd";
+import { buildMetadata, getSettings, localBusinessSchema, websiteSchema } from "@/lib/seo";
 import type { Block, Seo } from "@/lib/types";
 import type { SanityImage } from "@/sanity/lib/image";
 
@@ -14,6 +15,8 @@ type ParentRef = { title: string; slug: string; parent?: ParentRef | null } | nu
 
 export type CmsPageData = {
   _id: string;
+  _createdAt?: string;
+  _updatedAt?: string;
   title: string;
   slug: string;
   header?: { eyebrow?: string; heading?: string; intro?: string; image?: SanityImage; buttons?: Block[] };
@@ -28,17 +31,21 @@ export const getPage = cache((slug: string) =>
 
 export const pagePath = (slug: string) => (slug === "home" ? "/" : `/${slug}`);
 
-export async function cmsPageMetadata(slug: string): Promise<Metadata> {
-  const page = await getPage(slug);
-  if (!page) return {};
+function metaInput(page: CmsPageData, slug: string) {
   const firstHero = page.pageBuilder?.[0]?._type === "heroBlock" ? page.pageBuilder[0] : null;
-  return buildMetadata({
+  return {
     seo: page.seo,
     title: page.title,
     description: page.header?.intro || firstHero?.subheading,
     image: page.header?.image || firstHero?.images?.[0],
     path: pagePath(slug),
-  });
+  };
+}
+
+export async function cmsPageMetadata(slug: string): Promise<Metadata> {
+  const page = await getPage(slug);
+  if (!page) return {};
+  return buildMetadata(metaInput(page, slug));
 }
 
 function crumbsFor(page: CmsPageData, showNews?: boolean): Crumb[] {
@@ -56,7 +63,8 @@ export async function CmsPage({ slug }: { slug: string }) {
   const page = await getPage(slug);
   if (!page) notFound();
   const startsWithHero = page.pageBuilder?.[0]?._type === "heroBlock";
-  const { showNews } = await getSettings();
+  const settings = await getSettings();
+  const { showNews } = settings;
 
   return (
     <>
@@ -71,6 +79,13 @@ export async function CmsPage({ slug }: { slug: string }) {
         />
       )}
       <PageBuilder blocks={page.pageBuilder} />
+      <WebPageJsonLd {...metaInput(page, slug)} createdAt={page._createdAt} updatedAt={page._updatedAt} />
+      {slug === "home" && (
+        <>
+          <JsonLd data={localBusinessSchema(settings)} />
+          <JsonLd data={websiteSchema()} />
+        </>
+      )}
     </>
   );
 }

@@ -9,21 +9,21 @@ const TOOLS = [
   { name: "Grok", href: (q: string) => `https://grok.com/?q=${q}` },
 ];
 
-export function AiSummary({ heading, prompt, className = "bg-surface" }: { heading: string; prompt: string; className?: string }) {
+export function AiSummary({ heading, prompt, className = "" }: { heading: string; prompt: string; className?: string }) {
   const q = encodeURIComponent(prompt);
   return (
-    <div className={`rounded-md p-5 ring-1 ring-line sm:p-6 ${className}`}>
-      <p className="flex items-center gap-2 font-semibold text-ink">
-        <Sparkles className="size-5 text-accent" /> {heading}
+    <div className={className}>
+      <p className="flex items-center gap-1.5 text-xs font-semibold uppercase tracking-wider text-steel-500">
+        <Sparkles className="size-3.5 text-accent" aria-hidden /> {heading}
       </p>
-      <div className="mt-4 flex flex-wrap gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         {TOOLS.map((t) => (
           <a
             key={t.name}
             href={t.href(q)}
             target="_blank"
             rel="noopener noreferrer nofollow"
-            className="rounded-full bg-white px-4 py-2 text-sm font-semibold text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-white hover:ring-accent"
+            className="rounded-full bg-white px-3.5 py-1.5 text-[0.8rem] font-semibold text-ink ring-1 ring-line transition-colors hover:bg-accent hover:text-white hover:ring-accent"
           >
             {t.name}
           </a>

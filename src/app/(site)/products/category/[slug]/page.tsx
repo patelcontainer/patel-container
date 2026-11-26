@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { WebPageJsonLd } from "@/components/seo/JsonLd";
 import { cache } from "react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { ProductCard, CategoryCard } from "@/components/blocks/ProductCards";
@@ -102,6 +103,7 @@ export default async function CategoryPage({ params }: Props) {
           </div>
         </section>
       )}
+      <WebPageJsonLd seo={c.seo} title={c.title} description={c.shortDescription} image={c.image} path={`/products/category/${slug}`} createdAt={c._createdAt} updatedAt={c._updatedAt} />
     </>
   );
 }

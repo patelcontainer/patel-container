@@ -12,10 +12,10 @@ import { ShareButtons } from "@/components/post/ShareButtons";
 import { AiSummary } from "@/components/post/AiSummary";
 import { SanityImg } from "@/components/ui/SanityImg";
 import { Heading } from "@/components/ui/Heading";
-import { JsonLd } from "@/components/seo/JsonLd";
+import { JsonLd, WebPageJsonLd } from "@/components/seo/JsonLd";
 import { client, sanityFetch } from "@/sanity/lib/client";
 import { postQuery, postSlugsQuery } from "@/sanity/lib/queries";
-import { absoluteUrl, buildMetadata, getSettings, getTemplates } from "@/lib/seo";
+import { ORGANIZATION_REF, absoluteUrl, buildMetadata, getSettings, getTemplates } from "@/lib/seo";
 import { urlFor, hasImage } from "@/sanity/lib/image";
 import { formatDate, slugify } from "@/lib/utils";
 import { templateTag } from "@/lib/templates";
@@ -108,7 +108,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
                 <span className="flex items-center gap-1.5"><Calendar className="size-4" /> <time dateTime={p.publishedAt}>{formatDate(p.publishedAt)}</time></span>
                 {readTime && <span className="flex items-center gap-1.5"><Clock className="size-4" /> {readTime}</span>}
               </div>
-              <AiSummary heading={t.postAiHeading} prompt={aiPrompt} className="mt-8 bg-white" />
+              <AiSummary heading={t.postAiHeading} prompt={aiPrompt} className="mt-7 border-t border-line pt-6" />
             </div>
             {hasImage(p.mainImage) && (
               <div className="overflow-hidden rounded-md shadow-lift">
@@ -200,18 +200,26 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
         </section>
       )}
 
+      <WebPageJsonLd seo={p.seo} title={p.title} description={p.excerpt} image={p.mainImage} path={`/${postType}/${slug}`} type="article" createdAt={p.publishedAt || p._createdAt} updatedAt={p._updatedAt} />
       <JsonLd
         data={{
           "@context": "https://schema.org",
           "@type": postType === "news" ? "NewsArticle" : "BlogPosting",
           headline: p.title,
           description: p.excerpt,
-          image: hasImage(p.mainImage) ? [urlFor(p.mainImage).width(1200).url()] : undefined,
+          image: hasImage(p.mainImage) ? urlFor(p.mainImage).width(1200).url() : undefined,
+          url,
+          author: !p.authorProfile?.name && !p.author ? ORGANIZATION_REF : {
+            "@type": "Person",
+            name: author.name,
+            ...(author.linkedin ? { url: author.linkedin } : {}),
+            ...(hasImage(author.photo) ? { image: urlFor(author.photo).width(400).height(400).url() } : {}),
+            ...(author.role ? { jobTitle: author.role } : {}),
+          },
+          publisher: ORGANIZATION_REF,
           datePublished: p.publishedAt,
           dateModified: p._updatedAt,
-          author: p.authorProfile?.name ? { "@type": "Person", name: p.authorProfile.name, ...(p.authorProfile.role ? { jobTitle: p.authorProfile.role } : {}), ...(p.authorProfile.linkedin ? { sameAs: [p.authorProfile.linkedin] } : {}) } : { "@id": `${absoluteUrl("/")}#organization` },
-          publisher: { "@id": `${absoluteUrl("/")}#organization` },
-          mainEntityOfPage: url,
+          mainEntityOfPage: { "@type": "WebPage", "@id": url },
         }}
       />
     </article>

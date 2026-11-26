@@ -74,7 +74,7 @@ export const settingsQuery = defineQuery(`*[_type == "siteSettings"][0]{
 /* ── Pages ─────────────────────────────────────────────────────────────── */
 
 export const pageQuery = defineQuery(`*[_type == "page" && slug.current == $slug][0]{
-  _id, _type, _updatedAt, title, "slug": slug.current,
+  _id, _type, _createdAt, _updatedAt, title, "slug": slug.current,
   header{..., buttons[]{${link}}},
   "parent": parent->{title, "slug": slug.current, "parent": parent->{title, "slug": slug.current}},
   ${seo},
