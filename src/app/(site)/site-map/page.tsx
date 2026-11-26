@@ -2,7 +2,7 @@ import Link from "next/link";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { sanityFetch } from "@/sanity/lib/client";
 import { sitemapQuery } from "@/sanity/lib/queries";
-import { buildMetadata } from "@/lib/seo";
+import { buildMetadata, getSettings } from "@/lib/seo";
 
 export const generateMetadata = () => buildMetadata({ title: "Sitemap", description: "A list of every page on the VAHANA website.", path: "/site-map" });
 
@@ -11,7 +11,9 @@ type Data = Record<"pages" | "products" | "categories" | "industries" | "project
 
 export default async function HtmlSitemap() {
   const d = await sanityFetch<Data>({ query: sitemapQuery });
-  const pages = d.pages.filter((p) => p.slug !== "home");
+  const showNews = (await getSettings()).showNews;
+  const pages = d.pages.filter((p) => p.slug !== "home" && (showNews || p.slug !== "news"));
+  if (!showNews) d.posts = d.posts.filter((p) => p.postType !== "news");
   const top = pages.filter((p) => !p.slug.includes("/"));
   const groups: { title: string; links: { label: string; href: string }[] }[] = [
     { title: "Main pages", links: [{ label: "Home", href: "/" }, ...top.map((p) => ({ label: p.title, href: `/${p.slug}` }))] },
@@ -23,7 +25,7 @@ export default async function HtmlSitemap() {
     { title: "Products", links: d.products.map((p) => ({ label: p.title, href: `/products/${p.slug}` })) },
     { title: "Industries", links: d.industries.map((p) => ({ label: p.title, href: `/industries/${p.slug}` })) },
     { title: "Case studies", links: d.projects.map((p) => ({ label: p.title, href: `/projects/${p.slug}` })) },
-    { title: "News and articles", links: d.posts.map((p) => ({ label: p.title, href: `/${p.postType === "news" ? "news" : "blog"}/${p.slug}` })) },
+    { title: showNews ? "News and articles" : "Articles", links: d.posts.map((p) => ({ label: p.title, href: `/${p.postType === "news" ? "news" : "blog"}/${p.slug}` })) },
   ].filter((g) => g.links.length);
 
   return (

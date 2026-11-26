@@ -5,6 +5,7 @@ import { settingsQuery } from "@/sanity/lib/queries";
 import { urlFor, hasImage, type SanityImage } from "@/sanity/lib/image";
 import type { Seo, Settings } from "./types";
 import { resolveTemplates } from "./templates";
+import { withoutNewsLinks } from "./news";
 
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000").replace(/\/$/, "");
 
@@ -13,7 +14,8 @@ export const absoluteUrl = (path = "/") => (path.startsWith("http") ? path : `${
 /** Site settings, deduped per request. */
 export const getSettings = cache(async (): Promise<Settings> => {
   const s = await sanityFetch<Settings | null>({ query: settingsQuery, tags: ["siteSettings"] });
-  return s ?? { siteName: "VAHANA" };
+  if (!s) return { siteName: "VAHANA" };
+  return s.showNews ? s : withoutNewsLinks(s);
 });
 
 type MetaInput = {

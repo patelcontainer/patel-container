@@ -15,6 +15,7 @@ import { Newsletter } from "@/components/forms/Newsletter";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { WhatsAppIcon, SocialIcon } from "@/components/ui/SocialIcons";
 import { getSettings } from "@/lib/seo";
+import { isNewsLink, isNewsPost } from "@/lib/news";
 import { telHref, whatsappHref, linkHref } from "@/lib/links";
 import { bgClass } from "@/lib/utils";
 import type { Block } from "@/lib/types";
@@ -28,8 +29,12 @@ export function ProjectsBlock({ block }: { block: Block }) {
   );
 }
 
-export function PostsBlock({ block }: { block: Block }) {
+export async function PostsBlock({ block }: { block: Block }) {
+  const showNews = (await getSettings()).showNews;
+  if (!showNews && block.postType === "news") return null;
+  const posts: Block[] = (block.posts || []).filter((p: Block) => showNews || !isNewsPost(p));
   const full = block.mode === "full";
+  if (!full && !posts.length) return null;
   const href = block.postType === "news" ? "/news" : "/blog";
   return (
     <Section
@@ -42,7 +47,7 @@ export function PostsBlock({ block }: { block: Block }) {
         ) : undefined
       }
     >
-      <PostsList posts={block.posts || []} full={full} headingAs={headingTag(block.itemHeadingTag, "h3")} featuredHeadingAs={headingTag(block.featuredHeadingTag, "h3")} />
+      <PostsList posts={posts} full={full} headingAs={headingTag(block.itemHeadingTag, "h3")} featuredHeadingAs={headingTag(block.featuredHeadingTag, "h3")} />
     </Section>
   );
 }
@@ -373,8 +378,9 @@ export function NewsletterBlock({ block }: { block: Block }) {
   );
 }
 
-export function LinkCardsBlock({ block }: { block: Block }) {
-  const cards: Block[] = block.cards || [];
+export async function LinkCardsBlock({ block }: { block: Block }) {
+  const showNews = (await getSettings()).showNews;
+  const cards: Block[] = (block.cards || []).filter((c: Block) => showNews || !isNewsLink(c.link));
   return (
     <Section block={block}>
       <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">

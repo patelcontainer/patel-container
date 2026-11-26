@@ -29,6 +29,7 @@ export type Settings = {
   socialLinks?: { _key: string; platform?: string; url?: string }[];
   announcement?: string;
   mainNav?: NavItem[];
+  showNews?: boolean;
   headerCta?: CmsButton;
   footerText?: string;
   footerColumns?: { _key: string; title?: string; links?: (LinkLike & { _key: string })[] }[];

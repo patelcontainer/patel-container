@@ -4,6 +4,8 @@ import { ArrowUpRight, Search } from "lucide-react";
 import { PageHeader } from "@/components/layout/PageHeader";
 import { client } from "@/sanity/lib/client";
 import { searchQuery } from "@/sanity/lib/queries";
+import { getSettings } from "@/lib/seo";
+import { isNewsPost } from "@/lib/news";
 import { docHref } from "@/lib/links";
 
 export const metadata: Metadata = { title: "Search", robots: { index: false } };
@@ -13,7 +15,10 @@ const TYPE_LABEL: Record<string, string> = { page: "Page", product: "Product", p
 
 export default async function SearchPage({ searchParams }: { searchParams: Promise<{ q?: string }> }) {
   const q = ((await searchParams).q || "").trim().slice(0, 80);
-  const results = q ? await client.fetch<Result[]>(searchQuery, { q: `${q}*` }) : [];
+  const showNews = (await getSettings()).showNews;
+  const results = (q ? await client.fetch<Result[]>(searchQuery, { q: `${q}*` }) : []).filter(
+    (r) => showNews || !(isNewsPost(r) || (r._type === "page" && r.slug === "news")),
+  );
 
   return (
     <>

@@ -1,13 +1,17 @@
 import type { MetadataRoute } from "next";
 import { sanityFetch } from "@/sanity/lib/client";
 import { sitemapQuery } from "@/sanity/lib/queries";
-import { absoluteUrl } from "@/lib/seo";
+import { absoluteUrl, getSettings } from "@/lib/seo";
 
 type Item = { slug: string; _updatedAt: string; postType?: string };
 type Data = Record<"pages" | "products" | "categories" | "industries" | "projects" | "posts", Item[]>;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const d = await sanityFetch<Data>({ query: sitemapQuery });
+  if (!(await getSettings()).showNews) {
+    d.pages = d.pages.filter((p) => p.slug !== "news");
+    d.posts = d.posts.filter((p) => p.postType !== "news");
+  }
   const entry = (path: string, updated: string, priority: number, changeFrequency: "weekly" | "monthly" = "monthly") => ({
     url: absoluteUrl(path),
     lastModified: new Date(updated),

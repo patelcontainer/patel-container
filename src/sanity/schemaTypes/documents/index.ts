@@ -64,6 +64,14 @@ export const siteSettings = defineType({
     defineField({ name: "legalName", type: "string", group: "brand" }),
     defineField({ name: "tagline", type: "string", group: "brand" }),
     defineField({ name: "foundingYear", type: "string", group: "brand" }),
+    defineField({
+      name: "showNews",
+      title: "Show News section",
+      type: "boolean",
+      group: "header",
+      initialValue: false,
+      description: "Off: /news redirects to the blog, and News links, cards and posts are hidden from the menu, footer, listings, search and sitemap. News posts stay saved in Media → News.",
+    }),
 
     defineField({
       name: "phones",
