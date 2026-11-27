@@ -84,9 +84,9 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
   return (
     <article>
       <header className="bg-surface">
-        <div className="wrap max-w-6xl py-12 lg:py-16">
+        <div className="wrap max-w-7xl py-10 lg:py-14">
           <Breadcrumbs items={[{ label: LABEL[postType], href: `/${postType}` }, { label: p.title }]} />
-          <div className={`mt-8 grid items-center gap-10 ${hasImage(p.mainImage) ? "lg:grid-cols-2 xl:gap-14" : "max-w-4xl"}`}>
+          <div className={`mt-6 grid items-center gap-8 ${hasImage(p.mainImage) ? "lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)] lg:gap-12 xl:gap-16" : "max-w-4xl"}`}>
             <div>
               {!!p.categories?.length && (
                 <div className="mb-5 flex flex-wrap gap-2">
@@ -95,9 +95,9 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
                   ))}
                 </div>
               )}
-              <h1 className="text-4xl font-extrabold leading-[1.1] text-ink sm:text-5xl lg:text-[2.75rem] xl:text-5xl">{p.title}</h1>
-              {p.excerpt && <p className="mt-5 text-lg leading-relaxed text-steel-600 sm:text-xl">{p.excerpt}</p>}
-              <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-steel-500">
+              <h1 className="text-[1.85rem] font-extrabold leading-tight text-ink sm:text-4xl xl:text-[2.6rem]">{p.title}</h1>
+              {p.excerpt && <p className="mt-4 text-base leading-relaxed text-steel-600 sm:text-lg">{p.excerpt}</p>}
+              <div className="mt-6 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-steel-500">
                 <span className="flex items-center gap-3">
                   <AuthorAvatar author={author} size="sm" />
                   <span>
@@ -108,19 +108,19 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
                 <span className="flex items-center gap-1.5"><Calendar className="size-4" /> <time dateTime={p.publishedAt}>{formatDate(p.publishedAt)}</time></span>
                 {readTime && <span className="flex items-center gap-1.5"><Clock className="size-4" /> {readTime}</span>}
               </div>
-              <AiSummary heading={t.postAiHeading} prompt={aiPrompt} className="mt-7 border-t border-line pt-6" />
+              <AiSummary heading={t.postAiHeading} prompt={aiPrompt} className="mt-6 border-t border-line pt-5" />
             </div>
             {hasImage(p.mainImage) && (
               <div className="overflow-hidden rounded-md shadow-lift">
-                <SanityImg image={p.mainImage} aspect={16 / 10} priority sizes="(min-width:1280px) 560px, (min-width:1024px) 50vw, 100vw" className="w-full" />
+                <SanityImg image={p.mainImage} aspect={16 / 10} priority sizes="(min-width:1280px) 580px, (min-width:1024px) 48vw, 100vw" className="w-full" />
               </div>
             )}
           </div>
         </div>
       </header>
 
-      <div className="wrap max-w-6xl py-14 lg:py-20">
-        <div className="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)] xl:gap-16">
+      <div className="wrap max-w-7xl py-12 lg:py-16">
+        <div className="grid gap-12 lg:grid-cols-[260px_minmax(0,1fr)] xl:grid-cols-[280px_minmax(0,1fr)] xl:gap-16">
           <aside className="hidden lg:block">
             <div className="sticky top-28 space-y-10">
               {!!toc.length && (
@@ -133,7 +133,7 @@ export async function PostPage({ slug, postType }: { slug: string; postType: Pos
             </div>
           </aside>
 
-          <div className="min-w-0 max-w-3xl">
+          <div className="min-w-0 max-w-[56rem]">
             {!!toc.length && (
               <details className="group mb-8 rounded-md ring-1 ring-line lg:hidden">
                 <summary className="flex cursor-pointer list-none items-center justify-between p-5 font-semibold text-ink">
